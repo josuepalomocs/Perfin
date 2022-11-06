@@ -1,0 +1,42 @@
+:root {
+  --clr-text-white: #FFFFFF;
+  --clr-text-gray: #B1B1B1;
+  --clr-text-red: #FF8787;
+  --clr-text-green: #65FF7E;
+  --clr-bg-dark-gray: #151515;
+  --clr-bg-dark-blue: #212435;
+
+  --ff-default: 'Open Sans', sans-serif;
+
+  --fs-14: 14px;
+
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semi-bold: 600;
+  --fw-bold: 700;
+  --fw-extra-bold: 800;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+.App {
+  width: 100vw;
+  height: 100vh;
+  font-family: var(--ff-default);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-regular);
+  color: var(--clr-text-white);
+  background-color: var(--clr-bg-dark-gray);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
