@@ -2,7 +2,7 @@ import plaidClient from '../../plaid/config';
 import { CountryCode, LinkTokenCreateRequest, Products } from 'plaid';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-const PLAID_REDIRECT_URI = process.env.PLAID_REDIRECT_URI;
+// const PLAID_REDIRECT_URI = process.env.PLAID_REDIRECT_URI;
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	const request: LinkTokenCreateRequest = {
