@@ -8,7 +8,15 @@
 
   --ff-default: 'Open Sans', sans-serif;
 
+  --fs-12: 12px;
+  --fs-13: 13px;
   --fs-14: 14px;
+  --fs-15: 15px;
+  --fs-16: 16px;
+  --fs-17: 17px;
+  --fs-18: 18px;
+  --fs-20: 20px;
+  --fs-22: 22px;
 
   --fw-light: 300;
   --fw-regular: 400;
@@ -26,6 +34,7 @@
 
 html,
 body,
+#__next,
 .App {
   width: 100vw;
   height: 100vh;

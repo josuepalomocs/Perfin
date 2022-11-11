@@ -1,16 +1,17 @@
 import React from 'react';
+import styles from './image.module.css';
 
 interface ImageProps {
-    className: string,
     src: string,
-    alt: string,
-    width: number,
-    height: number,
+    className?: string,
+    alt?: string,
+    width?: number,
+    height?: number,
 }
 
-const Image = ({ className, src, alt, width, height } : ImageProps) => {
+const Image = ({ src, className = styles.default, alt, width = 40, height = 40 } : ImageProps) => {
     return (
-        <img className={className} src={src} alt={alt} width={width} height={height} />
+        <img src={src} className={className} alt={alt} width={width} height={height} />
     );
 }
 

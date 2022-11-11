@@ -1,25 +1,20 @@
 import React from 'react';
-import Container from '../Container/Container';
+import styles from './input.module.css';
 
 interface InputProps {
-  label?: string,
-  labelClassName?: string,
-  inputClassName?: string,
-  id?: string,
-  type?: 'text' | 'email' | 'password'
+  id: string,
+  className?: string,
+  type?: 
+    'text' | 'email' | 'password' |
+    'checkbox'
+  placeholder?: string,
+  onChange?: React.Dispatch<React.SetStateAction<any>>
 }
 
-const Input = (inputProps : InputProps) => {
-  const {
-    label, labelClassName, inputClassName,
-    id, type,
-  } = inputProps;
-  
+const Input = ({ id, className = styles.default, type = 'text', placeholder, onChange } : InputProps) => {
   return (
-    <Container className={''} type='div'>
-      {label ? <label className={labelClassName} htmlFor={id}>{ label }</label> : <></>}
-      <input className={inputClassName} id={id} type={type} />
-    </Container>
+    <input className={className} id={id} type={type} placeholder={placeholder} 
+      onChange={(e) => {onChange ? onChange(e.currentTarget.value) : null}} />
   );
 }
 

@@ -1,0 +1,154 @@
+.loginFormContainer {
+  min-width: 40rem;
+}
+
+.heading {
+  font-size: 30px;
+  font-weight: var(--fw-light);
+  margin-bottom: 0.3rem;
+}
+
+.subHeading {
+  font-size: 14px;
+  font-weight: var(--fw-regular);
+  margin-bottom: 2.4rem;
+  color: var(--clr-text-gray);
+}
+
+.inputFieldContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputFieldLabel {
+  font-size: var(--fs-14);
+  color: var(--clr-text-gray);
+}
+
+.inputFieldElement {
+  height: 3rem;
+  padding: 0 0.6rem;  
+  margin-bottom: 1.2rem;
+  border-radius: 6px 6px 0 0;
+  border: none;
+  border-bottom: 1px solid #303030;
+  outline: none;
+  font-size: var(--fs-16);
+  color: var(--clr-text-white);
+  background-color: var(--clr-bg-dark-gray);
+}
+
+.inputFieldElement:focus {
+  border-bottom: 1px solid #499eff;
+  transition: 0.3s;
+}
+
+.optionsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.6rem;
+  font-size: var(--fs-14);
+  color: var(--clr-text-gray);
+}
+
+.loginWithCredentials {
+  cursor: pointer;
+  height: 3.2rem;
+  width: 100%;
+  margin-bottom: 1.6rem;
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  font-size: var(--fs-16);
+  font-weight: var(--fw-regular);
+  color: var(--clr-text-white);
+  background-color: #1381ff;
+}
+
+.loginWithCredentials:hover {
+  outline: 1px solid #499eff;
+}
+
+.rememberPasswordLabel {
+  display: flex;
+  align-items: center;
+}
+
+.inputCheckboxElement {
+  visibility: hidden;
+  width: 13px;
+  height: 13px;
+  margin-right: 0.3rem;
+}
+
+.inputCheckboxElement:checked ~ .customInputCheckboxStyles {
+  background-color: #1381ff;
+}
+
+.customInputCheckboxStyles {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  border-radius: 3px;
+  background-color: white;
+}
+
+.forgotPasswordLink:hover {
+  text-decoration: underline;
+}
+
+.createAccountContainer {
+  display: flex;
+  align-items: flex-end;
+}
+
+.createAccountText {
+  font-size: var(--fs-14);
+  color: var(--clr-text-gray);
+  margin-right: 0.6rem;
+}
+
+.createAccountLink {
+  font-size: var(--fs-15);
+  color: #5ba7ff
+}
+
+.createAccountLink:hover {
+  text-decoration: underline;
+}
+
+.providersContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 2.4rem;
+}
+
+.loginWithGoogle,
+.loginWithFacebook {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  height: 3.2rem;
+  padding: 0 1.2rem;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  font-size: var(--fs-14);
+  color: var(--clr-text-white);
+  background-color: #252525;
+}
+
+.loginWithGoogle:hover,
+.loginWithFacebook:hover {
+  outline: 1px solid #333333;
+}
+
+.googleImage,
+.facebookImage {
+  margin-right: 0.6rem;
+}

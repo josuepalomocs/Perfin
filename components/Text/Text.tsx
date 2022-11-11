@@ -1,15 +1,16 @@
 import React, { ElementType, ReactElement } from 'react';
+import styles from './text.module.css';
 
 interface TextProps {
-    className: string,
-    as: 'h1' | 'h2' | 'h3' |
+    children: string,
+    className?: string,
+    type?: 'h1' | 'h2' | 'h3' |
         'h4' | 'h5' | 'h6' |
         'p' | 'span' | 'strong'
-    children: string,
 }
 
-const Text = ({ as, className, children } : TextProps) => {
-    const Component = as;
+const Text = ({ children, className = styles.default, type = 'p' } : TextProps) => {
+    const Component = type;
     return (
         <Component className={className}>
             { children }

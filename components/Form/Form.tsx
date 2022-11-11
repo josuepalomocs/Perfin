@@ -2,12 +2,13 @@ import React, { ReactElement } from 'react';
 
 interface FormProps {
   children: ReactElement | ReactElement[],
-  onSubmit: () => void,
+  className?: string,
+  onSubmit?: (e: any) => void,
 }
 
-const Form = ({ children, onSubmit } : FormProps) => {
+const Form = ({ children, className, onSubmit } : FormProps) => {
   return (
-    <form onSubmit={onSubmit}>
+    <form className={className} onSubmit={onSubmit}>
       { children }
     </form>
   );

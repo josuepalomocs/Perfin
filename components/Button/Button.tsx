@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import styles from './button.module.css';
 
 interface ButtonProps {
-	className: string,
-	text?: string,
+	children: string | ReactElement | ReactElement[],
+	className?: string,
 	onClick?: () => void,
 }
 
-const Button = ({ className, text, onClick } : ButtonProps) => {
+const Button = ({ children, className = styles.default, onClick } : ButtonProps) => {
 	return (
-		<button className={`${className} ${styles.default}`} onClick={onClick}>{text}</button>
+		<button className={className} onClick={onClick}>{ children }</button>
 	);
 }
 
