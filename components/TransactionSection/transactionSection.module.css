@@ -1,14 +1,45 @@
 .container {
-    width: 480px;
-    background-color: var(--clr-bg-dark-gray);
+	display: flex;
+	flex-direction: column;
+	width: 36rem;
+	height: 100%;
+	padding: 1.2rem 1.2rem;
+	background-color: #1d1d1d;
 }
 
-.title {
-    margin-bottom: 1.2em;
-    font-weight: var(--fw-bold);
+.heading {
+	margin-bottom: 0.6rem;
+	font-size: 18px;
+	font-weight: var(--fw-regular);
+	color: var(--clr-text-gray);
 }
 
 .list {
-    list-style-type: none;
-    margin-bottom: 1.2em;
+	flex: 1;
+	overflow-y: scroll;
+	list-style-type: none;
+	margin-bottom: 1.2em;
+}
+
+.list > li:nth-child(odd) {
+	/* background-color: #242424; */
+}
+
+.actionsContainer {
+	display: flex;
+	gap: 1rem;
+}
+
+.linkAccount,
+.pollTransactions {
+	cursor: pointer;
+	height: 3.2rem;
+	width: 100%;
+	outline: none;
+	border-radius: 6px;
+	border: none;
+	font-size: 14px;
+	font-family: var(--ff-default);
+	color: var(--clr-text-white);
+	background-color: #1381ff;
 }

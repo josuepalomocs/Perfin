@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import PageWrapper from '../components/PageWrapper/PageWrapper';
 import TransactionSection from '../components/TransactionSection/TransactionSection';
+import styles from '../styles/index.module.css';
 
 const Home = () => {
   return (
@@ -11,7 +12,7 @@ const Home = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <PageWrapper>
+      <PageWrapper className={styles.pageWrapper}>
         <TransactionSection />
       </PageWrapper>
     </div>

@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import LoginSection from '../components/LoginSection.tsx/LoginSection';
 import PageWrapper from '../components/PageWrapper/PageWrapper';
+import styles from '../styles/login.module.css';
 
 const Login = () => {
   return (
@@ -10,7 +11,7 @@ const Login = () => {
         <meta name='Login' content='Perfin | Personal Finance' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <PageWrapper>
+      <PageWrapper className={styles.pageWrapper}>
         <LoginSection />
       </PageWrapper>
     </>

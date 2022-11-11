@@ -2,12 +2,13 @@ import React, { ReactElement } from 'react';
 import styles from './pageWrapper.module.css';
 
 interface PageWrapperProps {
-    children: ReactElement | ReactElement[]
+    children: ReactElement | ReactElement[],
+    className?: string,
 }
 
-const PageWrapper = ({ children } : PageWrapperProps) => {
+const PageWrapper = ({ children, className = styles.default } : PageWrapperProps) => {
     return (
-        <div className={styles.pageWrapper}>
+        <div className={className}>
             { children }
         </div>
     );
