@@ -9,34 +9,28 @@ import Label from '../Label/Label';
 import Text from '../Text/Text';
 import { CheckIcon } from '@heroicons/react/24/solid';
 import firebaseAuth from '../../firebase/index';
-import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, fetchSignInMethodsForEmail, User } from "firebase/auth";
-import styles from './loginSection.module.css';
+import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, fetchSignInMethodsForEmail, createUserWithEmailAndPassword } from "firebase/auth";
+import styles from './signupSection.module.css';
 
-const LoginSection = () => {
+const SignupSection = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [validEmail, setValidEmail] = useState(false);
   const [validPassword, setValidPassword] = useState(false);
-  const [user, setUser] = useState<User | null>();
   const [submitted, setSubmitted] = useState(false);
-  
+
   const loginWithCredentials = () => {
-    signInWithEmailAndPassword(firebaseAuth, email, password)
+    createUserWithEmailAndPassword(firebaseAuth, email, password)
       .then((userCredential) => {
-        // Signed in 
         const user = userCredential.user;
-        console.log('User signed in successfully');
-        console.log(user);
-        setUser(user);
+        console.log('User created account successfully.', user);
         setSubmitted(true);
-        // ...
       })
       .catch((error) => {
-        setUser(null);
-        setSubmitted(true); 
-        console.log('User login failed');
+        setSubmitted(true);
         const errorCode = error.code;
         const errorMessage = error.message;
+        // ..
       });
   }
 
@@ -119,19 +113,18 @@ const LoginSection = () => {
 
   return (
     <Container className={styles.loginFormContainer} type='div'>
-      <Text className={styles.heading} type='h1'>Welcome back</Text>
-      <Text className={styles.subHeading} type='p'>Login to access your Perfin dashboard</Text>
+      <Text className={styles.heading} type='h1'>Get started</Text>
+      <Text className={styles.subHeading} type='p'>Sign up to set up your Perfin dashboard</Text>
       <Form className={styles.form} onSubmit={(e: any) => {e.preventDefault()}}>
-        {user === undefined ? <></> : <Text className={styles.incorrectCredentialsError} type='p'>The provided email and password combination is incorrect</Text>}
         <Container className={styles.inputFieldContainer} type='div'>
-          <Label className={styles.inputFieldLabel} htmlFor={'loginInputFieldEmail'}>Email</Label>
-          <Input id={'loginInputFieldEmail'} className={styles.inputFieldElement} type='email' placeholder='josue@perfin.com' onChange={setEmail} />
+          <Label className={styles.inputFieldLabel} htmlFor={'signupInputFieldEmail'}>Email</Label>
+          <Input id={'signupInputFieldEmail'} className={styles.inputFieldElement} type='email' placeholder='josue@perfin.com' onChange={setEmail} />
           <CheckIcon className={`${styles.checkIcon} ${validEmail && styles.active}`} />
         </Container>
         {!validEmail && submitted ? <Text className={styles.invalidEmailWarning}>Please enter a valid email address</Text> : <></>}
         <Container className={styles.inputFieldContainer} type='div'>
-          <Label className={styles.inputFieldLabel} htmlFor={'loginInputFieldPassword'}>Password</Label>
-          <Input id={'loginInputFieldPassword'} className={styles.inputFieldElement} type='password' placeholder='••••••••' onChange={setPassword} />
+          <Label className={styles.inputFieldLabel} htmlFor={'signupInputFieldPassword'}>Password</Label>
+          <Input id={'signupInputFieldPassword'} className={styles.inputFieldElement} type='password' placeholder='••••••••' onChange={setPassword} />
           <CheckIcon className={`${styles.checkIcon} ${validPassword && styles.active}`} />
         </Container>
         {!validPassword && submitted ? <Text className={styles.invalidPasswordWarning}>Password must be at least 8 characters long</Text> : <></>}
@@ -141,9 +134,8 @@ const LoginSection = () => {
             <span className={styles.customInputCheckboxStyles}></span>
             <Text className={styles.rememberPasswordText} type={'p'}>Remember Password</Text>
           </Label>
-          <HyperLink className={styles.forgotPasswordLink} href={'#'}>Forgot Password?</HyperLink>
         </Container>
-        <Button className={styles.loginWithCredentials} onClick={loginWithCredentials}>Login</Button>
+        <Button className={styles.loginWithCredentials} onClick={loginWithCredentials}>Sign up</Button>
       </Form>
       <Container className={styles.providersContainer} type='div'>
         <Button className={styles.loginWithGoogle} onClick={loginWithGoogle}>
@@ -156,11 +148,11 @@ const LoginSection = () => {
         </Button>
       </Container>
       <Container className={styles.createAccountContainer}>
-        <Text className={styles.createAccountText}>Don't have an account?</Text>
-        <HyperLink className={styles.createAccountLink} href={'/signup'}>Sign up</HyperLink>
+        <Text className={styles.createAccountText}>Already have an account?</Text>
+        <HyperLink className={styles.createAccountLink} href={'/login'}>Log in</HyperLink>
       </Container>
     </Container>
   );
 };
 
-export default LoginSection;
+export default SignupSection;

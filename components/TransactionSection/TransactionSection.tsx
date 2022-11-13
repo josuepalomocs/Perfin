@@ -29,14 +29,6 @@ const TransactionSection = () => {
 				<Transaction icon={'walmart'} name={'spotify'} date={'Oct 18'} account={'CHASE'} amount={20.22} />
 				<Transaction icon={'walmart'} name={'spotify'} date={'Oct 18'} account={'CHASE'} amount={20.22} />
 				<Transaction icon={'walmart'} name={'spotify'} date={'Oct 18'} account={'CHASE'} amount={20.22} />
-				<Transaction icon={'walmart'} name={'spotify'} date={'Oct 18'} account={'CHASE'} amount={20.22} />
-				<Transaction icon={'walmart'} name={'spotify'} date={'Oct 18'} account={'CHASE'} amount={20.22} />
-				<Transaction icon={'walmart'} name={'spotify'} date={'Oct 18'} account={'CHASE'} amount={20.22} />
-				<Transaction icon={'walmart'} name={'spotify'} date={'Oct 18'} account={'CHASE'} amount={20.22} />
-				<Transaction icon={'walmart'} name={'spotify'} date={'Oct 18'} account={'CHASE'} amount={20.22} />
-				<Transaction icon={'walmart'} name={'spotify'} date={'Oct 18'} account={'CHASE'} amount={20.22} />
-				<Transaction icon={'walmart'} name={'spotify'} date={'Oct 18'} account={'CHASE'} amount={20.22} />
-				<Transaction icon={'walmart'} name={'spotify'} date={'Oct 18'} account={'CHASE'} amount={20.22} />
 			</List>
 			<Container className={styles.actionsContainer}>
 				<Button className={styles.linkAccount} onClick={() => { setRenderPlaidLink(true) }}>Link Account</Button>

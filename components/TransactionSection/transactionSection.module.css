@@ -2,12 +2,13 @@
 	display: flex;
 	flex-direction: column;
 	width: 36rem;
-	height: 100%;
 	padding: 1.2rem 1.2rem;
+	border-radius: 12px;
 	background-color: #1d1d1d;
 }
 
 .heading {
+	margin: 0 1.2rem;
 	margin-bottom: 0.6rem;
 	font-size: 18px;
 	font-weight: var(--fw-regular);
