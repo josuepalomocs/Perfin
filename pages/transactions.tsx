@@ -1,24 +1,21 @@
 import Head from 'next/head';
-import NavigationSection from '../components/NavigationSection/navigationSection';
 import PageWrapper from '../components/PageWrapper/PageWrapper';
 import TransactionSection from '../components/TransactionSection/TransactionSection';
-import styles from '../styles/index.module.css';
+import styles from '../styles/signup.module.css';
 
-const Home = () => {
+const Signup = () => {
   return (
-    <div className={'App'}>
+    <>
       <Head>
-        <title>Home</title>
-        <meta name='Home' content='Perfin | Personal Finance' />
+        <title>Transactions</title>
+        <meta name='Transactions' content='Perfin | Personal Finance' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-
       <PageWrapper className={styles.pageWrapper}>
-        <NavigationSection />
         <TransactionSection />
       </PageWrapper>
-    </div>
-  )
-}
+    </>
+  );
+};
 
-export default Home;
+export default Signup;

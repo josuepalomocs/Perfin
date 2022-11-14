@@ -3,13 +3,14 @@ import styles from './button.module.css';
 
 interface ButtonProps {
 	children: string | ReactElement | ReactElement[],
+	id: string,
 	className?: string,
 	onClick?: () => void,
 }
 
-const Button = ({ children, className = styles.default, onClick } : ButtonProps) => {
+const Button = ({ children, id, className = styles.default, onClick } : ButtonProps) => {
 	return (
-		<button className={className} onClick={onClick}>{ children }</button>
+		<button id={id} className={className} onClick={onClick}>{ children }</button>
 	);
 }
 

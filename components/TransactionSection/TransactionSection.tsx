@@ -3,6 +3,7 @@ import createLinkToken from '../../plaid/services/createLinkToken';
 import Button from "../Button/Button";
 import Container from '../Container/Container';
 import List from "../List/List";
+import Image from '../Image/Image';
 import PlaidLink from '../PlaidLink/PlaidLink';
 import Text from '../Text/Text'
 import Transaction from "../Transaction/Transaction";
@@ -21,20 +22,57 @@ const TransactionSection = () => {
 	}, [renderPlaidLink, linkToken]);
 
 	return (
-		<section className={styles.container}>
-			<Text className={styles.heading} type={'p'}>Transactions</Text>
-			<List className={styles.list} type={'ul'}>
-				<Transaction icon={'walmart'} name={'spotify'} date={'Oct 18'} account={'CHASE'} amount={20.22} />
-				<Transaction icon={'walmart'} name={'spotify'} date={'Oct 18'} account={'CHASE'} amount={20.22} />
-				<Transaction icon={'walmart'} name={'spotify'} date={'Oct 18'} account={'CHASE'} amount={20.22} />
-				<Transaction icon={'walmart'} name={'spotify'} date={'Oct 18'} account={'CHASE'} amount={20.22} />
-				<Transaction icon={'walmart'} name={'spotify'} date={'Oct 18'} account={'CHASE'} amount={20.22} />
-			</List>
-			<Container className={styles.actionsContainer}>
-				<Button className={styles.linkAccount} onClick={() => { setRenderPlaidLink(true) }}>Link Account</Button>
-			</Container>
-			{ linkToken ? <PlaidLink linkToken={ linkToken } /> : <></> }
-		</section>
+		<Container className={styles.container} type='section'>
+			<Text className={styles.heading} type={'h1'}>Transactions</Text>
+			<table className={styles.table}>
+				<tr className={styles.tableRowHeaders}>
+					<th className={styles.tableHeader}>
+						<Button id='transactionListSortByName' className={styles.listSortByColumn} onClick={() => {}}>MERCHANT</Button>
+					</th>
+					<th className={styles.tableHeader}>
+						<Button id='transactionListSortByDate' className={styles.listSortByColumn} onClick={() => {}}>DATE</Button>
+					</th>
+					<th className={styles.tableHeader}>
+						<Button id='transactionListSortByAccount' className={styles.listSortByColumn} onClick={() => {}}>ACCOUNT</Button>
+					</th>
+					<th className={styles.tableHeader}>
+						<Button id='transactionListSortByAmount' className={styles.listSortByColumn} onClick={() => {}}>AMOUNT</Button>
+					</th>
+				</tr>
+				<tr className={styles.tableRowData}>
+					<td className={`${styles.tableData} ${styles.merchantData}`}>
+						<Image className={styles.merchantLogo} src={'https://logo.clearbit.com/target.com'} alt={'Merchant logo'} width={40} height={40} />
+						<Text className={styles.merchantName} type='p'>TARGET</Text>
+					</td>
+					<td className={styles.tableData}>Nov 1, 2022</td>
+					<td className={styles.tableData}>QuickSilver 7116</td>
+					<td className={`${styles.amount} ${styles.positive}`}>+$54.78</td>
+				</tr>
+				<tr className={styles.tableRowData}>
+					<td className={`${styles.tableData} ${styles.merchantData}`}>
+						<Image className={styles.merchantLogo} src={'https://logo.clearbit.com/amazon.com'} alt={'Merchant logo'} width={40} height={40} />
+						<Text className={styles.merchantName} type='p'>AMAZON</Text>
+					</td>
+					<td className={styles.tableData}>Oct 24, 2022</td>
+					<td className={styles.tableData}>QuickSilver 7116</td>
+					<td className={`${styles.amount} ${styles.negative}`}>-$12.47</td>
+				</tr>
+				<tr className={styles.tableRowData}>
+					<td className={`${styles.tableData} ${styles.merchantData}`}>
+						<Image className={styles.merchantLogo} src={'https://logo.clearbit.com/spotify.com'} alt={'Merchant logo'} width={40} height={40} />
+						<Text className={styles.merchantName} type='p'>SPOTIFY</Text>
+					</td>
+					<td className={styles.tableData}>Oct 21, 2022</td>
+					<td className={styles.tableData}>QuickSilver 7116</td>
+					<td className={`${styles.amount} ${styles.negative}`}>-$47.12</td>
+				</tr>
+			</table>
+			<Button id='addExternalTransaction' className={styles.addExternal}>Add External Transaction</Button>
+			{/* <Container className={styles.actionsContainer}>
+				<Button id={'linkAccountWithPlaid'} className={styles.linkAccount} onClick={() => { setRenderPlaidLink(true) }}>Link Account</Button>
+			</Container> */}
+			{/* { linkToken ? <PlaidLink linkToken={ linkToken } /> : <></> } */}
+		</Container>
 	);
 }
 
