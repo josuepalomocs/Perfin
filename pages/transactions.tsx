@@ -3,7 +3,7 @@ import PageWrapper from '../components/PageWrapper/PageWrapper';
 import TransactionSection from '../components/TransactionSection/TransactionSection';
 import styles from '../styles/signup.module.css';
 
-const Signup = () => {
+const Transactions = () => {
   return (
     <>
       <Head>
@@ -18,4 +18,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Transactions;
