@@ -10,6 +10,7 @@ const Home = () => {
         <title>Cards</title>
         <meta name='Cards' content='Perfin | Personal Finance' />
         <link rel='icon' href='/favicon.ico' />
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <PageWrapper className={styles.pageWrapper}>
         <CardSection />

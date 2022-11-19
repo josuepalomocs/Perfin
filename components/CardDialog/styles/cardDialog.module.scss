@@ -1,0 +1,87 @@
+.dialog {
+
+  & * {
+    font-family: var(--ff-default);
+  }
+  
+  & > div > div {
+    width: 30rem;
+    border: 1px solid rgb(24, 24, 24);
+    border-radius: 12px;
+    color: var(--clr-text-white);
+    background-color: #0c0c0c;
+    box-shadow: none;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  }
+}
+
+.dialogTitle {
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.inputLabel {
+  font-size: 12px;
+  color: var(--clr-text-gray);
+  margin-bottom: 0.6rem;
+}
+
+.dialog input,
+.selectUnstyled {
+  height: 3rem;
+  padding: 0 0.6rem;
+  margin-bottom: 1.2rem;
+  border-radius: 6px;
+  border: none;
+  border: 1px solid rgb(32, 32, 32);
+  outline: none;
+  font-size: var(--fs-14);
+  color: var(--clr-text-white);
+  background-color: var(--clr-bg-dark-gray);
+}
+
+.dialog input {
+  width: 100%;
+
+  &:focus {
+    border: 1px solid #499eff94;
+    transition: 0.3s;
+  }
+}
+
+.dialogContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  & .inputBox.cardBrand,
+    .inputBox.cardHolder,
+    .inputBox.cardNumber {
+    grid-column: 1 / 4;
+  }
+
+  & .inputBox.cardExpirationDate input {
+    border-radius: 6px 0 0 6px;
+  }
+
+  & .inputBox.cardCSV input {
+    border-radius: 0 6px 6px 0;
+  }
+}
+
+.addAction {
+  color: #499eff;
+
+  &:hover {
+    background-color: rgba(73, 158, 255, 0.1);
+    transition: 0.1s;
+  }
+}
+
+.cancelAction {
+  color: #707070;
+
+  &:hover {
+    background-color: rgba(112, 112, 112, 0.1);
+    transition: 0.1s;
+  }
+}

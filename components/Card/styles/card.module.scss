@@ -1,0 +1,149 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 20rem;
+  height: 14rem;
+  padding: 1.2rem;
+  border-radius: 18px;
+  background-color: #141414;
+  box-shadow: rgba(43, 43, 43, 0.6) 1px 1px 2px 0px, rgba(107, 107, 107, 0.6) 0px 1px 2px 1px;
+  z-index: 1;
+
+  & .backgroundImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 18px;
+    background: linear-gradient(225deg, rgb(0, 0, 0) 10%, rgba(165, 165, 165, 0.97) 100%, rgb(228, 228, 228) 20%);
+    opacity: 0.1;
+    filter: blur(1px);
+    // background-image: url('/card_bg.jpg');
+    z-index: -1;
+  }
+}
+
+.cardBrandType {
+  position: absolute;
+  top: 1.2rem;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 0;
+
+  & img {
+    object-fit: contain;
+  }
+}
+
+.cardChipIcon {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  width: 2rem;
+  height: 2rem;
+
+  & img {
+    object-fit: cover;
+  }
+}
+
+.middle {
+  position: relative;
+  margin-top: 5rem;
+  
+  & .cardNumberText {
+    font-weight: 400;
+    color: #b8b8b8;
+    margin-bottom: 0.3rem;
+  }
+
+  & .cardNickname {
+    font-size: 14px;
+    color: var(--clr-text-gray);
+    font-weight: 300;
+    margin-bottom: 0.2rem;
+  }
+
+  & .cardNumberValue {
+    word-spacing: 0.6rem;
+    font-size: 18px;
+    color: var(--clr-text-gray);
+    font-weight: 300;
+  }
+
+  & .cardNumberConcealer {
+    position: absolute;
+    top: 23px;
+    width: 170px;
+    height: 27px;
+    border-radius: 6px;
+    background: linear-gradient(5deg, #220072 30%, #000261 100%);
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 8px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+    opacity: 0.1;
+    transition: 0.1s ease-in;
+
+    &.active {
+      opacity: 1;
+      transition: 0.1s ease-in-out;
+    }
+  }
+}
+
+.bottom {
+  position: relative;
+  display: flex;
+  // margin-left: auto;  
+  & .cardHolder,
+  & .cardExpirationDate,
+  & .cardCVV {
+    
+    & .cardExpirationDateConcealer,
+    & .cardCVVConcealer {
+      position: absolute;
+      top: 25px;
+      height: 24px;
+      border-radius: 6px;
+      background: linear-gradient(5deg, #220072 30%, #000261 100%);
+      box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 8px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+      opacity: 0.1;
+      transition: 0.1s ease-in;
+
+      &.active {
+        opacity: 1;
+        transition: 0.1s ease-in-out;
+      }
+    }
+
+    & .cardExpirationDateConcealer {
+      width: 60px;
+    }
+    
+    & .cardCVVConcealer {
+      width: 30px;
+    }
+    
+    & .cardHolderText,
+    & .cardExpirationDateText,
+    & .cardCVVText {
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      color: #b8b8b8;
+    }
+
+    & .cardExpirationDateValue {
+      margin-right: 2rem;
+    }
+    
+    & .cardHolderValue,
+    & .cardExpirationDateValue, 
+    & .cardCVVValue {
+      word-spacing: 0.6rem;
+      font-size: 14px;
+      color: var(--clr-text-gray);
+      font-weight: 300;
+    }
+  }
+}

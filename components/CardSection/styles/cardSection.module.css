@@ -1,0 +1,125 @@
+.container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr auto 1fr;
+      grid-template-columns: 1fr auto 1fr;
+  gap: 0 1.2rem;
+  padding: 2rem;
+  border-radius: 12px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.top {
+  -ms-grid-column: 2;
+  grid-column: 2;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  margin-bottom: 1.2rem;
+  padding: 0;
+}
+
+.top .cardName {
+  font-size: 14px;
+  margin-right: auto;
+  color: #dadada;
+}
+
+.top .revealCard {
+  margin-left: auto;
+}
+
+.top .editCard,
+.top .revealCard {
+  margin-right: 1.2rem;
+  background-color: #181818;
+  color: var(--clr-text-gray);
+}
+
+.top .editCard:hover,
+.top .revealCard:hover {
+  background-color: #2e2e2e;
+}
+
+.top .addCard {
+  background-color: #0066ff;
+  color: white;
+}
+
+.top .addCard:hover {
+  background-color: #287eff;
+}
+
+.top .addCard,
+.top .editCard,
+.top .revealCard {
+  min-width: 0rem;
+  min-height: 0rem;
+  width: 3rem;
+  height: 3rem;
+}
+
+.top .addCard svg,
+.top .editCard svg,
+.top .revealCard svg {
+  width: 20px;
+  height: 20px;
+}
+
+.switchToPreviousCard,
+.switchToNextCard {
+  min-width: 0;
+  min-height: 0;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  border-radius: 50%;
+  background-color: inherit;
+  color: var(--clr-text-gray);
+}
+
+.switchToPreviousCard svg,
+.switchToNextCard svg {
+  width: 20px;
+  height: 20px;
+}
+
+.switchToPreviousCard:hover,
+.switchToNextCard:hover {
+  background-color: rgba(145, 145, 145, 0.1);
+  -webkit-transition: 0.1s ease-in-out;
+  transition: 0.1s ease-in-out;
+}
+
+.switchToPreviousCard {
+  -ms-grid-column: 1;
+  grid-column: 1;
+}
+
+.switchToNextCard {
+  -ms-grid-column: 3;
+  grid-column: 3;
+}
+
+.bottom {
+  margin-top: 0.6rem;
+  -ms-grid-column: 2;
+  grid-column: 2;
+  padding: 0;
+}
+
+.bottom .revealDetails {
+  color: var(--clr-text-gray);
+}
+
+.bottom .revealDetails:hover {
+  background-color: rgba(177, 177, 177, 0.1);
+}
+/*# sourceMappingURL=cardSection.module.css.map */
