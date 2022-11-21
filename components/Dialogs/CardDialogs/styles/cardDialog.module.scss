@@ -48,7 +48,7 @@
   }
 }
 
-.dialogContent {
+.dialogContent.createCardDialogContent {
   display: grid;
   grid-template-columns: 1fr 1fr;
 
@@ -67,11 +67,25 @@
   }
 }
 
-.addAction {
+.addAction,
+.editAction {
   color: #499eff;
 
   &:hover {
     background-color: rgba(73, 158, 255, 0.1);
+    transition: 0.1s;
+  }
+}
+
+.dialogContent.deleteCardDialogContent {
+  
+}
+
+.deleteAction {
+  color: #ff4e74;
+  
+  &:hover {
+    background-color: rgba(112, 112, 112, 0.1);
     transition: 0.1s;
   }
 }
@@ -86,7 +100,7 @@
 }
 
 .input.cardNumber > div {
-  color: red;
+
 }
 
 .inputBox.cardNumber {

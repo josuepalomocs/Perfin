@@ -48,35 +48,47 @@
   transition: 0.3s;
 }
 
-.dialogContent {
+.dialogContent.createCardDialogContent {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr 1fr;
       grid-template-columns: 1fr 1fr;
 }
 
-.dialogContent .inputBox.cardBrand,
-.dialogContent .inputBox.cardHolder,
-.dialogContent .inputBox.cardNumber {
+.dialogContent.createCardDialogContent .inputBox.cardBrand,
+.dialogContent.createCardDialogContent .inputBox.cardHolder,
+.dialogContent.createCardDialogContent .inputBox.cardNumber {
   -ms-grid-column: 1;
   -ms-grid-column-span: 3;
   grid-column: 1 / 4;
 }
 
-.dialogContent .inputBox.cardExpirationDate input {
+.dialogContent.createCardDialogContent .inputBox.cardExpirationDate input {
   border-radius: 6px 0 0 6px;
 }
 
-.dialogContent .inputBox.cardCSV input {
+.dialogContent.createCardDialogContent .inputBox.cardCSV input {
   border-radius: 0 6px 6px 0;
 }
 
-.addAction {
+.addAction,
+.editAction {
   color: #499eff;
 }
 
-.addAction:hover {
+.addAction:hover,
+.editAction:hover {
   background-color: rgba(73, 158, 255, 0.1);
+  -webkit-transition: 0.1s;
+  transition: 0.1s;
+}
+
+.deleteAction {
+  color: #ff4e74;
+}
+
+.deleteAction:hover {
+  background-color: rgba(112, 112, 112, 0.1);
   -webkit-transition: 0.1s;
   transition: 0.1s;
 }
@@ -89,10 +101,6 @@
   background-color: rgba(112, 112, 112, 0.1);
   -webkit-transition: 0.1s;
   transition: 0.1s;
-}
-
-.input.cardNumber > div {
-  color: red;
 }
 
 .inputBox.cardNumber {

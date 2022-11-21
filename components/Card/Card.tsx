@@ -3,12 +3,17 @@ import { Avatar, Box, Container, Typography } from '@mui/material';
 import { Card as CardType} from '../../types';
 import styles from './styles/card.module.css';
 
-const Card = ({ id, brand, nickname, number, expirationDate, cvv } : CardType) => {
+interface CardProps extends CardType {}
+
+const Card = ({ brand, nickname, number, expirationDate, csv} : CardProps) => {
   return (
     <Container className={styles.container}>
-      <Avatar className={styles.cardBrandType} alt='Card brand logo' src='/mastercard_logo.svg' />
+      <Avatar 
+        className={styles.cardBrandType} 
+        alt='Card brand logo' 
+        src={`${brand}_logo.svg`} />
       <Box className={styles.middle}>
-        <Typography className={styles.cardNickname} variant='inherit'>Chase Credit Main</Typography>
+        <Typography className={styles.cardNickname} variant='inherit'>{nickname}</Typography>
         <Typography className={styles.cardNumberValue} variant='inherit'>{number}</Typography>
       </Box>
       <Box className={styles.bottom}>
@@ -16,7 +21,7 @@ const Card = ({ id, brand, nickname, number, expirationDate, cvv } : CardType) =
           <Typography className={styles.cardExpirationDateValue}>Exp {expirationDate}</Typography>
         </Box>
         <Box className={styles.cardCVV}>
-          <Typography className={styles.cardCVVValue}>Csv {cvv}</Typography>
+          <Typography className={styles.cardCVVValue}>Csv {csv}</Typography>
         </Box>
       </Box>
     <Box className={styles.backgroundImage} />

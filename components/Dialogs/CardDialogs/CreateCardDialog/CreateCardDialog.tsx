@@ -1,25 +1,27 @@
 import React, { useState } from 'react';
-import { Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, InputLabel, MenuItem, TextField } from '@mui/material';
-import { Card } from '../../types';
+import { Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, InputLabel } from '@mui/material';
+import { Card } from '../../../../types';
 import { InputUnstyled } from '@mui/base';
-import { getDefaultCardValues } from '../../utilities/cardDialog';
+import { getDefaultCardValues } from '../../../../utilities/cardDialog';
 import InputMask from 'react-input-mask';
-import styles from './styles/cardDialog.module.css';
+import styles from '../styles/cardDialog.module.css';
 
 interface CardDialogProps {
   dialogOpen: boolean,
   setDialogOpen: React.Dispatch<React.SetStateAction<boolean>>,
   cards: Card[] | null,
   setCards: React.Dispatch<React.SetStateAction<Card[] | null>>,
+  cardSelection: number,
+  setCardSelection: React.Dispatch<React.SetStateAction<number>>,
 }
 
-const CardDialog = ({ dialogOpen, setDialogOpen, cards, setCards } : CardDialogProps) => {
+const CreateCardDialog = ({ dialogOpen, setDialogOpen, cards, setCards, cardSelection, setCardSelection } : CardDialogProps) => {
   const [newCard, setNewCard] = useState<Card>(getDefaultCardValues());
 
   return(
     <Dialog className={styles.dialog} open={dialogOpen} onClose={() => {setDialogOpen(false)}} disableEnforceFocus={false}>
       <DialogTitle className={styles.dialogTitle}>Add card</DialogTitle>
-      <DialogContent className={styles.dialogContent}>
+      <DialogContent className={`${styles.dialogContent} ${styles.createCardContent}`}>
         <Box className={`${styles.inputBox} ${styles.cardHolder}`}>
           <InputLabel className={styles.inputLabel} htmlFor='inputCardNickname'>Nickname</InputLabel>
           <InputUnstyled
@@ -81,6 +83,7 @@ const CardDialog = ({ dialogOpen, setDialogOpen, cards, setCards } : CardDialogP
       <DialogActions className={styles.dialogActions}>
         <Button className={styles.addAction} onClick={() => {
           cards ? setCards([...cards, newCard]) : setCards([newCard]);
+          setCardSelection(cards ? cards!.length : 0);
           setDialogOpen(false);
         }}>Add</Button>
         <Button className={styles.cancelAction} onClick={() => {
@@ -92,4 +95,4 @@ const CardDialog = ({ dialogOpen, setDialogOpen, cards, setCards } : CardDialogP
   );
 };
 
-export default CardDialog;
+export default CreateCardDialog;
