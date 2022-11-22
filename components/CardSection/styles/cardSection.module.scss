@@ -1,15 +1,15 @@
 .container {
+  height: min-content;
+  width: min-content;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   gap: 0 1.2rem;
   padding: 3rem 1.2rem;
   border-radius: 36px;
   align-items: center;
-  // border: 1px solid #ffffff50;
-  // box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 
-.top {
+.actions {
   grid-column: 2;
   display: flex;
   justify-content: space-between;
@@ -23,15 +23,10 @@
     color: #dadada;
   }
 
-  & .revealCard {
-    // margin-left: auto;
-  }
-
   & .editCard,
   & .revealCard,
   & .deleteCard,
   & .copyCardNumber {
-    // margin-right: 1.2rem;
     background-color: #181818;
     color: var(--clr-text-gray);
 
@@ -40,7 +35,7 @@
     }
   }
 
-  & .addCard {
+  & .createCard {
     background-color: #0066ff;
     color: white;
 
@@ -49,7 +44,7 @@
     }
   }
 
-  & .addCard,
+  & .createCard,
   & .editCard,
   & .revealCard,
   & .deleteCard,
@@ -66,8 +61,8 @@
   }
 }
 
-.switchToPreviousCard,
-.switchToNextCard {
+.toPreviousCard,
+.toNextCard {
   min-width: 0;
   min-height: 0;
   width: 3rem;
@@ -89,7 +84,7 @@
   }
 }
 
-.switchToPreviousCard {
+.toPreviousCard {
   grid-column: 1;
 
   &.firstCard {
@@ -102,7 +97,7 @@
   }
 }
 
-.switchToNextCard {
+.toNextCard {
   grid-column: 3;
 
   &.lastCard {
@@ -129,7 +124,7 @@
   }
 }
 
-.cardBox .noCardsText {
+.card .noCardsText {
   display: flex;
   justify-content: center;
   align-items: center;

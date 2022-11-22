@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import CardSection from '../components/CardSection/CardSection';
 import NavigationSection from '../components/NavigationSection/navigationSection';
 import PageWrapper from '../components/PageWrapper/PageWrapper';
 import TransactionSection from '../components/TransactionSection/TransactionSection';
@@ -14,8 +15,9 @@ const Home = () => {
       </Head>
 
       <PageWrapper className={styles.pageWrapper}>
-        <NavigationSection />
+        {/* <NavigationSection /> */}
         <TransactionSection />
+        <CardSection />
       </PageWrapper>
     </div>
   )
