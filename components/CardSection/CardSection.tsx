@@ -74,7 +74,7 @@ const CardSection = ({} : CardSectionProps) => {
       <Button 
         className={`${styles.toNextCard} ${cards && cardSelection === cards.length - 1 && styles.lastCard}`} 
         variant='contained' 
-        onClick={() => {setCardSelection(cardSelection + 1)}}>
+        onClick={() => {cards && cardSelection < cards.length - 1 && setCardSelection(cardSelection + 1)}}>
         <ChevronRightIcon className={styles.chevronRightIcon} />
       </Button>
       <CreateCardDialog
