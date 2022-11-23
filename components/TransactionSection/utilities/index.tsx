@@ -14,7 +14,7 @@ export const getTestRows = (): GridRowsProp => {
 export const getDataGridColumns = (): GridColDef[] => {
   return [
     { field: 'image', headerName: 'Image', width: 100, renderCell: (params: GridRenderCellParams<any, any, any>) => {
-      return <Avatar sx={{ width: 30, height: 30, }} src={params.value}></Avatar>;
+      return <Avatar sx={{ width: 30, height: 30, }} src={params.value} alt='Merchant image'>{params.value}</Avatar>;
     } },
     { field: 'name', headerName: 'Name', width: 200 },
     { field: 'date', headerName: 'Date', width: 100 },

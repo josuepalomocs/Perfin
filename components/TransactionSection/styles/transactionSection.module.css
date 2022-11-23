@@ -3,6 +3,11 @@
   min-height: 36rem;
 }
 
+.title {
+  font-size: 18px;
+  margin-bottom: 0.6rem;
+}
+
 .dataGrid {
   border: none;
   font-size: 14px;
@@ -63,11 +68,11 @@
   outline: none;
 }
 
-.dataGrid :global .MuiDataGrid-cell[data-colindex="3"].positiveValue div {
+.dataGrid :global .MuiDataGrid-cell[data-colindex="4"].positiveValue div {
   color: var(--clr-text-green);
 }
 
-.dataGrid :global .MuiDataGrid-cell[data-colindex="3"].negativeValue div {
+.dataGrid :global .MuiDataGrid-cell[data-colindex="4"].negativeValue div {
   color: var(--clr-text-red);
 }
 
