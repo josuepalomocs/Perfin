@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import createLinkToken from '../../plaid/services/createLinkToken';
-import Button from "../Button/Button";
-import Container from '../Container/Container';
-import List from "../List/List";
-import Image from '../Image/Image';
+import { Container, Typography } from '@mui/material';
 import PlaidLink from '../PlaidLink/PlaidLink';
-import Text from '../Text/Text'
-import Transaction from "../Transaction/Transaction";
-import styles from './transactionSection.module.css';
+import { DataGrid } from '@mui/x-data-grid';
+import styles from './styles/transactionSection.module.css';
+import { getDataGridColumns, getDataGridRows } from './utilities';
 
 const TransactionSection = () => {
 	const [renderPlaidLink, setRenderPlaidLink] = useState(false);
@@ -21,10 +18,19 @@ const TransactionSection = () => {
 		})();
 	}, [renderPlaidLink, linkToken]);
 
+	console.log(getDataGridColumns());
+	console.log(getDataGridRows());
+
 	return (
-		<Container className={styles.container} type='section'>
-			<Text className={styles.heading} type={'h1'}>Transactions</Text>
-			<table className={styles.table}>
+		<Container className={styles.container}>
+			{/* <Typography className={styles.title} variant='inherit'>Transactions</Typography> */}
+			<DataGrid className={styles.dataGrid}
+				rows={getDataGridRows()}
+				columns={getDataGridColumns()}
+				disableColumnSelector
+				disableColumnFilter
+			/>
+			{/* <table className={styles.table}>
 				<thead className={styles.tableHead}>
 					<tr className={styles.tableRowHeaders}>
 						<th className={styles.tableHeader}>
@@ -88,7 +94,7 @@ const TransactionSection = () => {
 							<td className={`${styles.amount} ${styles.negative}`}>-$504.57</td>
 						</tr>
 				</tbody>
-			</table>
+			</table> */}
 			{/* <Button id='addExternalTransaction' className={styles.addExternal}>Add External Transaction</Button> */}
 			{/* <Container className={styles.actionsContainer}>
 				<Button id={'linkAccountWithPlaid'} className={styles.linkAccount} onClick={() => { setRenderPlaidLink(true) }}>Link Account</Button>
