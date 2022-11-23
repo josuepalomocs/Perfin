@@ -1,0 +1,94 @@
+.container {
+  width: 748px;
+  min-height: 36rem;
+}
+
+.title {
+  font-size: 18px;
+  margin-bottom: 0.6rem;
+}
+
+.dataGrid {
+  border: none;
+  font-size: 14px;
+  font-family: var(--ff-default);
+  color: var(--clr-text-gray);
+  
+  & * {
+    color: var(--clr-text-gray);
+  }
+
+  & :global {
+
+    & .MuiDataGrid-main {
+      color: var(--clr-text-gray);
+    
+      & .MuiDataGrid-columnHeaders {
+        border-bottom: 1px solid #202020;
+
+        & .MuiDataGrid-columnHeader {
+
+        }
+
+        & .MuiDataGrid-columnHeaderTitle {
+          font-weight: 400;
+        }
+      }
+    }
+
+    & .MuiDataGrid-row {
+
+      &:nth-child(odd) {
+        background-color: #141414;
+
+        &.Mui-selected {
+          background-color: #141414;
+  
+          &:hover {
+            background-color: #141414;
+          }
+        }
+  
+        &:hover {
+          background-color: #141414;
+        }
+      }
+      
+      &.Mui-selected {
+        background-color: inherit;
+
+        &:hover {
+          background-color: inherit;
+        }
+      }
+
+      &:hover {
+        background-color: inherit;
+      }
+    }
+
+    & .MuiDataGrid-cell {
+      border: none;
+      background-color: inherit;
+
+      &:focus {
+        outline: none;
+      }
+
+      &[data-colindex="4"] {
+        
+        &.positiveValue div {
+          color: var(--clr-text-green);
+        }
+        
+        &.negativeValue div {
+          color: var(--clr-text-red);
+        }
+      }
+    }
+
+    & .MuiDataGrid-footerContainer {
+      border-top: 1px solid #202020;
+    }
+  }
+}

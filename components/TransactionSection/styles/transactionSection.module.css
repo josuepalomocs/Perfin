@@ -1,0 +1,82 @@
+.container {
+  width: 748px;
+  min-height: 36rem;
+}
+
+.title {
+  font-size: 18px;
+  margin-bottom: 0.6rem;
+}
+
+.dataGrid {
+  border: none;
+  font-size: 14px;
+  font-family: var(--ff-default);
+  color: var(--clr-text-gray);
+}
+
+.dataGrid * {
+  color: var(--clr-text-gray);
+}
+
+.dataGrid :global .MuiDataGrid-main {
+  color: var(--clr-text-gray);
+}
+
+.dataGrid :global .MuiDataGrid-main .MuiDataGrid-columnHeaders {
+  border-bottom: 1px solid #202020;
+}
+
+.dataGrid :global .MuiDataGrid-main .MuiDataGrid-columnHeaders .MuiDataGrid-columnHeaderTitle {
+  font-weight: 400;
+}
+
+.dataGrid :global .MuiDataGrid-row:nth-child(odd) {
+  background-color: #141414;
+}
+
+.dataGrid :global .MuiDataGrid-row:nth-child(odd).Mui-selected {
+  background-color: #141414;
+}
+
+.dataGrid :global .MuiDataGrid-row:nth-child(odd).Mui-selected:hover {
+  background-color: #141414;
+}
+
+.dataGrid :global .MuiDataGrid-row:nth-child(odd):hover {
+  background-color: #141414;
+}
+
+.dataGrid :global .MuiDataGrid-row.Mui-selected {
+  background-color: inherit;
+}
+
+.dataGrid :global .MuiDataGrid-row.Mui-selected:hover {
+  background-color: inherit;
+}
+
+.dataGrid :global .MuiDataGrid-row:hover {
+  background-color: inherit;
+}
+
+.dataGrid :global .MuiDataGrid-cell {
+  border: none;
+  background-color: inherit;
+}
+
+.dataGrid :global .MuiDataGrid-cell:focus {
+  outline: none;
+}
+
+.dataGrid :global .MuiDataGrid-cell[data-colindex="4"].positiveValue div {
+  color: var(--clr-text-green);
+}
+
+.dataGrid :global .MuiDataGrid-cell[data-colindex="4"].negativeValue div {
+  color: var(--clr-text-red);
+}
+
+.dataGrid :global .MuiDataGrid-footerContainer {
+  border-top: 1px solid #202020;
+}
+/*# sourceMappingURL=transactionSection.module.css.map */
