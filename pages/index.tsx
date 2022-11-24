@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { Box } from '@mui/material';
 import CardSection from '../components/CardSection/CardSection';
 import NavigationSection from '../components/NavigationSection/navigationSection';
 import PageWrapper from '../components/PageWrapper/PageWrapper';
@@ -14,11 +15,13 @@ const Home = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <PageWrapper className={styles.pageWrapper}>
-        {/* <NavigationSection /> */}
-        <TransactionSection />
-        <CardSection />
-      </PageWrapper>
+      <Box className={styles.container}>
+        <NavigationSection />
+        <Box className={styles.main}>
+          <TransactionSection />
+          <CardSection />
+        </Box>
+      </Box>
     </div>
   )
 }

@@ -1,11 +1,19 @@
 .container {
-  width: 748px;
-  min-height: 36rem;
+  background-color: #111111;
+  // padding: 3rem;
+}
+
+.dataGridBox {
+  width: calc(748px + 3rem);
+  height: 30rem;
+  padding: 1.2rem 2.4rem;
+  border: 1px solid #202020;
+  border-radius: 24px;
 }
 
 .title {
   font-size: 18px;
-  margin-bottom: 0.6rem;
+  margin-bottom: 1.2rem;
 }
 
 .dataGrid {

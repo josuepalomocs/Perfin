@@ -26,7 +26,8 @@ const CardSection = ({} : CardSectionProps) => {
   const formattedCardNumber = activeCard && getFormattedCardNumber(activeCard.brand, activeCard.number);
 
   return (
-    <Container className={styles.container}>
+    <Box className={styles.container}>
+      <Typography className={styles.title}>Cards</Typography>
       <Box className={styles.grid}>
         <Box className={styles.actions}>
           <Fab className={`${styles.fab} ${styles.copyCardNumber}`} onClick={() => {activeCard && copyCardNumberToClipboard(activeCard.number)}}>
@@ -106,7 +107,7 @@ const CardSection = ({} : CardSectionProps) => {
             setCardSelection={setCardSelection} />
         }
       </Box>
-    </Container>
+    </Box>
   );
 };
 

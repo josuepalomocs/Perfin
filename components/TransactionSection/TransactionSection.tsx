@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import createLinkToken from '../../plaid/services/createLinkToken';
-import { Container, Typography } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import PlaidLink from '../PlaidLink/PlaidLink';
 import { DataGrid } from '@mui/x-data-grid';
 import styles from './styles/transactionSection.module.css';
@@ -21,16 +21,18 @@ const TransactionSection = () => {
 
 
 	return (
-		<Container className={styles.container}>
+		<Box className={styles.container}>
 			<Typography className={styles.title} variant='inherit'>Transactions</Typography>
-			<DataGrid className={styles.dataGrid}
-				rows={getDataGridRows()}
-				columns={getDataGridColumns()}
-				disableColumnSelector
-				disableColumnFilter
-			/>
+			<Box className={styles.dataGridBox}>
+				<DataGrid className={styles.dataGrid}
+					rows={getDataGridRows()}
+					columns={getDataGridColumns()}
+					disableColumnSelector
+					disableColumnFilter
+				/>
+			</Box>
 			{ linkToken ? <PlaidLink linkToken={ linkToken } /> : <></> }
-		</Container>
+		</Box>
 	);
 }
 
