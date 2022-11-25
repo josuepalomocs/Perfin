@@ -73,7 +73,7 @@ const CardSection = ({} : CardSectionProps) => {
               <Typography className={styles.noCardsText}>You don't have any saved cards</Typography>
           }
         </Box>
-        <Button 
+        <Button
           className={`${styles.toNextCard} ${cards && cardSelection === cards.length - 1 && styles.lastCard}`} 
           variant='contained' 
           onClick={() => {cards && cardSelection < cards.length - 1 && setCardSelection(cardSelection + 1)}}>
