@@ -1,0 +1,64 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 20rem;
+  height: 14rem;
+  padding: 1.2rem;
+  border-radius: 18px;
+  color: var(--clr-text-gray);
+  background-color: #141414;
+  z-index: 1;
+
+  & .backgroundGradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 18px;
+    opacity: 0.2;
+    filter: contrast(200%);
+    background: linear-gradient(145deg, #ffffff 10%, #696969f7 90%);
+    border: 2px solid rgb(255, 255, 255);
+  }
+}
+
+.brandImage {
+  position: absolute;
+  top: 1.2rem;
+  width: 4rem;
+  height: 4rem;
+
+  & img {
+    object-fit: scale-down;
+  }
+}
+
+.center {
+  margin-top: 5rem;
+
+  & .nickname {
+    font-size: var(--fs-regular);
+    margin-bottom: 0.2rem;
+  }
+
+  & .number {
+    word-spacing: 0.6rem;
+    font-size: var(--fs-semi-large);
+    font-weight: var(--fw-medium);
+    color: var(--clr-text-white);
+  }
+}
+
+.bottom {
+  display: flex;
+  gap: 1.2rem;
+  word-spacing: 0.3rem;
+
+  & .expirationDate span,
+  & .cvv span {
+    color: var(--clr-text-white);
+  }
+}

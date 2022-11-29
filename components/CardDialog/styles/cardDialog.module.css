@@ -43,7 +43,7 @@
 }
 
 .dialog input:focus {
-  border: 1px solid #499eff94;
+  border: 1px solid --clr-input--focus;
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
@@ -82,7 +82,7 @@
 }
 
 .cancelAction {
-  color: #707070;
+  color: var(--clr-text-gray);
 }
 
 .cancelAction:hover {

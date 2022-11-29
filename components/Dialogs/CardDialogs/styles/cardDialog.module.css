@@ -26,6 +26,7 @@
 }
 
 .dialog input {
+  width: 100%;
   height: 3rem;
   padding: 0 0.6rem;
   margin-bottom: 1.2rem;
@@ -38,36 +39,32 @@
   background-color: var(--clr-bg-dark-gray);
 }
 
-.dialog input {
-  width: 100%;
-}
-
 .dialog input:focus {
   border: 1px solid #499eff94;
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
 
-.dialogContent.createCardDialogContent {
+.dialogContent.addCardDialogContent {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr 1fr;
       grid-template-columns: 1fr 1fr;
 }
 
-.dialogContent.createCardDialogContent .inputBox.cardBrand,
-.dialogContent.createCardDialogContent .inputBox.cardHolder,
-.dialogContent.createCardDialogContent .inputBox.cardNumber {
+.dialogContent.addCardDialogContent .inputBox.cardBrand,
+.dialogContent.addCardDialogContent .inputBox.cardHolder,
+.dialogContent.addCardDialogContent .inputBox.cardNumber {
   -ms-grid-column: 1;
   -ms-grid-column-span: 3;
   grid-column: 1 / 4;
 }
 
-.dialogContent.createCardDialogContent .inputBox.cardExpirationDate input {
+.dialogContent.addCardDialogContent .inputBox.cardExpirationDate input {
   border-radius: 6px 0 0 6px;
 }
 
-.dialogContent.createCardDialogContent .inputBox.cardCSV input {
+.dialogContent.addCardDialogContent .inputBox.cardCSV input {
   border-radius: 0 6px 6px 0;
 }
 
@@ -94,7 +91,7 @@
 }
 
 .cancelAction {
-  color: #707070;
+  color: var(--clr-text-gray);
 }
 
 .cancelAction:hover {
