@@ -10,8 +10,7 @@
     color: var(--clr-text-white);
     background-color: #0c0c0c;
     box-shadow: none;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
-      rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
   }
 }
 
@@ -27,6 +26,7 @@
 }
 
 .dialog input {
+  width: 100%;
   height: 3rem;
   padding: 0 0.6rem;
   margin-bottom: 1.2rem;
@@ -37,18 +37,13 @@
   font-size: var(--fs-14);
   color: var(--clr-text-white);
   background-color: var(--clr-bg-dark-gray);
-}
-
-.dialog input {
-  width: 100%;
-
   &:focus {
-    border: 1px solid --clr-input--focus;
+    border: 1px solid #499eff94;
     transition: 0.3s;
   }
 }
 
-.dialogContent {
+.dialogContent.addCardDialogContent {
   display: grid;
   grid-template-columns: 1fr 1fr;
 
@@ -67,11 +62,21 @@
   }
 }
 
-.addAction {
+.addAction,
+.editAction {
   color: #499eff;
 
   &:hover {
     background-color: rgba(73, 158, 255, 0.1);
+    transition: 0.1s;
+  }
+}
+
+.deleteAction {
+  color: #ff4e74;
+
+  &:hover {
+    background-color: rgba(112, 112, 112, 0.1);
     transition: 0.1s;
   }
 }
@@ -86,28 +91,29 @@
 }
 
 .input.cardNumber > div {
-  color: red;
 }
 
-.inputBox.cardNumber {
+.inputBox {
   position: relative;
 }
 
-.cardBrand {
+.inputImage {
   position: absolute;
-  top: 28px;
-  right: 14px;
-  border-radius: 0;
+  width: 3rem;
+  height: 3rem;
   object-fit: contain;
+  top: 25px;
+  right: 10px;
+  border-radius: 0;
   background-color: transparent;
-  opacity: 0;
+  animation: smoothEntry 0.2s;
+}
 
-  &.cardIcon {
-    opacity: 1;
-    transition: 0.2s ease-in-out;
+@keyframes smoothEntry {
+  from {
+    opacity: 0;
   }
-
-  & img {
-    object-fit: contain;
+  to {
+    opacity: 1;
   }
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import { Card as CardType } from "../../../../types";
+import { Card as CardType } from "../../../../types/card";
 import styles from "./styles/card.module.css";
 
 interface CardProps extends CardType {}

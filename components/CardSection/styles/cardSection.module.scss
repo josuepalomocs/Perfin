@@ -10,8 +10,8 @@
   align-items: center;
 }
 
-.primaryActions,
-.secondaryActions {
+.actionsPrimary,
+.actionsSecondary {
   grid-column: 2;
   display: flex;
   align-items: flex-end;
@@ -52,11 +52,11 @@
   }
 }
 
-.primaryActions {
+.actionsPrimary {
   margin-left: auto;
 }
 
-.secondaryActions {
+.actionsSecondary {
   margin: 0 1.8rem;
   justify-content: space-around;
 

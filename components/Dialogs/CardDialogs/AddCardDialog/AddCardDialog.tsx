@@ -1,37 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import { Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, InputLabel } from "@mui/material";
-import { Card, CardBrand } from "../../../../types";
+import { Card, CardBrand, CardDialogForm } from "../../../../types/card";
 import { InputUnstyled } from "@mui/base";
-import { getDefaultCardValues } from "../../../../utilities/cardDialog";
-import { ValidationOptions } from "../utilities";
+import dialogHelpers from "./helpers";
+import { useForm, Controller } from "react-hook-form";
 import styles from "../styles/cardDialog.module.css";
+
+const { handleClose, handleAddCard, handleCancelCard } = dialogHelpers;
 
 interface CardDialogProps {
   dialogOpen: boolean;
   setDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
   cardList: Card[] | null;
   setCardList: React.Dispatch<React.SetStateAction<Card[] | null>>;
-  cardSelection: number;
-  setCardSelection: React.Dispatch<React.SetStateAction<number>>;
+  selectedCardIndex: number;
+  setSelectedCardIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const AddCardDialog = ({ dialogOpen, setDialogOpen, cardList, setCardList, cardSelection, setCardSelection }: CardDialogProps) => {
-  const [newCard, setNewCard] = useState<Card>(getDefaultCardValues());
-
-  const handleClose = () => {
-    setDialogOpen(false);
-  };
-
-  const handleAddCard = () => {
-    cardList ? setCardList([...cardList, newCard]) : setCardList([newCard]);
-    setCardSelection(cardList ? cardList!.length : 0);
-    setDialogOpen(false);
-  };
-
-  const handleCancelCard = () => {
-    setNewCard({ ...newCard, brand: null });
-    setDialogOpen(false);
-  };
+const AddCardDialog = ({ dialogOpen, setDialogOpen, cardList, setCardList, selectedCardIndex, setSelectedCardIndex }: CardDialogProps) => {
+  const { control, handleSubmit } = useForm<CardDialogForm>();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, key: string) => {
     if (key === "number") {
@@ -63,22 +50,20 @@ const AddCardDialog = ({ dialogOpen, setDialogOpen, cardList, setCardList, cardS
           .trim();
         console.log(e.target.value);
       }
-      setNewCard({ ...newCard, brand: brand, [key]: e.target.value });
+      setCard({ ...card, brand: brand, [key]: e.target.value });
     } else if (key === "expirationDate") {
       e.target.value = e.target.value
         .replace(/^(.{2}\s{1}\/{1})$/, e.target.value.charAt(0))
         .replace(/[^\dA-Z]/g, "")
         .replace(/^(.{2})/, "$1 / ");
       console.log(e.target.value);
-      setNewCard({ ...newCard, [key]: e.target.value });
+      setCard({ ...card, [key]: e.target.value });
     } else if (key === "csv") {
-      setNewCard({ ...newCard, [key]: e.target.value });
+      setCard({ ...card, [key]: e.target.value });
     } else {
-      setNewCard({ ...newCard, [key]: e.target.value });
+      setCard({ ...card, [key]: e.target.value });
     }
   };
-
-  const handleBlur = (e: React.ChangeEvent<HTMLInputElement>, validationOptions: ValidationOptions) => {};
 
   return (
     <Dialog className={styles.dialog} open={dialogOpen} onClose={handleClose}>
@@ -88,13 +73,13 @@ const AddCardDialog = ({ dialogOpen, setDialogOpen, cardList, setCardList, cardS
           <InputLabel className={styles.inputLabel} htmlFor="inputCardNickname">
             Nickname
           </InputLabel>
-          <InputUnstyled
-            id="inputCardNickname"
-            className={styles.input}
-            slotProps={{ input: { maxLength: 50 } }}
-            placeholder="John Doe"
-            onChange={(e) => {
-              handleChange(e, "nickname");
+          <Controller
+            name="nickname"
+            control={control}
+            render={({ field }) => {
+              return (
+                <InputUnstyled {...field} id="inputCardNickname" className={styles.input} slotProps={{ input: { maxLength: 50 } }} placeholder="John Doe" />
+              );
             }}
           />
         </Box>
@@ -102,16 +87,26 @@ const AddCardDialog = ({ dialogOpen, setDialogOpen, cardList, setCardList, cardS
           <InputLabel className={styles.inputLabel} htmlFor="inputCardNumber">
             Card number
           </InputLabel>
-          <InputUnstyled
-            id="inputCardNumber"
-            className={styles.input}
-            slotProps={{ input: { maxLength: newCard.brand === "american-express" ? 17 : 23 } }}
-            placeholder="4242 4242 4242 4242"
-            onChange={(e) => {
-              handleChange(e, "number");
+          <Controller
+            name="number"
+            control={control}
+            render={({ field }) => {
+              return (
+                <InputUnstyled
+                  {...field}
+                  id="inputCardNumber"
+                  className={styles.input}
+                  slotProps={{ input: { maxLength: card.brand === "american-express" ? 17 : 23 } }}
+                  placeholder="4242 4242 4242 4242"
+                  onChange={(e) => {
+                    if (e.target.value.charAt(0) === "3") {
+                    }
+                  }}
+                />
+              );
             }}
           />
-          <Avatar className={`${newCard.brand && styles.cardIcon} ${styles.cardBrand}`} src={`${newCard.brand}_logo.svg`}>
+          <Avatar className={`${card.brand && styles.cardIcon} ${styles.cardBrand}`} src={`${card.brand}_logo.svg`}>
             " "
           </Avatar>
         </Box>
@@ -119,13 +114,13 @@ const AddCardDialog = ({ dialogOpen, setDialogOpen, cardList, setCardList, cardS
           <InputLabel className={styles.inputLabel} htmlFor="inputCardExpirationDate">
             Exp date
           </InputLabel>
-          <InputUnstyled
-            id="inputCardExpirationDate"
-            className={styles.input}
-            slotProps={{ input: { maxLength: 7 } }}
-            placeholder="01/25"
-            onChange={(e) => {
-              handleChange(e, "expirationDate");
+          <Controller
+            name="expirationDate"
+            control={control}
+            render={({ field }) => {
+              return (
+                <InputUnstyled {...field} id="inputCardExpirationDate" className={styles.input} slotProps={{ input: { maxLength: 7 } }} placeholder="01/25" />
+              );
             }}
           />
         </Box>
@@ -133,19 +128,33 @@ const AddCardDialog = ({ dialogOpen, setDialogOpen, cardList, setCardList, cardS
           <InputLabel className={styles.inputLabel} htmlFor="inputCardCSV">
             CSV
           </InputLabel>
-          <InputUnstyled
-            id="inputCardCSV"
-            className={`${styles.input} ${styles.cardCSV}`}
-            slotProps={{ input: { maxLength: 4 } }}
-            placeholder="424"
-            onChange={(e) => {
-              handleChange(e, "csv");
+          <Controller
+            name="csv"
+            control={control}
+            render={({ field }) => {
+              return (
+                <InputUnstyled
+                  {...field}
+                  id="inputCardCSV"
+                  className={`${styles.input} ${styles.cardCSV}`}
+                  slotProps={{ input: { maxLength: 4 } }}
+                  placeholder="424"
+                  onChange={(e) => {
+                    handleChange(e, "csv");
+                  }}
+                />
+              );
             }}
           />
         </Box>
       </DialogContent>
       <DialogActions className={styles.dialogActions}>
-        <Button className={styles.addAction} onClick={handleAddCard}>
+        <Button
+          className={styles.addAction}
+          onClick={() => {
+            handleAddCard(card, cardList, setCardList, setSelectedCardIndex);
+          }}
+        >
           Add
         </Button>
         <Button className={styles.cancelAction} onClick={handleCancelCard}>

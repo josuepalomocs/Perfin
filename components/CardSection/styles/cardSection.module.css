@@ -15,8 +15,8 @@
           align-items: center;
 }
 
-.primaryActions,
-.secondaryActions {
+.actionsPrimary,
+.actionsSecondary {
   -ms-grid-column: 2;
   grid-column: 2;
   display: -webkit-box;
@@ -30,8 +30,8 @@
   margin-bottom: 1.2rem;
 }
 
-.primaryActions .fab,
-.secondaryActions .fab {
+.actionsPrimary .fab,
+.actionsSecondary .fab {
   background-color: var(--clr-bg-fab);
   color: var(--clr-text-gray);
   -webkit-transition: none;
@@ -40,53 +40,53 @@
   transition: 0.1s;
 }
 
-.primaryActions .fab:hover,
-.secondaryActions .fab:hover {
+.actionsPrimary .fab:hover,
+.actionsSecondary .fab:hover {
   background-color: var(--clr-bg-fab--hover);
 }
 
-.primaryActions .addCard,
-.secondaryActions .addCard {
+.actionsPrimary .addCard,
+.actionsSecondary .addCard {
   border-radius: 48px;
   background-color: #0059ff;
   color: var(--clr-text-white);
 }
 
-.primaryActions .addCard:hover,
-.secondaryActions .addCard:hover {
+.actionsPrimary .addCard:hover,
+.actionsSecondary .addCard:hover {
   background-color: #4184ff;
 }
 
-.primaryActions .addCard svg,
-.primaryActions .editCard svg,
-.primaryActions .revealCard svg,
-.primaryActions .deleteCard svg,
-.primaryActions .copyCardNumber svg,
-.secondaryActions .addCard svg,
-.secondaryActions .editCard svg,
-.secondaryActions .revealCard svg,
-.secondaryActions .deleteCard svg,
-.secondaryActions .copyCardNumber svg {
+.actionsPrimary .addCard svg,
+.actionsPrimary .editCard svg,
+.actionsPrimary .revealCard svg,
+.actionsPrimary .deleteCard svg,
+.actionsPrimary .copyCardNumber svg,
+.actionsSecondary .addCard svg,
+.actionsSecondary .editCard svg,
+.actionsSecondary .revealCard svg,
+.actionsSecondary .deleteCard svg,
+.actionsSecondary .copyCardNumber svg {
   width: 20px;
   height: 20px;
 }
 
-.primaryActions {
+.actionsPrimary {
   margin-left: auto;
 }
 
-.secondaryActions {
+.actionsSecondary {
   margin: 0 1.8rem;
   -ms-flex-pack: distribute;
       justify-content: space-around;
 }
 
-.secondaryActions .fab {
+.actionsSecondary .fab {
   background-color: transparent;
   border: 2px solid var(--clr-bg-fab);
 }
 
-.secondaryActions .fab:hover {
+.actionsSecondary .fab:hover {
   border: none;
 }
 
