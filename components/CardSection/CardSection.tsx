@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { copyCardNumberToClipboard, getFormattedCardNumber, getTestCards } from "./utilities";
+import { copyCardNumberToClipboard, getTestCards } from "./utilities";
 import { Box, Button, Fab, Typography } from "@mui/material";
 import { ChevronLeftIcon, ChevronRightIcon, ClipboardIcon, EyeIcon, EyeSlashIcon, PencilSquareIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/solid";
 import Card from "./components/Card/Card";
@@ -14,18 +14,58 @@ import useInputMask from "./components/Card/hooks/useInputMask";
 interface CardSectionProps {}
 
 const CardSection = ({}: CardSectionProps) => {
+  const [cardList, setCardList] = useState<CardType[] | null>(getTestCards());
+  const [selectedCardIndex, setSelectedCardIndex] = useState(0);
+  const [isCardRevealed, setIsCardRevealed] = useState(false);
+
+  const selectedCard = cardList && cardList[selectedCardIndex];
+
+  const [addCardDialogIsOpen, setAddCardDialogIsOpen] = useState(false);
+  const [editCardDialogIsOpen, setEditCardDialogIsOpen] = useState(false);
+  const [deleteCardDialogIsOpen, setDeleteCardDialogIsOpen] = useState(false);
+
   // control: Keeps track of the dialog form data
   // handleSubmit: Handles form validation and submission
   // setValue: Explicitly changes the value of a controlled input field, used to implement input masks
-  const { control, handleSubmit, setValue } = useForm<CardDialogForm>({ defaultValues: { number: "", nickname: "", expirationDate: "", csv: "" } });
+  const {
+    control: addCardControl,
+    handleSubmit: handleAddCardSubmit,
+    setValue: setAddCardValue,
+  } = useForm<CardDialogForm>({ defaultValues: { number: "", nickname: "", expirationDate: "", csv: "" } });
+
+  const {
+    control: editCardControl,
+    handleSubmit: handleEditCardSubmit,
+    setValue: setEditCardValue,
+    reset: resetEditCard,
+  } = useForm<CardDialogForm>({
+    defaultValues: {
+      number: selectedCard ? selectedCard.number : "",
+      nickname: selectedCard ? selectedCard.nickname : "",
+      expirationDate: selectedCard ? selectedCard.expirationDate : "",
+      csv: selectedCard ? selectedCard.csv : "",
+    },
+  });
+
+  useEffect(() => {
+    resetEditCard({
+      number: selectedCard ? selectedCard.number : "",
+      nickname: selectedCard ? selectedCard.nickname : "",
+      expirationDate: selectedCard ? selectedCard.expirationDate : "",
+      csv: selectedCard ? selectedCard.csv : "",
+    });
+  }, [selectedCard, editCardDialogIsOpen]);
 
   // Returns the expected card brand based on the first character (MII Number) of the target input field
-  const cardBrand = useExpectedCardBrand({ control, name: "number" });
+  const addCardExpectedCardBrand = useExpectedCardBrand({ control: addCardControl, name: "number" });
+
+  // Returns the expected card brand based on the first character (MII Number) of the target input field
+  const editCardExpectedCardBrand = useExpectedCardBrand({ control: editCardControl, name: "number" });
 
   // Returns formatted card number according to the expected card brand
   // eg. AE: 4242 424242 42424 | Visa: 4242 4242 4242 4242
   const toCardNumberFormat = (number: string) => {
-    if (cardBrand === "american-express") {
+    if (addCardExpectedCardBrand === "american-express") {
       return number
         .replace(/[^\dA-Z]/g, "")
         .replace(/(.{10})/g, "$1 ")
@@ -47,27 +87,68 @@ const CardSection = ({}: CardSectionProps) => {
       .replace(/^(.{2})/, "$1 / ");
   };
 
-  // Handle input mask logic for the target input fields
-  useInputMask({ control, name: "number" }, setValue, toCardNumberFormat);
-  useInputMask({ control, name: "expirationDate" }, setValue, toCardExpirationDateFormat);
+  // Returns formatted csv according to the expected card brand
+  // eg. 424
+  const toCardCsvFormat = (number: string) => {
+    return number.replace(/[^\dA-Z]/g, "");
+  };
 
-  const [addCardDialogIsOpen, setAddCardDialogIsOpen] = useState(false);
-  const [editCardDialogIsOpen, setEditCardDialogIsOpen] = useState(false);
-  const [deleteCardDialogIsOpen, setDeleteCardDialogIsOpen] = useState(false);
-
-  const [cardList, setCardList] = useState<CardType[] | null>(getTestCards());
-  const [selectedCardIndex, setSelectedCardIndex] = useState(0);
-  const [cardRevealed, setCardRevealed] = useState(false);
-
-  const selectedCard = cardList && cardList[selectedCardIndex];
-  const formattedCardNumber = selectedCard && getFormattedCardNumber(selectedCard.brand!, selectedCard.number);
-
-  const onSubmit: SubmitHandler<CardDialogForm> = (data) => {
-    if (cardList) {
-      setCardList([...cardList, { ...data, id: "-1", brand: cardBrand }]);
-    } else {
-      setCardList([{ ...data, id: "-1", brand: cardBrand }]);
+  // Handles previous card selection
+  const handleSelectPreviousCard = () => {
+    if (selectedCardIndex > 0) {
+      setSelectedCardIndex(selectedCardIndex - 1);
     }
+  };
+
+  // Handles next card selection
+  const handleSelectNextCard = () => {
+    if (cardList && selectedCardIndex < cardList.length - 1) {
+      setSelectedCardIndex(selectedCardIndex + 1);
+    }
+  };
+
+  // Copies the currently selected cards' number to clipboard
+  const handleCopyToClipboard = () => {
+    if (selectedCard) {
+      copyCardNumberToClipboard(selectedCard.number);
+    }
+  };
+
+  const handleDeleteCard = () => {};
+
+  // Handle input mask logic for the target input fields
+  useInputMask({ control: addCardControl, name: "number" }, setAddCardValue, toCardNumberFormat);
+  useInputMask({ control: addCardControl, name: "expirationDate" }, setAddCardValue, toCardExpirationDateFormat);
+  useInputMask({ control: addCardControl, name: "csv" }, setAddCardValue, toCardCsvFormat);
+
+  // Handle input mask logic for the target input fields
+  useInputMask({ control: editCardControl, name: "number" }, setEditCardValue, toCardNumberFormat);
+  useInputMask({ control: editCardControl, name: "expirationDate" }, setEditCardValue, toCardExpirationDateFormat);
+  useInputMask({ control: editCardControl, name: "csv" }, setEditCardValue, toCardCsvFormat);
+
+  const onAddCardSubmit: SubmitHandler<CardDialogForm> = (data) => {
+    const cleanData = { ...data, number: data.number.replaceAll(" ", ""), expirationDate: data.expirationDate.replaceAll(" ", "") };
+    if (cardList) {
+      setCardList([...cardList, { ...cleanData, id: "-1", brand: addCardExpectedCardBrand }]);
+      setSelectedCardIndex(cardList.length);
+    } else {
+      setCardList([{ ...cleanData, id: "-1", brand: addCardExpectedCardBrand }]);
+      setSelectedCardIndex(0);
+    }
+  };
+
+  const onEditCardSubmit: SubmitHandler<CardDialogForm> = (data) => {
+    if (cardList) {
+      const cleanData = { ...data, number: data.number.replaceAll(" ", ""), expirationDate: data.expirationDate.replaceAll(" ", "") };
+      const newCardList = cardList.map((card, index) => {
+        if (selectedCardIndex === index) {
+          return { ...cleanData, id: "-1", brand: editCardExpectedCardBrand };
+        }
+        return card;
+      });
+      setCardList(newCardList);
+    }
+    setEditCardDialogIsOpen(false);
   };
 
   const handleDialogClose = (setDialogIsOpen: React.Dispatch<React.SetStateAction<boolean>>) => {
@@ -80,14 +161,14 @@ const CardSection = ({}: CardSectionProps) => {
     }
   };
 
-  const inputList: CardDialogInput[] = [
+  const addCardInputList: CardDialogInput[] = [
     { id: "nickname", label: "Nickname", placeholder: "Main Debit", slotProps: { input: { maxLength: 50 } } },
     {
       id: "number",
       label: "Card Number",
       placeholder: "4242 4242 4242 4242",
-      slotProps: { input: { maxLength: cardBrand === "american-express" ? 17 : 23 } },
-      imageSrc: cardBrand && `${cardBrand}_logo.svg`,
+      slotProps: { input: { maxLength: addCardExpectedCardBrand === "american-express" ? 17 : 23 } },
+      imageSrc: addCardExpectedCardBrand && `${addCardExpectedCardBrand}_logo.svg`,
     },
     {
       id: "expirationDate",
@@ -103,13 +184,58 @@ const CardSection = ({}: CardSectionProps) => {
     },
   ];
 
-  const actionList: DialogAction[] = [
-    { id: "addCardAction", text: "Add", handleClick: handleSubmit(onSubmit) },
+  const editCardInputList: CardDialogInput[] = [
+    { id: "nickname", label: "Nickname", placeholder: "Main Debit", slotProps: { input: { maxLength: 50 } } },
+    {
+      id: "number",
+      label: "Card Number",
+      placeholder: "4242 4242 4242 4242",
+      slotProps: { input: { maxLength: editCardExpectedCardBrand === "american-express" ? 17 : 23 } },
+      imageSrc: editCardExpectedCardBrand && `${editCardExpectedCardBrand}_logo.svg`,
+    },
+    {
+      id: "expirationDate",
+      label: "Exp Date",
+      placeholder: "01 / 25",
+      slotProps: { input: { maxLength: 7 } },
+    },
+    {
+      id: "csv",
+      label: "CSV",
+      placeholder: "424",
+      slotProps: { input: { maxLength: 4 } },
+    },
+  ];
+
+  const addCardActionList: DialogAction[] = [
+    { id: "addCardAction", text: "Add", handleClick: handleAddCardSubmit(onAddCardSubmit) },
     {
       id: "cancelCardAction",
       text: "Cancel",
       handleClick: () => {
         setAddCardDialogIsOpen(false);
+      },
+    },
+  ];
+
+  const editCardActionList: DialogAction[] = [
+    { id: "addCardAction", text: "Edit", handleClick: handleEditCardSubmit(onEditCardSubmit) },
+    {
+      id: "cancelCardAction",
+      text: "Cancel",
+      handleClick: () => {
+        setEditCardDialogIsOpen(false);
+      },
+    },
+  ];
+
+  const deleteCardActionList: DialogAction[] = [
+    { id: "deleteCardAction", text: "Delete", handleClick: handleDeleteCard },
+    {
+      id: "cancelCardAction",
+      text: "Cancel",
+      handleClick: () => {
+        setDeleteCardDialogIsOpen(false);
       },
     },
   ];
@@ -137,13 +263,7 @@ const CardSection = ({}: CardSectionProps) => {
             <PlusIcon className={`${styles.icon} ${styles.plusIcon}`} />
           </Fab>
         </Box>
-        <Button
-          className={`${styles.toPreviousCard} ${selectedCardIndex <= 0 && styles.firstCard}`}
-          variant="contained"
-          onClick={() => {
-            selectedCardIndex > 0 && setSelectedCardIndex(selectedCardIndex - 1);
-          }}
-        >
+        <Button className={`${styles.toPreviousCard} ${selectedCardIndex <= 0 && styles.firstCard}`} variant="contained" onClick={handleSelectPreviousCard}>
           <ChevronLeftIcon className={styles.chevronLeftIcon} />
         </Button>
         <Box className={styles.card}>
@@ -152,17 +272,10 @@ const CardSection = ({}: CardSectionProps) => {
               id={selectedCard.id}
               brand={selectedCard.brand}
               nickname={selectedCard.nickname}
-              number={
-                cardRevealed
-                  ? formattedCardNumber!
-                  : `${
-                      selectedCard.brand === "american-express"
-                        ? `•••• •••••• ${formattedCardNumber!.slice(-5)}`
-                        : `•••• •••• •••• ${formattedCardNumber!.slice(-5)}`
-                    }`
-              }
-              expirationDate={cardRevealed ? selectedCard.expirationDate : "••/••"}
-              csv={cardRevealed ? selectedCard.csv : "•••"}
+              number={selectedCard.number}
+              expirationDate={selectedCard.expirationDate}
+              csv={selectedCard.csv}
+              isCardRevealed={isCardRevealed}
             />
           ) : (
             <Typography className={styles.noCardsText}>You don't have any saved cards</Typography>
@@ -171,30 +284,22 @@ const CardSection = ({}: CardSectionProps) => {
         <Button
           className={`${styles.toNextCard} ${cardList && selectedCardIndex === cardList.length - 1 && styles.lastCard}`}
           variant="contained"
-          onClick={() => {
-            cardList && selectedCardIndex < cardList.length - 1 && setSelectedCardIndex(selectedCardIndex + 1);
-          }}
+          onClick={handleSelectNextCard}
         >
           <ChevronRightIcon className={styles.chevronRightIcon} />
         </Button>
         <Box className={styles.actionsSecondary}>
-          <Fab
-            className={`${styles.fab} ${styles.copyCardNumber}`}
-            size="small"
-            onClick={() => {
-              selectedCard && copyCardNumberToClipboard(selectedCard.number);
-            }}
-          >
+          <Fab className={`${styles.fab} ${styles.copyCardNumber}`} size="small" onClick={handleCopyToClipboard}>
             <ClipboardIcon className={`${styles.icon} ${styles.clipboardIcon}`} />
           </Fab>
           <Fab
             className={`${styles.fab} ${styles.revealCard}`}
             size="small"
             onClick={() => {
-              setCardRevealed(!cardRevealed);
+              setIsCardRevealed(!isCardRevealed);
             }}
           >
-            {cardRevealed ? <EyeSlashIcon className={`${styles.icon} ${styles.eyeSlashIcon}`} /> : <EyeIcon className={`${styles.icon} ${styles.eyeIcon}`} />}
+            {isCardRevealed ? <EyeSlashIcon className={`${styles.icon} ${styles.eyeSlashIcon}`} /> : <EyeIcon className={`${styles.icon} ${styles.eyeIcon}`} />}
           </Fab>
           <Fab
             className={`${styles.fab} ${styles.deleteCard}`}
@@ -214,9 +319,30 @@ const CardSection = ({}: CardSectionProps) => {
         }}
         type="form"
         title="Add Card"
-        inputList={inputList}
-        actionList={actionList}
-        control={control}
+        inputList={addCardInputList}
+        actionList={addCardActionList}
+        control={addCardControl}
+      />
+      <Dialog
+        open={editCardDialogIsOpen}
+        handleClose={() => {
+          handleDialogClose(setEditCardDialogIsOpen);
+        }}
+        type="form"
+        title="Edit Card"
+        inputList={editCardInputList}
+        actionList={editCardActionList}
+        control={editCardControl}
+      />
+      <Dialog
+        open={deleteCardDialogIsOpen}
+        handleClose={() => {
+          handleDialogClose(setDeleteCardDialogIsOpen);
+        }}
+        type="prompt"
+        title="Delete card"
+        message={`Delete '${selectedCard?.nickname}'?`}
+        actionList={deleteCardActionList}
       />
     </Box>
   );
