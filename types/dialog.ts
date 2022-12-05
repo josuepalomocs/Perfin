@@ -4,6 +4,12 @@ import { CardDialogInput, CardDialogForm } from "./card";
 
 export type DialogType = "prompt" | "form";
 
+export type DialogInputWidth = "full" | "half" | "third" | "quarter";
+
+export type DialogInputBorderType = "round" | "roundLeft" | "roundRight";
+
+export type DialogActionType = "positive" | "negative" | "neutral";
+
 export interface DialogInput {
   id: string;
   label?: string;
@@ -13,11 +19,14 @@ export interface DialogInput {
   };
   placeholder?: string;
   imageSrc?: string;
+  width?: DialogInputWidth;
+  borderType?: DialogInputBorderType;
   handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface DialogAction {
   id?: string;
+  type?: DialogActionType;
   text?: string;
   handleClick?: (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }

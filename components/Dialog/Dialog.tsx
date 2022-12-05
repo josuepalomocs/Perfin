@@ -12,9 +12,9 @@ const Dialog = ({ open = false, handleClose, type = "prompt", title, message, in
     }
     if (type === "form" && inputList) {
       return inputList.map((input) => {
-        const { id, label, slotProps, placeholder, imageSrc } = input;
+        const { id, label, slotProps, placeholder, imageSrc, width = "full", borderType = "round" } = input;
         return (
-          <Box className={styles.inputBox} key={id}>
+          <Box className={`${styles.inputBox} ${styles[width]}`} key={id}>
             <InputLabel className={styles.inputLabel} htmlFor={id}>
               {label}
             </InputLabel>
@@ -22,7 +22,7 @@ const Dialog = ({ open = false, handleClose, type = "prompt", title, message, in
               name={id}
               control={control}
               render={({ field }) => {
-                return <InputUnstyled {...field} id={id} className={styles.input} slotProps={slotProps} placeholder={placeholder} />;
+                return <InputUnstyled {...field} id={id} className={`${styles.input} ${styles[borderType]}`} slotProps={slotProps} placeholder={placeholder} />;
               }}
             />
             {imageSrc && <Box className={styles.inputImage} component="img" src={imageSrc} />}
@@ -35,9 +35,10 @@ const Dialog = ({ open = false, handleClose, type = "prompt", title, message, in
   const renderDialogActions = () => {
     if (actionList) {
       return actionList.map((action) => {
+        const { id, type = "positive", text, handleClick } = action;
         return (
-          <Button key={action.id} id={action.id} className={styles.actionButton} onClick={action.handleClick}>
-            {action.text}
+          <Button key={id} id={id} className={`${styles.action} ${styles[type]}`} onClick={handleClick} disableFocusRipple={true}>
+            {text}
           </Button>
         );
       });

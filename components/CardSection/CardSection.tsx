@@ -8,7 +8,7 @@ import Dialog from "../Dialog/Dialog";
 import { Card as CardType, CardDialogForm, CardDialogInput } from "../../types/card";
 import { DialogAction } from "../../types/dialog";
 import styles from "./styles/cardSection.module.css";
-import useExpectedCardBrand from "./hooks/useExpectedCardBrand";
+import useExpectedCardBrand from "./hooks/useCardBrand";
 import useInputMask from "./components/Card/hooks/useInputMask";
 
 interface CardSectionProps {}
@@ -65,7 +65,7 @@ const CardSection = ({}: CardSectionProps) => {
   // Returns formatted card number according to the expected card brand
   // eg. AE: 4242 424242 42424 | Visa: 4242 4242 4242 4242
   const toCardNumberFormat = (number: string) => {
-    if (addCardExpectedCardBrand === "american-express") {
+    if (addCardExpectedCardBrand === "american-express" || editCardExpectedCardBrand === "american-express") {
       return number
         .replace(/[^\dA-Z]/g, "")
         .replace(/(.{10})/g, "$1 ")
@@ -116,12 +116,12 @@ const CardSection = ({}: CardSectionProps) => {
 
   const handleDeleteCard = () => {};
 
-  // Handle input mask logic for the target input fields
+  // Handle input mask logic for the target input fields (Add Card Dialog)
   useInputMask({ control: addCardControl, name: "number" }, setAddCardValue, toCardNumberFormat);
   useInputMask({ control: addCardControl, name: "expirationDate" }, setAddCardValue, toCardExpirationDateFormat);
   useInputMask({ control: addCardControl, name: "csv" }, setAddCardValue, toCardCsvFormat);
 
-  // Handle input mask logic for the target input fields
+  // Handle input mask logic for the target input fields (Edit Card Dialog)
   useInputMask({ control: editCardControl, name: "number" }, setEditCardValue, toCardNumberFormat);
   useInputMask({ control: editCardControl, name: "expirationDate" }, setEditCardValue, toCardExpirationDateFormat);
   useInputMask({ control: editCardControl, name: "csv" }, setEditCardValue, toCardCsvFormat);
@@ -175,12 +175,16 @@ const CardSection = ({}: CardSectionProps) => {
       label: "Exp Date",
       placeholder: "01 / 25",
       slotProps: { input: { maxLength: 7 } },
+      width: "half",
+      borderType: "roundRight",
     },
     {
       id: "csv",
       label: "CSV",
       placeholder: "424",
       slotProps: { input: { maxLength: 4 } },
+      width: "half",
+      borderType: "roundLeft",
     },
   ];
 
@@ -198,19 +202,24 @@ const CardSection = ({}: CardSectionProps) => {
       label: "Exp Date",
       placeholder: "01 / 25",
       slotProps: { input: { maxLength: 7 } },
+      width: "half",
+      borderType: "roundRight",
     },
     {
       id: "csv",
       label: "CSV",
       placeholder: "424",
       slotProps: { input: { maxLength: 4 } },
+      width: "half",
+      borderType: "roundLeft",
     },
   ];
 
   const addCardActionList: DialogAction[] = [
-    { id: "addCardAction", text: "Add", handleClick: handleAddCardSubmit(onAddCardSubmit) },
+    { id: "addCardAction", type: "positive", text: "Add", handleClick: handleAddCardSubmit(onAddCardSubmit) },
     {
       id: "cancelCardAction",
+      type: "neutral",
       text: "Cancel",
       handleClick: () => {
         setAddCardDialogIsOpen(false);
@@ -219,9 +228,10 @@ const CardSection = ({}: CardSectionProps) => {
   ];
 
   const editCardActionList: DialogAction[] = [
-    { id: "addCardAction", text: "Edit", handleClick: handleEditCardSubmit(onEditCardSubmit) },
+    { id: "addCardAction", type: "positive", text: "Edit", handleClick: handleEditCardSubmit(onEditCardSubmit) },
     {
       id: "cancelCardAction",
+      type: "neutral",
       text: "Cancel",
       handleClick: () => {
         setEditCardDialogIsOpen(false);
@@ -230,9 +240,10 @@ const CardSection = ({}: CardSectionProps) => {
   ];
 
   const deleteCardActionList: DialogAction[] = [
-    { id: "deleteCardAction", text: "Delete", handleClick: handleDeleteCard },
+    { id: "deleteCardAction", type: "negative", text: "Delete", handleClick: handleDeleteCard },
     {
       id: "cancelCardAction",
+      type: "neutral",
       text: "Cancel",
       handleClick: () => {
         setDeleteCardDialogIsOpen(false);
@@ -243,7 +254,7 @@ const CardSection = ({}: CardSectionProps) => {
   return (
     <Box className={styles.container}>
       <Box className={styles.grid}>
-        <Box className={styles.actionsPrimary}>
+        <Box className={`${styles.actions} ${styles.primary}`}>
           <Fab
             className={`${styles.fab} ${styles.editCard}`}
             size="small"
@@ -288,7 +299,7 @@ const CardSection = ({}: CardSectionProps) => {
         >
           <ChevronRightIcon className={styles.chevronRightIcon} />
         </Button>
-        <Box className={styles.actionsSecondary}>
+        <Box className={`${styles.actions} ${styles.secondary}`}>
           <Fab className={`${styles.fab} ${styles.copyCardNumber}`} size="small" onClick={handleCopyToClipboard}>
             <ClipboardIcon className={`${styles.icon} ${styles.clipboardIcon}`} />
           </Fab>

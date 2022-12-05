@@ -1,7 +1,7 @@
 import { FieldValues, useWatch } from "react-hook-form";
 import { CardBrand } from "../../../types/card";
 
-const useExpectedCardBrand = (fieldValues: FieldValues): CardBrand => {
+const useCardBrand = (fieldValues: FieldValues): CardBrand => {
   const MIINumber = useWatch(fieldValues).toString().charAt(0);
 
   switch (MIINumber) {
@@ -18,4 +18,4 @@ const useExpectedCardBrand = (fieldValues: FieldValues): CardBrand => {
   return "";
 };
 
-export default useExpectedCardBrand;
+export default useCardBrand;

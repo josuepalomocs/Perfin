@@ -15,8 +15,7 @@
           align-items: center;
 }
 
-.actionsPrimary,
-.actionsSecondary {
+.actions {
   -ms-grid-column: 2;
   grid-column: 2;
   display: -webkit-box;
@@ -30,9 +29,27 @@
   margin-bottom: 1.2rem;
 }
 
-.actionsPrimary .fab,
-.actionsSecondary .fab {
-  background-color: var(--clr-bg-fab);
+.actions.primary {
+  margin-left: auto;
+}
+
+.actions.secondary {
+  margin: 0 1.8rem;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.actions.secondary .fab {
+  background-color: transparent;
+  border: 2px solid var(--clr-bg-fab-secondary);
+}
+
+.actions.secondary .fab:hover {
+  border: none;
+}
+
+.actions .fab {
+  background-color: var(--clr-bg-fab-secondary);
   color: var(--clr-text-gray);
   -webkit-transition: none;
   transition: none;
@@ -40,54 +57,22 @@
   transition: 0.1s;
 }
 
-.actionsPrimary .fab:hover,
-.actionsSecondary .fab:hover {
-  background-color: var(--clr-bg-fab--hover);
-}
-
-.actionsPrimary .addCard,
-.actionsSecondary .addCard {
-  border-radius: 48px;
-  background-color: #0059ff;
-  color: var(--clr-text-white);
-}
-
-.actionsPrimary .addCard:hover,
-.actionsSecondary .addCard:hover {
-  background-color: #4184ff;
-}
-
-.actionsPrimary .addCard svg,
-.actionsPrimary .editCard svg,
-.actionsPrimary .revealCard svg,
-.actionsPrimary .deleteCard svg,
-.actionsPrimary .copyCardNumber svg,
-.actionsSecondary .addCard svg,
-.actionsSecondary .editCard svg,
-.actionsSecondary .revealCard svg,
-.actionsSecondary .deleteCard svg,
-.actionsSecondary .copyCardNumber svg {
+.actions .fab svg {
   width: 20px;
   height: 20px;
 }
 
-.actionsPrimary {
-  margin-left: auto;
+.actions .fab:hover {
+  background-color: var(--clr-bg-fab-secondary--hover);
 }
 
-.actionsSecondary {
-  margin: 0 1.8rem;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+.actions .addCard {
+  background-color: var(--clr-bg-fab-primary);
+  color: var(--clr-text-white);
 }
 
-.actionsSecondary .fab {
-  background-color: transparent;
-  border: 2px solid var(--clr-bg-fab);
-}
-
-.actionsSecondary .fab:hover {
-  border: none;
+.actions .addCard:hover {
+  background-color: var(--clr-bg-fab-primary--hover);
 }
 
 .toPreviousCard,
