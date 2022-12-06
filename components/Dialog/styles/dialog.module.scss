@@ -1,0 +1,164 @@
+.dialog {
+  & * {
+    font-family: var(--ff-default);
+  }
+
+  & > div > div {
+    width: 30rem;
+    border: 1px solid rgb(24, 24, 24);
+    border-radius: 12px;
+    color: var(--clr-text-white);
+    background-color: #0c0c0c;
+    box-shadow: none;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  }
+}
+
+.dialogTitle {
+  font-size: var(--fs-semi-large);
+  font-weight: var(fw-light);
+  margin-bottom: 0.6rem;
+}
+
+.inputLabel {
+  font-size: var(--fs-small);
+  color: var(--clr-text-gray);
+  margin-bottom: 0.6rem;
+}
+
+.dialogContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.dialogContentMessage {
+  grid-column: span 4;
+}
+
+.inputBox {
+  position: relative;
+  margin-bottom: 1.2rem;
+
+  &.full {
+    grid-column: span 4;
+  }
+
+  &.half {
+    grid-column: span 2;
+  }
+
+  &.quarter {
+    grid-column: span 1;
+  }
+}
+
+.input > input {
+  width: 100%;
+  height: 3rem;
+  padding: 0 0.6rem;
+  border: none;
+  border: 1px solid rgb(32, 32, 32);
+  outline: none;
+  font-size: var(--fs-14);
+  color: var(--clr-text-white);
+  background-color: var(--clr-bg-dark-gray);
+
+  &:focus {
+    border: 1px solid var(--clr-input--focus);
+    transition: 0.5s;
+  }
+}
+
+.input.round > input {
+  border-radius: 6px;
+}
+
+.input.roundLeft > input {
+  border-radius: 0 6px 6px 0;
+}
+
+.input.roundRight > input {
+  border-radius: 6px 0 0 6px;
+}
+
+.action {
+  transition: 0.1s ease-in-out;
+
+  &:focus {
+    &.positive {
+      background-color: var(--clr-button-text--positive--hover);
+    }
+
+    &.neutral {
+      background-color: var(--clr-button-text--neutral--hover);
+    }
+
+    &.negative {
+      background-color: var(--clr-button-text--negative--hover);
+    }
+  }
+
+  &.positive {
+    color: var(--clr-button-text--positive);
+
+    &:hover {
+      background-color: var(--clr-button-text--positive--hover);
+    }
+  }
+  &.neutral {
+    color: var(--clr-button-text--neutral);
+
+    &:hover {
+      background-color: var(--clr-button-text--neutral--hover);
+    }
+  }
+  &.negative {
+    color: var(--clr-button-text--negative);
+
+    &.hover {
+      background-color: var(--clr-button-text--negative--hover);
+    }
+  }
+}
+
+.inputImage {
+  position: absolute;
+  width: 3rem;
+  height: 3rem;
+  object-fit: contain;
+  top: 25px;
+  right: 10px;
+  border-radius: 0;
+  background-color: transparent;
+  animation: smoothEntry 0.2s;
+}
+
+.inputErrorBox {
+  display: flex;
+  align-items: center;
+  margin-top: 0.3rem;
+  animation: smoothEntry 0.6s;
+
+  & .inputErrorIcon {
+    width: 20px;
+    height: 20px;
+    color: var(--clr-text-red);
+    margin-right: 0.6rem;
+  }
+
+  & .inputErrorMessage {
+    width: 100%;
+    font-size: var(--fs-small);
+    border-radius: 6px;
+    color: var(--clr-text-red);
+  }
+}
+
+@keyframes smoothEntry {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

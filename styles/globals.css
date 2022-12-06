@@ -1,22 +1,36 @@
 :root {
-  --clr-text-white: #FFFFFF;
-  --clr-text-gray: #B1B1B1;
-  --clr-text-red: #FF8787;
-  --clr-text-green: #65FF7E;
-  /* --clr-bg-dark-gray: #151515; */
+  --clr-text-white: #ffffff;
+  --clr-text-gray: #b1b1b1;
+  --clr-text-red: #ff8787;
+  --clr-text-green: #65ff7e;
+
   --clr-bg-dark-gray: #0c0c0c;
 
-  --ff-default: 'Open Sans', sans-serif;
+  --clr-bg-fab-primary: #0059ff;
+  --clr-bg-fab-primary--hover: #4184ff;
+  --clr-bg-fab-secondary: #2b2b2b;
+  --clr-bg-fab-secondary--hover: #444444;
 
-  --fs-12: 12px;
-  --fs-13: 13px;
-  --fs-14: 14px;
-  --fs-15: 15px;
-  --fs-16: 16px;
-  --fs-17: 17px;
-  --fs-18: 18px;
-  --fs-20: 20px;
-  --fs-22: 22px;
+  --clr-button-text--positive: #4184ff;
+  --clr-button-text--positive--hover: rgba(65, 132, 255, 0.1);
+  --clr-button-text--neutral: #7c7c7c;
+  --clr-button-text--neutral--hover: rgba(124, 124, 124, 0.1);
+  --clr-button-text--negative: #ff8787;
+  --clr-button-text--negative--hover: rgba(255, 135, 135, 0.1);
+
+  --clr-button--hover: rgba(145, 145, 145, 0.1);
+  --clr-input--focus: #2c66a8;
+
+  --clr-text-disabled: #303030;
+
+  --ff-default: "Open Sans", sans-serif;
+
+  --fs-small: 12px;
+  --fs-regular: 14px;
+  --fs-medium: 16px;
+  --fs-semi-large: 18px;
+  --fs-large: 20px;
+  --fs-extra-large: 22px;
 
   --fw-light: 300;
   --fw-regular: 400;
@@ -39,7 +53,7 @@ body,
   width: 100vw;
   height: 100vh;
   font-family: var(--ff-default);
-  font-size: var(--fs-14);
+  font-size: var(--fs-regular);
   font-weight: var(--fw-regular);
   color: var(--clr-text-white);
   background-color: var(--clr-bg-dark-gray);

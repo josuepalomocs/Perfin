@@ -13,21 +13,19 @@
   font-size: 14px;
   font-family: var(--ff-default);
   color: var(--clr-text-gray);
-  
+
   & * {
     color: var(--clr-text-gray);
   }
 
   & :global {
-
     & .MuiDataGrid-main {
       color: var(--clr-text-gray);
-    
+
       & .MuiDataGrid-columnHeaders {
         border-bottom: 1px solid #202020;
 
         & .MuiDataGrid-columnHeader {
-
         }
 
         & .MuiDataGrid-columnHeaderTitle {
@@ -37,23 +35,22 @@
     }
 
     & .MuiDataGrid-row {
-
       &:nth-child(odd) {
         background-color: #141414;
 
         &.Mui-selected {
           background-color: #141414;
-  
+
           &:hover {
             background-color: #141414;
           }
         }
-  
+
         &:hover {
           background-color: #141414;
         }
       }
-      
+
       &.Mui-selected {
         background-color: inherit;
 
@@ -76,11 +73,10 @@
       }
 
       &[data-colindex="4"] {
-        
         &.positiveValue div {
           color: var(--clr-text-green);
         }
-        
+
         &.negativeValue div {
           color: var(--clr-text-red);
         }

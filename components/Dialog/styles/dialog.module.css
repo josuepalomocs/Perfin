@@ -1,0 +1,185 @@
+.dialog * {
+  font-family: var(--ff-default);
+}
+
+.dialog > div > div {
+  width: 30rem;
+  border: 1px solid #181818;
+  border-radius: 12px;
+  color: var(--clr-text-white);
+  background-color: #0c0c0c;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+          box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+}
+
+.dialogTitle {
+  font-size: var(--fs-semi-large);
+  font-weight: var(fw-light);
+  margin-bottom: 0.6rem;
+}
+
+.inputLabel {
+  font-size: var(--fs-small);
+  color: var(--clr-text-gray);
+  margin-bottom: 0.6rem;
+}
+
+.dialogContent {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.dialogContentMessage {
+  grid-column: span 4;
+}
+
+.inputBox {
+  position: relative;
+  margin-bottom: 1.2rem;
+}
+
+.inputBox.full {
+  grid-column: span 4;
+}
+
+.inputBox.half {
+  grid-column: span 2;
+}
+
+.inputBox.quarter {
+  grid-column: span 1;
+}
+
+.input > input {
+  width: 100%;
+  height: 3rem;
+  padding: 0 0.6rem;
+  border: none;
+  border: 1px solid #202020;
+  outline: none;
+  font-size: var(--fs-14);
+  color: var(--clr-text-white);
+  background-color: var(--clr-bg-dark-gray);
+}
+
+.input > input:focus {
+  border: 1px solid var(--clr-input--focus);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.input.round > input {
+  border-radius: 6px;
+}
+
+.input.roundLeft > input {
+  border-radius: 0 6px 6px 0;
+}
+
+.input.roundRight > input {
+  border-radius: 6px 0 0 6px;
+}
+
+.action {
+  -webkit-transition: 0.1s ease-in-out;
+  transition: 0.1s ease-in-out;
+}
+
+.action:focus.positive {
+  background-color: var(--clr-button-text--positive--hover);
+}
+
+.action:focus.neutral {
+  background-color: var(--clr-button-text--neutral--hover);
+}
+
+.action:focus.negative {
+  background-color: var(--clr-button-text--negative--hover);
+}
+
+.action.positive {
+  color: var(--clr-button-text--positive);
+}
+
+.action.positive:hover {
+  background-color: var(--clr-button-text--positive--hover);
+}
+
+.action.neutral {
+  color: var(--clr-button-text--neutral);
+}
+
+.action.neutral:hover {
+  background-color: var(--clr-button-text--neutral--hover);
+}
+
+.action.negative {
+  color: var(--clr-button-text--negative);
+}
+
+.action.negative.hover {
+  background-color: var(--clr-button-text--negative--hover);
+}
+
+.inputImage {
+  position: absolute;
+  width: 3rem;
+  height: 3rem;
+  -o-object-fit: contain;
+     object-fit: contain;
+  top: 25px;
+  right: 10px;
+  border-radius: 0;
+  background-color: transparent;
+  -webkit-animation: smoothEntry 0.2s;
+          animation: smoothEntry 0.2s;
+}
+
+.inputErrorBox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 0.3rem;
+  -webkit-animation: smoothEntry 0.6s;
+          animation: smoothEntry 0.6s;
+}
+
+.inputErrorBox .inputErrorIcon {
+  width: 20px;
+  height: 20px;
+  color: var(--clr-text-red);
+  margin-right: 0.6rem;
+}
+
+.inputErrorBox .inputErrorMessage {
+  width: 100%;
+  font-size: var(--fs-small);
+  border-radius: 6px;
+  color: var(--clr-text-red);
+}
+
+@-webkit-keyframes smoothEntry {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes smoothEntry {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/*# sourceMappingURL=dialog.module.css.map */

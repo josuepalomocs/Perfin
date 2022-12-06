@@ -1,0 +1,85 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 20rem;
+  height: 14rem;
+  padding: 1.2rem;
+  border-radius: 24px;
+  color: var(--clr-text-gray);
+  background-color: #141414;
+  z-index: 1;
+
+  & .backgroundGradient,
+  & .backgroundGradient2,
+  & .backgroundGradient3 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20%;
+    height: 80%;
+    border-radius: 0 24px 0px 100%;
+    opacity: 0.75;
+    z-index: -1;
+    transition: 0.5s ease-in-out;
+
+    &.american-express {
+      background-color: #227fbb;
+    }
+    &.visa {
+      background-color: #1a1f71;
+    }
+    &.mastercard {
+      background-color: #f79e1b;
+    }
+    &.discover {
+      background-color: #e55c20;
+    }
+  }
+
+  .backgroundGradient2 {
+    width: 45%;
+    height: 35%;
+    opacity: 0.85;
+    border-radius: 0% 24px 0% 100%;
+  }
+}
+
+.brandImage {
+  position: absolute;
+  top: 1.2rem;
+  width: 4rem;
+  height: 4rem;
+
+  & img {
+    object-fit: fill;
+  }
+}
+
+.center {
+  margin-top: 5rem;
+
+  & .nickname {
+    font-size: var(--fs-regular);
+    margin-bottom: 0.2rem;
+  }
+
+  & .number {
+    word-spacing: 0.6rem;
+    font-size: var(--fs-semi-large);
+    font-weight: var(--fw-medium);
+    color: var(--clr-text-white);
+  }
+}
+
+.bottom {
+  display: flex;
+  gap: 1.2rem;
+  word-spacing: 0.3rem;
+
+  & .expirationDate span,
+  & .cvv span {
+    color: var(--clr-text-white);
+  }
+}

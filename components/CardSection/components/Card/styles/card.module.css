@@ -1,0 +1,108 @@
+.container {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 20rem;
+  height: 14rem;
+  padding: 1.2rem;
+  border-radius: 24px;
+  color: var(--clr-text-gray);
+  background-color: #141414;
+  z-index: 1;
+}
+
+.container .backgroundGradient,
+.container .backgroundGradient2,
+.container .backgroundGradient3 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20%;
+  height: 80%;
+  border-radius: 0 24px 0px 100%;
+  opacity: 0.75;
+  z-index: -1;
+  -webkit-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+}
+
+.container .backgroundGradient.american-express,
+.container .backgroundGradient2.american-express,
+.container .backgroundGradient3.american-express {
+  background-color: #227fbb;
+}
+
+.container .backgroundGradient.visa,
+.container .backgroundGradient2.visa,
+.container .backgroundGradient3.visa {
+  background-color: #1a1f71;
+}
+
+.container .backgroundGradient.mastercard,
+.container .backgroundGradient2.mastercard,
+.container .backgroundGradient3.mastercard {
+  background-color: #f79e1b;
+}
+
+.container .backgroundGradient.discover,
+.container .backgroundGradient2.discover,
+.container .backgroundGradient3.discover {
+  background-color: #e55c20;
+}
+
+.container .backgroundGradient2 {
+  width: 45%;
+  height: 35%;
+  opacity: 0.85;
+  border-radius: 0% 24px 0% 100%;
+}
+
+.brandImage {
+  position: absolute;
+  top: 1.2rem;
+  width: 4rem;
+  height: 4rem;
+}
+
+.brandImage img {
+  -o-object-fit: fill;
+     object-fit: fill;
+}
+
+.center {
+  margin-top: 5rem;
+}
+
+.center .nickname {
+  font-size: var(--fs-regular);
+  margin-bottom: 0.2rem;
+}
+
+.center .number {
+  word-spacing: 0.6rem;
+  font-size: var(--fs-semi-large);
+  font-weight: var(--fw-medium);
+  color: var(--clr-text-white);
+}
+
+.bottom {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1.2rem;
+  word-spacing: 0.3rem;
+}
+
+.bottom .expirationDate span,
+.bottom .cvv span {
+  color: var(--clr-text-white);
+}
+/*# sourceMappingURL=card.module.css.map */

@@ -1,9 +1,3 @@
-.title {
-  font-family: var(--ff-default);
-  font-size: 18px;
-  margin-bottom: 0.6rem;
-}
-
 .grid {
   height: -webkit-min-content;
   height: -moz-min-content;
@@ -27,64 +21,58 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
   -webkit-box-align: end;
       -ms-flex-align: end;
           align-items: flex-end;
-  margin-bottom: 1.2rem;
+  gap: 0.8rem;
   padding: 0;
+  margin-bottom: 1.2rem;
 }
 
-.actions .cardName {
-  font-size: 14px;
-  margin-right: auto;
-  color: #dadada;
+.actions.primary {
+  margin-left: auto;
 }
 
-.actions .editCard,
-.actions .revealCard,
-.actions .deleteCard,
-.actions .copyCardNumber {
-  background-color: #181818;
+.actions.secondary {
+  margin: 0 1.8rem;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.actions.secondary .fab {
+  background-color: transparent;
+  border: 2px solid var(--clr-bg-fab-secondary);
+}
+
+.actions.secondary .fab:hover {
+  border: none;
+}
+
+.actions .fab {
+  background-color: var(--clr-bg-fab-secondary);
   color: var(--clr-text-gray);
+  -webkit-transition: none;
+  transition: none;
+  -webkit-transition: 0.1s;
+  transition: 0.1s;
 }
 
-.actions .editCard:hover,
-.actions .revealCard:hover,
-.actions .deleteCard:hover,
-.actions .copyCardNumber:hover {
-  background-color: #2e2e2e;
-}
-
-.actions .createCard {
-  background-color: #0066ff;
-  color: white;
-}
-
-.actions .createCard:hover {
-  background-color: #287eff;
-}
-
-.actions .createCard,
-.actions .editCard,
-.actions .revealCard,
-.actions .deleteCard,
-.actions .copyCardNumber {
-  min-width: 0rem;
-  min-height: 0rem;
-  width: 3rem;
-  height: 3rem;
-}
-
-.actions .createCard svg,
-.actions .editCard svg,
-.actions .revealCard svg,
-.actions .deleteCard svg,
-.actions .copyCardNumber svg {
+.actions .fab svg {
   width: 20px;
   height: 20px;
+}
+
+.actions .fab:hover {
+  background-color: var(--clr-bg-fab-secondary--hover);
+}
+
+.actions .addCard {
+  background-color: var(--clr-bg-fab-primary);
+  color: var(--clr-text-white);
+}
+
+.actions .addCard:hover {
+  background-color: var(--clr-bg-fab-primary--hover);
 }
 
 .toPreviousCard,
@@ -96,7 +84,7 @@
   padding: 0;
   -webkit-box-shadow: none;
           box-shadow: none;
-  border-radius: 50%;
+  border-radius: 30%;
   background-color: inherit;
   color: var(--clr-text-gray);
 }
@@ -109,9 +97,26 @@
 
 .toPreviousCard:hover,
 .toNextCard:hover {
-  background-color: rgba(145, 145, 145, 0.1);
-  -webkit-transition: 0.1s ease-in-out;
-  transition: 0.1s ease-in-out;
+  -webkit-transition: 0.1s;
+  transition: 0.1s;
+  background-color: var(--clr-button--hover);
+}
+
+.card {
+  margin-bottom: 1.2rem;
+}
+
+.toPreviousCard.firstCard, .toPreviousCard.lastCard,
+.toNextCard.firstCard,
+.toNextCard.lastCard {
+  cursor: default;
+  color: var(--clr-text-disabled);
+}
+
+.toPreviousCard.firstCard:hover, .toPreviousCard.lastCard:hover,
+.toNextCard.firstCard:hover,
+.toNextCard.lastCard:hover {
+  background-color: inherit;
 }
 
 .toPreviousCard {
@@ -119,42 +124,9 @@
   grid-column: 1;
 }
 
-.toPreviousCard.firstCard {
-  cursor: default;
-  color: #2e2e2e;
-}
-
-.toPreviousCard.firstCard:hover {
-  background-color: inherit;
-}
-
 .toNextCard {
   -ms-grid-column: 3;
   grid-column: 3;
-}
-
-.toNextCard.lastCard {
-  cursor: default;
-  color: #2e2e2e;
-}
-
-.toNextCard.lastCard:hover {
-  background-color: inherit;
-}
-
-.bottom {
-  margin-top: 0.6rem;
-  -ms-grid-column: 2;
-  grid-column: 2;
-  padding: 0;
-}
-
-.bottom .revealDetails {
-  color: var(--clr-text-gray);
-}
-
-.bottom .revealDetails:hover {
-  background-color: rgba(177, 177, 177, 0.1);
 }
 
 .card .noCardsText {
@@ -174,5 +146,14 @@
   color: var(--clr-text-gray);
   height: 14rem;
   width: 20rem;
+}
+
+.fab,
+.toPreviousCard,
+.toNextCard {
+  -webkit-transition: none;
+  transition: none;
+  -webkit-transition: 0.1s;
+  transition: 0.1s;
 }
 /*# sourceMappingURL=cardSection.module.css.map */
