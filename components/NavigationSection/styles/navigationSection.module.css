@@ -1,0 +1,70 @@
+.drawer {
+  width: 250px;
+  height: 100%;
+}
+
+.drawer :global .MuiPaper-elevation {
+  background-color: #111111;
+  border-right: 1px solid #383838;
+  position: static;
+}
+
+.divider {
+  border-color: #383838;
+}
+
+.logoContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-left: 2.4rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1.2rem;
+  margin: 2.4rem 0;
+}
+
+.logoContainer .logoContent3 {
+  width: 45px;
+  height: 35px;
+  background-color: transparent;
+  border-radius: 50%;
+  border-right: 10px solid #ffffff;
+  border-bottom: 10px solid #6ea1ff;
+  border-top-left-radius: 20%;
+  border-top-right-radius: 50%;
+}
+
+.logoContainer .logoText {
+  letter-spacing: 1px;
+  margin-top: 0.6rem;
+  font-weight: 400;
+  font-size: 18px;
+  color: white;
+}
+
+.listItem {
+  color: var(--clr-text-gray);
+}
+
+.listItem .listItemButton {
+  border-radius: 6px;
+}
+
+.listItem .listItemButton:hover {
+  background-color: #202020;
+  -webkit-transition: 0s ease-in-out;
+  transition: 0s ease-in-out;
+}
+
+.listItem .listItemButton .listItemIcon > svg {
+  color: var(--clr-text-gray);
+  width: 24px;
+  height: 24px;
+}
+
+.listItem .listItemButton .listItemText {
+  color: var(--clr-text-gray);
+}
+/*# sourceMappingURL=navigationSection.module.css.map */
