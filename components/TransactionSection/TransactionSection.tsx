@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from "react";
 import createLinkToken from "../../plaid/services/createLinkToken";
-import Container from "../Container/Container";
-import PlaidLink from "../PlaidLink/PlaidLink";
-import styles from "./styles/transactionSection.module.css";
-import React, { useEffect, useState } from "react";
-import createLinkToken from "../../plaid/services/createLinkToken";
 import { Container, Typography } from "@mui/material";
 import PlaidLink from "../PlaidLink/PlaidLink";
 import { DataGrid } from "@mui/x-data-grid";
