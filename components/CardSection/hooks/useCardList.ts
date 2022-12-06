@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Card } from "../../../types/card";
+import { getTestCards } from "../utilities";
 
 const useCardList = () => {
-  const [cardList, setCardList] = useState<Card[] | null>(null);
+  const [cardList, setCardList] = useState<Card[] | null>(getTestCards());
   const [selectedCardIndex, setSelectedCardIndex] = useState(0);
-  console.log(selectedCardIndex);
 
   let selectedCard: Card | null = null;
 
@@ -65,7 +65,9 @@ const useCardList = () => {
 
   const selectCardOnDelete = () => {
     if (cardList) {
-      setSelectedCardIndex(cardList.length - 1);
+      if (isLastCard()) {
+        setSelectedCardIndex(selectedCardIndex - 1);
+      }
     }
   };
 
@@ -83,6 +85,12 @@ const useCardList = () => {
     return true;
   };
 
+  const isEmpty = () => {
+    if (selectedCardIndex === -1) {
+      return true;
+    }
+  };
+
   return {
     cardList,
     selectedCard,
@@ -90,13 +98,13 @@ const useCardList = () => {
     addCard,
     editCard,
     deleteCard,
-    setCardList,
     selectPreviousCard,
     selectNextCard,
     selectCardOnAdd,
     selectCardOnDelete,
     isFirstCard,
     isLastCard,
+    isEmpty,
   };
 };
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm, useFormState } from "react-hook-form";
 import { Card, CardDialogForm, CardDialogInput } from "../../../types/card";
 import { DialogAction } from "../../../types/dialog";
 import useInputMask from "../components/Card/hooks/useInputMask";
@@ -23,6 +23,8 @@ const useAddCardDialog = ({ addCard, cardList }: useAddCardDialogParams) => {
   };
 
   const { control, handleSubmit, setValue, reset } = useForm<CardDialogForm>({ defaultValues: { number: "", nickname: "", expirationDate: "", csv: "" } });
+
+  const { errors } = useFormState({ control });
 
   const brand = useCardBrand({ control, name: "number" });
   const formatNumber = brand === "american-express" ? formatAmericanExpressNumber : formatGeneralNumber;
@@ -59,17 +61,28 @@ const useAddCardDialog = ({ addCard, cardList }: useAddCardDialogParams) => {
   };
 
   const inputList: CardDialogInput[] = [
-    { id: "nickname", label: "Nickname", placeholder: "Main Debit", slotProps: { input: { maxLength: 50 } } },
+    {
+      id: "nickname",
+      label: "Nickname",
+      validationOptions: { required: { value: true, message: "Required" } },
+      placeholder: "Main Debit",
+      slotProps: { input: { maxLength: 50 } },
+    },
     {
       id: "number",
       label: "Card Number",
+      validationOptions: {
+        required: { value: true, message: "Required" },
+        pattern: { value: brand === "american-express" ? /^[0-9]{4}\s[0-9]{6}\s[0-9]{5}$/ : /^([0-9]{4}\s){3}[0-9]{4}$/, message: "Invalid card number" },
+      },
       placeholder: "4242 4242 4242 4242",
-      slotProps: { input: { maxLength: brand === "american-express" ? 17 : 23 } },
+      slotProps: { input: { maxLength: brand === "american-express" ? 17 : 19 } },
       imageSrc: brand && `${brand}_logo.svg`,
     },
     {
       id: "expirationDate",
       label: "Exp Date",
+      validationOptions: { required: { value: true, message: "Required" }, pattern: { value: /^[0-9]{2}\s\/\s[0-9]{2}$/, message: "Invalid expiration date" } },
       placeholder: "01 / 25",
       slotProps: { input: { maxLength: 7 } },
       width: "half",
@@ -78,6 +91,7 @@ const useAddCardDialog = ({ addCard, cardList }: useAddCardDialogParams) => {
     {
       id: "csv",
       label: "CSV",
+      validationOptions: { required: { value: true, message: "Required" }, pattern: { value: /^[0-9]{3,4}/, message: "Invalid csv" } },
       placeholder: "424",
       slotProps: { input: { maxLength: 4 } },
       width: "half",
@@ -97,7 +111,7 @@ const useAddCardDialog = ({ addCard, cardList }: useAddCardDialogParams) => {
     },
   ];
 
-  return { isOpen, inputList, actionList, control, setIsOpen, handleOpen, handleClose };
+  return { isOpen, inputList, actionList, control, errors, setIsOpen, handleOpen, handleClose };
 };
 
 export default useAddCardDialog;

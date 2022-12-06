@@ -1,6 +1,6 @@
 import { InputUnstyledComponentsPropsOverrides, InputUnstyledOwnerState, SlotComponentProps } from "@mui/base";
-import { Control, UseFormHandleSubmit } from "react-hook-form";
-import { CardDialogInput, CardDialogForm } from "./card";
+import { Control, FieldErrorsImpl } from "react-hook-form";
+import { CardDialogInput } from "./card";
 
 export type DialogType = "prompt" | "form";
 
@@ -10,9 +10,19 @@ export type DialogInputBorderType = "round" | "roundLeft" | "roundRight";
 
 export type DialogActionType = "positive" | "negative" | "neutral";
 
+export interface DialogInputValidationOptions {
+  required?: { value: boolean; message: string };
+  maxLength?: { value: number; message: string };
+  minLength?: { value: number; message: string };
+  max?: { value: number; message: string };
+  min?: { value: number; message: string };
+  pattern?: { value: RegExp; message: string };
+}
+
 export interface DialogInput {
   id: string;
   label?: string;
+  validationOptions?: DialogInputValidationOptions;
   slotProps?: {
     root?: SlotComponentProps<"div", InputUnstyledComponentsPropsOverrides, InputUnstyledOwnerState>;
     input?: SlotComponentProps<"input", InputUnstyledComponentsPropsOverrides, InputUnstyledOwnerState>;
@@ -39,5 +49,6 @@ export interface Dialog {
   message?: string;
   inputList?: CardDialogInput[];
   actionList?: DialogAction[];
-  control?: Control<CardDialogForm, any>;
+  control?: Control<any, any>;
+  errors?: Partial<FieldErrorsImpl<any>>;
 }

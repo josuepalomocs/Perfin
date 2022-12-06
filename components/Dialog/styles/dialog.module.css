@@ -17,6 +17,7 @@
 .dialogTitle {
   font-size: var(--fs-semi-large);
   font-weight: var(fw-light);
+  margin-bottom: 0.6rem;
 }
 
 .inputLabel {
@@ -38,6 +39,7 @@
 
 .inputBox {
   position: relative;
+  margin-bottom: 1.2rem;
 }
 
 .inputBox.full {
@@ -56,7 +58,6 @@
   width: 100%;
   height: 3rem;
   padding: 0 0.6rem;
-  margin-bottom: 1.2rem;
   border: none;
   border: 1px solid #202020;
   outline: none;
@@ -136,6 +137,32 @@
   background-color: transparent;
   -webkit-animation: smoothEntry 0.2s;
           animation: smoothEntry 0.2s;
+}
+
+.inputErrorBox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 0.3rem;
+  -webkit-animation: smoothEntry 0.6s;
+          animation: smoothEntry 0.6s;
+}
+
+.inputErrorBox .inputErrorIcon {
+  width: 20px;
+  height: 20px;
+  color: var(--clr-text-red);
+  margin-right: 0.6rem;
+}
+
+.inputErrorBox .inputErrorMessage {
+  width: 100%;
+  font-size: var(--fs-small);
+  border-radius: 6px;
+  color: var(--clr-text-red);
 }
 
 @-webkit-keyframes smoothEntry {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm, useFormState } from "react-hook-form";
 import { Card, CardDialogForm, CardDialogInput } from "../../../types/card";
 import { DialogAction } from "../../../types/dialog";
 import useInputMask from "../components/Card/hooks/useInputMask";
@@ -28,6 +28,9 @@ const useEditCardDialog = ({ editCard, selectedCard }: useEditCardDialogParams) 
   }
 
   const { control, handleSubmit, setValue, reset } = useForm<CardDialogForm>({ defaultValues });
+
+  const { errors } = useFormState({ control });
+
   const brand = useCardBrand({ control, name: "number" });
   const formatNumber = brand === "american-express" ? formatToAmericanExpressNumber : formatToGeneralNumber;
 
@@ -47,7 +50,9 @@ const useEditCardDialog = ({ editCard, selectedCard }: useEditCardDialogParams) 
   }, [isOpen, selectedCard]);
 
   const handleOpen = () => {
-    setIsOpen(true);
+    if (selectedCard) {
+      setIsOpen(true);
+    }
   };
 
   const handleClose = () => {
@@ -56,7 +61,7 @@ const useEditCardDialog = ({ editCard, selectedCard }: useEditCardDialogParams) 
 
   const onSubmitEditCard: SubmitHandler<CardDialogForm> = (data) => {
     if (selectedCard) {
-      const { id, brand } = selectedCard;
+      const { id } = selectedCard;
       const { number, expirationDate } = data;
       const cleanData = { ...data, number: number.replaceAll(" ", ""), expirationDate: expirationDate.replaceAll(" ", "") };
       editCard({ ...cleanData, id, brand });
@@ -65,17 +70,28 @@ const useEditCardDialog = ({ editCard, selectedCard }: useEditCardDialogParams) 
   };
 
   const inputList: CardDialogInput[] = [
-    { id: "nickname", label: "Nickname", placeholder: "Main Debit", slotProps: { input: { maxLength: 50 } } },
+    {
+      id: "nickname",
+      label: "Nickname",
+      validationOptions: { required: { value: true, message: "Required" } },
+      placeholder: "Main Debit",
+      slotProps: { input: { maxLength: 50 } },
+    },
     {
       id: "number",
       label: "Card Number",
+      validationOptions: {
+        required: { value: true, message: "Required" },
+        pattern: { value: brand === "american-express" ? /^[0-9]{4}\s[0-9]{6}\s[0-9]{5}$/ : /^([0-9]{4}\s){3}[0-9]{4}$/, message: "Invalid card number" },
+      },
       placeholder: "4242 4242 4242 4242",
-      slotProps: { input: { maxLength: brand === "american-express" ? 17 : 23 } },
+      slotProps: { input: { maxLength: brand === "american-express" ? 17 : 19 } },
       imageSrc: brand && `${brand}_logo.svg`,
     },
     {
       id: "expirationDate",
       label: "Exp Date",
+      validationOptions: { required: { value: true, message: "Required" }, pattern: { value: /^[0-9]{2}\s\/\s[0-9]{2}$/, message: "Invalid expiration date" } },
       placeholder: "01 / 25",
       slotProps: { input: { maxLength: 7 } },
       width: "half",
@@ -84,6 +100,7 @@ const useEditCardDialog = ({ editCard, selectedCard }: useEditCardDialogParams) 
     {
       id: "csv",
       label: "CSV",
+      validationOptions: { required: { value: true, message: "Required" }, pattern: { value: /^[0-9]{3,4}/, message: "Invalid csv" } },
       placeholder: "424",
       slotProps: { input: { maxLength: 4 } },
       width: "half",
@@ -103,7 +120,7 @@ const useEditCardDialog = ({ editCard, selectedCard }: useEditCardDialogParams) 
     },
   ];
 
-  return { isOpen, inputList, actionList, control, handleOpen, handleClose };
+  return { isOpen, inputList, actionList, control, errors, handleOpen, handleClose };
 };
 
 export default useEditCardDialog;

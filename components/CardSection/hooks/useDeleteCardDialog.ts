@@ -1,11 +1,13 @@
 import { useState } from "react";
+import { Card } from "../../../types/card";
 import { DialogAction } from "../../../types/dialog";
 
 interface useDeleteCardDialogParams {
   deleteCard: () => void;
+  selectedCard: Card | null;
 }
 
-const useDeleteCardDialog = ({ deleteCard }: useDeleteCardDialogParams) => {
+const useDeleteCardDialog = ({ deleteCard, selectedCard }: useDeleteCardDialogParams) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleDeleteCard = () => {
@@ -26,7 +28,9 @@ const useDeleteCardDialog = ({ deleteCard }: useDeleteCardDialogParams) => {
   ];
 
   const handleOpen = () => {
-    setIsOpen(true);
+    if (selectedCard) {
+      setIsOpen(true);
+    }
   };
 
   const handleClose = () => {

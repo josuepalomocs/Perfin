@@ -11,13 +11,14 @@ import useDeleteCardDialog from "./hooks/useDeleteCardDialog";
 import copyToClipboard from "./helpers/navigator/copyToClipboard";
 
 const CardSection = () => {
-  const { cardList, selectedCard, addCard, editCard, deleteCard, setCardList, selectPreviousCard, selectNextCard, isFirstCard, isLastCard } = useCardList();
+  const { cardList, selectedCard, addCard, editCard, deleteCard, selectPreviousCard, selectNextCard, isFirstCard, isLastCard, isEmpty } = useCardList();
 
   const {
     isOpen: isAddCardDialogOpen,
     inputList: inputListAddCard,
     actionList: actionListAddCard,
     control: controlAddCard,
+    errors: errorsAddCard,
     handleOpen: handleOpenAddCard,
     handleClose: handleCloseAddCard,
   } = useAddCardDialog({ addCard, cardList });
@@ -27,6 +28,7 @@ const CardSection = () => {
     inputList: inputListEditCard,
     actionList: actionListEditCard,
     control: controlEditCard,
+    errors: errorsEditCard,
     handleOpen: handleOpenEditCard,
     handleClose: handleCloseEditCard,
   } = useEditCardDialog({ editCard, selectedCard });
@@ -36,9 +38,9 @@ const CardSection = () => {
     handleOpen: handleOpenDeleteCard,
     handleClose: handleCloseDeleteCard,
     actionList: actionListDeleteCard,
-  } = useDeleteCardDialog({ deleteCard });
+  } = useDeleteCardDialog({ deleteCard, selectedCard });
 
-  const [isCardRevealed, setIsCardRevealed] = useState(false);
+  const [isCardListDataRevealed, setIsCardListDataRevealed] = useState(false);
 
   return (
     <Box className={styles.container}>
@@ -51,7 +53,7 @@ const CardSection = () => {
             <PlusIcon className={`${styles.icon} ${styles.plusIcon}`} />
           </Fab>
         </Box>
-        <Button className={`${styles.toPreviousCard} ${isFirstCard() && styles.firstCard}`} variant="contained" onClick={selectPreviousCard}>
+        <Button className={`${styles.toPreviousCard} ${(isFirstCard() || isEmpty()) && styles.firstCard}`} variant="contained" onClick={selectPreviousCard}>
           <ChevronLeftIcon className={styles.chevronLeftIcon} />
         </Button>
         <Box className={styles.card}>
@@ -63,7 +65,7 @@ const CardSection = () => {
               number={selectedCard.number}
               expirationDate={selectedCard.expirationDate}
               csv={selectedCard.csv}
-              isCardRevealed={isCardRevealed}
+              isCardRevealed={isCardListDataRevealed}
             />
           ) : (
             <Typography className={styles.noCardsText}>You don't have any saved cards</Typography>
@@ -88,10 +90,14 @@ const CardSection = () => {
             className={`${styles.fab} ${styles.revealCard}`}
             size="small"
             onClick={() => {
-              setIsCardRevealed(!isCardRevealed);
+              setIsCardListDataRevealed(!isCardListDataRevealed);
             }}
           >
-            {isCardRevealed ? <EyeSlashIcon className={`${styles.icon} ${styles.eyeSlashIcon}`} /> : <EyeIcon className={`${styles.icon} ${styles.eyeIcon}`} />}
+            {isCardListDataRevealed ? (
+              <EyeSlashIcon className={`${styles.icon} ${styles.eyeSlashIcon}`} />
+            ) : (
+              <EyeIcon className={`${styles.icon} ${styles.eyeIcon}`} />
+            )}
           </Fab>
           <Fab className={`${styles.fab} ${styles.deleteCard}`} size="small" onClick={handleOpenDeleteCard}>
             <TrashIcon className={`${styles.icon} ${styles.trashIcon}`} />
@@ -106,6 +112,7 @@ const CardSection = () => {
         inputList={inputListAddCard}
         actionList={actionListAddCard}
         control={controlAddCard}
+        errors={errorsAddCard}
       />
       <Dialog
         open={isEditCardDialogOpen}
@@ -115,6 +122,7 @@ const CardSection = () => {
         inputList={inputListEditCard}
         actionList={actionListEditCard}
         control={controlEditCard}
+        errors={errorsEditCard}
       />
       <Dialog
         open={isDeleteCardDialogOpen}
