@@ -1,24 +1,23 @@
 .container {
-  background-color: #111111;
-  // padding: 3rem;
-}
-
-.dataGridBox {
-  width: calc(748px + 3rem);
-  height: 30rem;
-  padding: 1.2rem 2.4rem;
-  border: 1px solid #202020;
-  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  // background-color: #0a0a0a;
+  padding: 1rem;
+  animation: smoothEntry 0.5s;
 }
 
 .title {
-  font-size: 18px;
+  font-size: var(--fs-large);
+  font-weight: var(--fw-extra-bold);
   margin-bottom: 1.2rem;
 }
 
 .dataGrid {
+  width: 600px;
+  flex: 1;
   border: none;
-  font-size: 14px;
+  font-size: var(--fs-regular);
   font-family: var(--ff-default);
   color: var(--clr-text-gray);
 
@@ -30,6 +29,12 @@
     & .MuiDataGrid-main {
       color: var(--clr-text-gray);
 
+      & .MuiDataGrid-row {
+        &:hover {
+          background-color: var(--clr-bg-dark-gray);
+        }
+      }
+
       & .MuiDataGrid-columnHeaders {
         border-bottom: 1px solid #202020;
 
@@ -37,38 +42,9 @@
         }
 
         & .MuiDataGrid-columnHeaderTitle {
-          font-weight: 400;
+          font-size: var(--fs-small);
+          font-weight: var(--fw-extra-bold);
         }
-      }
-    }
-
-    & .MuiDataGrid-row {
-      &:nth-child(odd) {
-        background-color: #141414;
-
-        &.Mui-selected {
-          background-color: #141414;
-
-          &:hover {
-            background-color: #141414;
-          }
-        }
-
-        &:hover {
-          background-color: #141414;
-        }
-      }
-
-      &.Mui-selected {
-        background-color: inherit;
-
-        &:hover {
-          background-color: inherit;
-        }
-      }
-
-      &:hover {
-        background-color: inherit;
       }
     }
 
@@ -80,7 +56,7 @@
         outline: none;
       }
 
-      &[data-colindex="4"] {
+      &[data-colindex="3"] {
         &.positiveValue div {
           color: var(--clr-text-green);
         }
@@ -94,5 +70,14 @@
     & .MuiDataGrid-footerContainer {
       border-top: 1px solid #202020;
     }
+  }
+}
+
+@keyframes smoothEntry {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

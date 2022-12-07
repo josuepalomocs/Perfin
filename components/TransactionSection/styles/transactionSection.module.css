@@ -1,23 +1,30 @@
 .container {
-  background-color: #111111;
-}
-
-.dataGridBox {
-  width: calc(748px + 3rem);
-  height: 30rem;
-  padding: 1.2rem 2.4rem;
-  border: 1px solid #202020;
-  border-radius: 24px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 100%;
+  padding: 1rem;
+  -webkit-animation: smoothEntry 0.5s;
+          animation: smoothEntry 0.5s;
 }
 
 .title {
-  font-size: 18px;
+  font-size: var(--fs-large);
+  font-weight: var(--fw-extra-bold);
   margin-bottom: 1.2rem;
 }
 
 .dataGrid {
+  width: 600px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   border: none;
-  font-size: 14px;
+  font-size: var(--fs-regular);
   font-family: var(--ff-default);
   color: var(--clr-text-gray);
 }
@@ -30,40 +37,17 @@
   color: var(--clr-text-gray);
 }
 
+.dataGrid :global .MuiDataGrid-main .MuiDataGrid-row:hover {
+  background-color: var(--clr-bg-dark-gray);
+}
+
 .dataGrid :global .MuiDataGrid-main .MuiDataGrid-columnHeaders {
   border-bottom: 1px solid #202020;
 }
 
 .dataGrid :global .MuiDataGrid-main .MuiDataGrid-columnHeaders .MuiDataGrid-columnHeaderTitle {
-  font-weight: 400;
-}
-
-.dataGrid :global .MuiDataGrid-row:nth-child(odd) {
-  background-color: #141414;
-}
-
-.dataGrid :global .MuiDataGrid-row:nth-child(odd).Mui-selected {
-  background-color: #141414;
-}
-
-.dataGrid :global .MuiDataGrid-row:nth-child(odd).Mui-selected:hover {
-  background-color: #141414;
-}
-
-.dataGrid :global .MuiDataGrid-row:nth-child(odd):hover {
-  background-color: #141414;
-}
-
-.dataGrid :global .MuiDataGrid-row.Mui-selected {
-  background-color: inherit;
-}
-
-.dataGrid :global .MuiDataGrid-row.Mui-selected:hover {
-  background-color: inherit;
-}
-
-.dataGrid :global .MuiDataGrid-row:hover {
-  background-color: inherit;
+  font-size: var(--fs-small);
+  font-weight: var(--fw-extra-bold);
 }
 
 .dataGrid :global .MuiDataGrid-cell {
@@ -75,15 +59,33 @@
   outline: none;
 }
 
-.dataGrid :global .MuiDataGrid-cell[data-colindex="4"].positiveValue div {
+.dataGrid :global .MuiDataGrid-cell[data-colindex="3"].positiveValue div {
   color: var(--clr-text-green);
 }
 
-.dataGrid :global .MuiDataGrid-cell[data-colindex="4"].negativeValue div {
+.dataGrid :global .MuiDataGrid-cell[data-colindex="3"].negativeValue div {
   color: var(--clr-text-red);
 }
 
 .dataGrid :global .MuiDataGrid-footerContainer {
   border-top: 1px solid #202020;
+}
+
+@-webkit-keyframes smoothEntry {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes smoothEntry {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 /*# sourceMappingURL=transactionSection.module.css.map */

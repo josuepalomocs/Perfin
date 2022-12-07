@@ -1,16 +1,25 @@
 .container {
   // background-color: rgb(0, 0, 0);
-  // padding: 2rem 1rem;
-  // border-radius: 36px;
+  // padding: 3rem 1.8rem;
+  // border-radius: 24px;
+  height: min-content;
+}
+
+.title {
+  margin-bottom: 1.2rem;
+  font-size: var(--fs-medium);
+  font-weight: var(--fw-bold);
 }
 
 .grid {
-  height: min-content;
-  width: min-content;
   display: grid;
+  padding: 1.2rem 1.2rem;
+  border-radius: 12px;
   grid-template-columns: 1fr auto 1fr;
   gap: 0 1.2rem;
   align-items: center;
+  // background-color: rgb(51, 51, 51);
+  // border: 1px solid #303030;
 }
 
 .actions {

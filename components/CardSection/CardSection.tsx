@@ -44,6 +44,9 @@ const CardSection = () => {
 
   return (
     <Box className={styles.container}>
+      {/* <Typography className={styles.title} variant="inherit">
+        Payment Methods
+      </Typography> */}
       <Box className={styles.grid}>
         <Box className={`${styles.actions} ${styles.primary}`}>
           <Fab className={`${styles.fab} ${styles.editCard}`} size="small" onClick={handleOpenEditCard}>

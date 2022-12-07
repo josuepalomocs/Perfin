@@ -8,7 +8,6 @@ import { ExclamationCircleIcon } from "@heroicons/react/24/solid";
 import styles from "./styles/dialog.module.css";
 
 const Dialog = ({ open = false, handleClose, type = "prompt", title, message, inputList, actionList, control, errors }: DialogProps) => {
-  console.log(errors);
   const renderDialogContent = () => {
     if (type === "prompt") {
       return (

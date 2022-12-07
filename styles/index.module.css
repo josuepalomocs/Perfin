@@ -5,9 +5,5 @@
 }
 
 .main {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  padding: 3rem;
-  gap: 3rem;
-  background-color: #111111;
+  min-height: 100%;
 }
