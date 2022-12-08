@@ -6,8 +6,8 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  height: 100%;
   padding: 1rem;
+  min-height: 30rem;
   -webkit-animation: smoothEntry 0.5s;
           animation: smoothEntry 0.5s;
 }
@@ -51,7 +51,7 @@
 }
 
 .dataGrid :global .MuiDataGrid-cell {
-  border: none;
+  border-bottom: 1px solid #121212;
   background-color: inherit;
 }
 

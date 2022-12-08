@@ -2,6 +2,7 @@ import { BellIcon } from "@heroicons/react/24/solid";
 import { ButtonUnstyled } from "@mui/base";
 import { Avatar, Box, Typography } from "@mui/material";
 import Head from "next/head";
+import BalanceSection from "../components/BalanceSection/BalanceSection";
 import CardSection from "../components/CardSection/CardSection";
 import useNavigation from "../components/NavigationSection/hooks/useNavigation";
 import NavigationSection from "../components/NavigationSection/navigationSection";
@@ -39,8 +40,14 @@ const Home = () => {
           </Box>
 
           <Box className={styles.grid}>
-            {selectedNavigationItem.id === "cardSection" && <CardSection />}
-            {selectedNavigationItem.id === "dashboardSection" && <TransactionSection />}
+            {selectedNavigationItem.id === "dashboardSection" ? (
+              <>
+                <TransactionSection />
+                <BalanceSection />
+              </>
+            ) : (
+              <></>
+            )}
           </Box>
         </Box>
         {/* <TransactionSection /> */}

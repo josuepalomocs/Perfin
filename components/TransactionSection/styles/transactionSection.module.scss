@@ -1,9 +1,8 @@
 .container {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  // background-color: #0a0a0a;
   padding: 1rem;
+  min-height: 30rem;
   animation: smoothEntry 0.5s;
 }
 
@@ -49,7 +48,7 @@
     }
 
     & .MuiDataGrid-cell {
-      border: none;
+      border-bottom: 1px solid #121212;
       background-color: inherit;
 
       &:focus {

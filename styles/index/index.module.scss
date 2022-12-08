@@ -80,8 +80,18 @@
 
 .grid {
   display: grid;
-  grid-template-columns: auto 1fr;
-  height: calc(100% - 5rem);
-  padding: 1rem 2rem;
+  grid-template-columns: auto auto;
+  justify-content: space-evenly;
+  padding: 1rem;
   background-color: #080808;
+  animation: smoothEntry 0.1s;
+}
+
+@keyframes smoothEntry {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,UAAU,CAAC;EACT,OAAO,EAAE,IAAI;EACb,SAAS,EAAE,KAAK;CACjB;;AAED,AAAA,MAAM,CAAC;EACL,SAAS,EAAE,eAAe;EAC1B,WAAW,EAAE,oBAAoB;EACjC,aAAa,EAAE,MAAM;CACtB",
+    "sources": [
+        "balanceSection.module.scss"
+    ],
+    "names": [],
+    "file": "balanceSection.module.css"
+}
