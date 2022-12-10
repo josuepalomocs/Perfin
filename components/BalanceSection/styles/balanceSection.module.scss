@@ -1,4 +1,6 @@
 .container {
+  display: flex;
+  flex-direction: column;
   padding: 1rem;
   min-width: 60rem;
 }
@@ -10,4 +12,8 @@
 }
 
 .lineGraphBox {
+  flex: 1;
+  outline: 1px solid #202020;
+  border-radius: 4px;
+  padding: 2rem;
 }

@@ -97,12 +97,13 @@
 .grid {
   display: -ms-grid;
   display: grid;
+  height: calc(100% - 5rem);
   -ms-grid-columns: auto auto;
       grid-template-columns: auto auto;
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
-  padding: 1rem;
+  padding: 4rem 6rem;
   background-color: #080808;
   -webkit-animation: smoothEntry 0.1s;
           animation: smoothEntry 0.1s;

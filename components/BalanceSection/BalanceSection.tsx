@@ -20,14 +20,47 @@ export const options = {
   },
 };
 
-const labels = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const labels = [
+  "Dec 2",
+  "Dec 4",
+  "Dec 6",
+  "Dec 8",
+  "Dec 2",
+  "Dec 4",
+  "Dec 6",
+  "Dec 8",
+  "Dec 2",
+  "Dec 4",
+  "Dec 6",
+  "Dec 8",
+  "Dec 2",
+  "Dec 4",
+  "Dec 6",
+  "Dec 8",
+  "Dec 2",
+  "Dec 4",
+  "Dec 6",
+  "Dec 8",
+  "Dec 2",
+  "Dec 4",
+  "Dec 6",
+  "Dec 8",
+  "Dec 2",
+  "Dec 4",
+  "Dec 6",
+  "Dec 8",
+  "Dec 2",
+  "Dec 4",
+];
 
 export const data = {
   labels,
   datasets: [
     {
-      label: "Balance amount",
-      data: labels.map(() => faker.random.numeric()),
+      label: "Balance",
+      data: labels.map(() => {
+        return faker.finance.amount(-5555, 5555);
+      }),
       borderColor: "#3c5abe",
       backgroundColor: "#3c5abe",
       tension: 0.4,

@@ -1,8 +1,8 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import { RemovedTransaction, Transaction, TransactionsSyncRequest } from 'plaid';
-import plaidClient from '../../plaid/config';
+import { NextApiRequest, NextApiResponse } from "next";
+import { RemovedTransaction, Transaction, TransactionsSyncRequest } from "plaid";
+import plaidClient from "../../../plaid/config";
 
-const handler = async(req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   // Provide a cursor from your database if you've previously
   // received one for the Item. Leave null if this is your
   // first sync call for this Item. The first request will
@@ -33,13 +33,13 @@ const handler = async(req: NextApiRequest, res: NextApiResponse) => {
       // Update cursor to the next cursor
       cursor = data.next_cursor;
       res.status(200).json(data);
-    } catch(error) {
+    } catch (error) {
       console.log(error);
       res.status(400).json(error);
     }
   }
   // Persist cursor and updated data
   // database.applyUpdates(itemId, added, modified, removed, cursor);
-}
+};
 
 export default handler;

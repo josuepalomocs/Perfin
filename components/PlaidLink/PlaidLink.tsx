@@ -1,48 +1,50 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import axios from 'axios';
-import { usePlaidLink, PlaidLinkOptions, PlaidLinkOnSuccess, 
-	PlaidLinkOnSuccessMetadata, PlaidLinkOnExit, PlaidLinkOnExitMetadata,
-	PlaidLinkError, PlaidLinkOnEvent, PlaidLinkStableEvent,
-  PlaidLinkOnEventMetadata } from 'react-plaid-link';
-import exchangePublicToken from '../../plaid/services/exchangePublicToken';
-import transactionsSync from '../../plaid/services/transactionsSync';
+import React, { useCallback, useContext, useEffect, useState } from "react";
+import { ButtonUnstyled } from "@mui/base";
+import {
+  usePlaidLink,
+  PlaidLinkOnSuccess,
+  PlaidLinkOnSuccessMetadata,
+  PlaidLinkOnExit,
+  PlaidLinkOnExitMetadata,
+  PlaidLinkError,
+  PlaidLinkOnEvent,
+  PlaidLinkStableEvent,
+  PlaidLinkOnEventMetadata,
+} from "react-plaid-link";
+import axios from "axios";
+import styles from "./styles/plaidLink.module.css";
+import { ItemPublicTokenExchangeResponse, LinkTokenCreateResponse } from "plaid";
+import { PlaidContext } from "../../pages/_app";
 
-interface PlaidLinkProps {
-  linkToken: string | null,
-}
+const PlaidLink = () => {
+  const [linkToken, setLinkToken] = useState("");
+  const { accessTokenList, setAccessTokenList } = useContext(PlaidContext);
 
-const PlaidLink = ({ linkToken } : PlaidLinkProps) => {
-  const onSuccess = useCallback<PlaidLinkOnSuccess>(
-    async (public_token: string, metadata: PlaidLinkOnSuccessMetadata) => {
-      const { accessToken, itemId } = await exchangePublicToken(public_token);
-      const response = await transactionsSync(accessToken);
-      console.log(response);
-    }, []
-  );
-  
-  const onExit = useCallback<PlaidLinkOnExit>(
-    (error: PlaidLinkError | null, metadata: PlaidLinkOnExitMetadata) => {
-      // log and save error and metadata
-      // handle invalid link token
-      if (error != null && error.error_code === 'INVALID_LINK_TOKEN') {
-        // generate new link token
-      }
-      // to handle other error codes, see https://plaid.com/docs/errors/
-    }, []
-  );
-  
-  const onEvent = useCallback<PlaidLinkOnEvent>(
-    (
-      eventName: PlaidLinkStableEvent | string,
-      metadata: PlaidLinkOnEventMetadata,
-    ) => {
-      // log eventName and metadata
-      console.log(`Event Name: ${eventName}\n
+  const createLinkToken = async () => {
+    const { data } = await axios.get<LinkTokenCreateResponse>("/api/plaid/create-link-token");
+    const { link_token } = data;
+    setLinkToken(link_token);
+  };
+
+  const onSuccess = useCallback<PlaidLinkOnSuccess>(async (public_token: string, metadata: PlaidLinkOnSuccessMetadata) => {
+    const { data } = await axios.post<ItemPublicTokenExchangeResponse>("/api/plaid/exchange-public-token", { public_token });
+    const { access_token } = data;
+    setAccessTokenList(accessTokenList.length === 0 ? [access_token] : [...accessTokenList, access_token]);
+  }, []);
+
+  const onExit = useCallback<PlaidLinkOnExit>((error: PlaidLinkError | null, metadata: PlaidLinkOnExitMetadata) => {
+    console.log("Exited");
+    if (error != null && error.error_code === "INVALID_LINK_TOKEN") {
+      createLinkToken();
+    }
+  }, []);
+
+  const onEvent = useCallback<PlaidLinkOnEvent>((eventName: PlaidLinkStableEvent | string, metadata: PlaidLinkOnEventMetadata) => {
+    console.log(`Event Name: ${eventName}\n
         Metadata: ${metadata}`);
-    }, []
-  );
-  
-  const { ready, open, exit } = usePlaidLink({
+  }, []);
+
+  const { ready, open, error } = usePlaidLink({
     onSuccess,
     onExit,
     onEvent,
@@ -50,18 +52,16 @@ const PlaidLink = ({ linkToken } : PlaidLinkProps) => {
   });
 
   useEffect(() => {
-    if(linkToken) {
-      console.log('Link token available...');
-      if(ready) {
-        console.log('Plaid Link is ready...');
-        open();
-      }
+    if (linkToken && ready) {
+      open();
     }
   }, [linkToken, ready]);
 
   return (
-    <></>  
+    <ButtonUnstyled id="initPlaidLink" className={styles.button} onClick={createLinkToken}>
+      Link Account
+    </ButtonUnstyled>
   );
-}
+};
 
 export default PlaidLink;

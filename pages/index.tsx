@@ -6,8 +6,10 @@ import BalanceSection from "../components/BalanceSection/BalanceSection";
 import CardSection from "../components/CardSection/CardSection";
 import useNavigation from "../components/NavigationSection/hooks/useNavigation";
 import NavigationSection from "../components/NavigationSection/navigationSection";
+import OverviewSection from "../components/OverviewSection/OverviewSection";
 import Transaction from "../components/Transaction/Transaction";
 import TransactionSection from "../components/TransactionSection/TransactionSection";
+import UpcomingSection from "../components/UpcomingSection/UpcomingSection";
 import styles from "../styles/index/index.module.css";
 
 const Home = () => {
@@ -42,6 +44,8 @@ const Home = () => {
           <Box className={styles.grid}>
             {selectedNavigationItem.id === "dashboardSection" ? (
               <>
+                <OverviewSection />
+                <UpcomingSection />
                 <TransactionSection />
                 <BalanceSection />
               </>

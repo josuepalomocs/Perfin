@@ -80,9 +80,10 @@
 
 .grid {
   display: grid;
+  height: calc(100% - 5rem);
   grid-template-columns: auto auto;
   justify-content: space-evenly;
-  padding: 1rem;
+  padding: 4rem 6rem;
   background-color: #080808;
   animation: smoothEntry 0.1s;
 }

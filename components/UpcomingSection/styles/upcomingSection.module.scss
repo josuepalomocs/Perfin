@@ -1,0 +1,15 @@
+.container {
+  padding: 1rem;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 1.2rem;
+
+  & .title {
+    font-size: var(--fs-large);
+    font-weight: var(--fw-extra-bold);
+  }
+}
