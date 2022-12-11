@@ -9,7 +9,10 @@ import getDummyTransactionList from "./faker/getDummyTransactionList";
 import { PlaidContext } from "../../pages/_app";
 
 const TransactionSection = () => {
+  const [transactionList, setTransactionList] = useState();
   const { accessTokenList, setAccessTokenList } = useContext(PlaidContext);
+
+  useEffect(() => {});
 
   return (
     <Box className={styles.container}>
