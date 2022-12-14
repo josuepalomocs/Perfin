@@ -14,11 +14,9 @@ import {
 import axios from "axios";
 import styles from "./styles/plaidLink.module.css";
 import { ItemPublicTokenExchangeResponse, LinkTokenCreateResponse } from "plaid";
-import { PlaidContext } from "../../pages/_app";
 
 const PlaidLink = () => {
   const [linkToken, setLinkToken] = useState("");
-  const { accessTokenList, setAccessTokenList } = useContext(PlaidContext);
 
   const createLinkToken = async () => {
     const { data } = await axios.get<LinkTokenCreateResponse>("/api/plaid/create-link-token");
@@ -29,7 +27,6 @@ const PlaidLink = () => {
   const onSuccess = useCallback<PlaidLinkOnSuccess>(async (public_token: string, metadata: PlaidLinkOnSuccessMetadata) => {
     const { data } = await axios.post<ItemPublicTokenExchangeResponse>("/api/plaid/exchange-public-token", { public_token });
     const { access_token } = data;
-    setAccessTokenList(accessTokenList.length === 0 ? [access_token] : [...accessTokenList, access_token]);
   }, []);
 
   const onExit = useCallback<PlaidLinkOnExit>((error: PlaidLinkError | null, metadata: PlaidLinkOnExitMetadata) => {

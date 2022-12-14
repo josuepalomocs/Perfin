@@ -9,6 +9,8 @@
   --clr-bg-dark-gray: #0c0c0c;
   --clr-bg-black: #080808;
 
+  --clr-border-primary: #202020;
+
   --clr-bg-fab-primary: #0059ff;
   --clr-bg-fab-primary--hover: #4184ff;
   --clr-bg-fab-secondary: #2b2b2b;
@@ -69,6 +71,7 @@ body,
 
 button {
   font-family: var(--ff-default);
+  outline: none;
 }
 
 ::-webkit-scrollbar {

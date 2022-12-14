@@ -1,0 +1,34 @@
+.wrapper {
+  display: grid;
+  place-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: var(--clr-bg-black);
+}
+
+.redirectDialog {
+  & :global(.MuiPaper-elevation) {
+    padding: 2rem;
+    background-color: var(--clr-bg-black);
+    border: 1px solid var(--clr-border-primary);
+    box-shadow: none;
+
+    .title {
+      padding: 0;
+      margin-bottom: 1rem;
+      text-align: center;
+      font-size: var(--fs-medium);
+      font-weight: var(--fw-light);
+      color: var(--clr-text-white);
+    }
+
+    .content {
+      padding: 0;
+
+      & .message {
+        text-align: center;
+        color: var(--clr-text-white);
+      }
+    }
+  }
+}

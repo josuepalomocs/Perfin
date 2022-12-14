@@ -6,13 +6,9 @@ import { DataGrid } from "@mui/x-data-grid";
 import styles from "./styles/transactionSection.module.css";
 import { getDataGridColumns } from "./utilities";
 import getDummyTransactionList from "./faker/getDummyTransactionList";
-import { PlaidContext } from "../../pages/_app";
 
 const TransactionSection = () => {
   const [transactionList, setTransactionList] = useState();
-  const { accessTokenList, setAccessTokenList } = useContext(PlaidContext);
-
-  useEffect(() => {});
 
   return (
     <Box className={styles.container}>

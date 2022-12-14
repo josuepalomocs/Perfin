@@ -1,0 +1,35 @@
+.wrapper {
+  display: -ms-grid;
+  display: grid;
+  place-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: var(--clr-bg-black);
+}
+
+.redirectDialog :global(.MuiPaper-elevation) {
+  padding: 2rem;
+  background-color: var(--clr-bg-black);
+  border: 1px solid var(--clr-border-primary);
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.redirectDialog :global(.MuiPaper-elevation) .title {
+  padding: 0;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: var(--fs-medium);
+  font-weight: var(--fw-light);
+  color: var(--clr-text-white);
+}
+
+.redirectDialog :global(.MuiPaper-elevation) .content {
+  padding: 0;
+}
+
+.redirectDialog :global(.MuiPaper-elevation) .content .message {
+  text-align: center;
+  color: var(--clr-text-white);
+}
+/*# sourceMappingURL=register.module.css.map */

@@ -1,31 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import type { AppProps } from "next/app";
 import { StyledEngineProvider } from "@mui/material";
+import UserContext from "../context/UserContext";
+import useUser from "../hooks/useUser";
 import "../styles/globals.css";
 
-type PlaidAccessToken = string;
-
-interface PlaidContext {
-  accessTokenList: PlaidAccessToken[] | [];
-  setAccessTokenList: React.Dispatch<React.SetStateAction<PlaidAccessToken[]>>;
-}
-
-const PlaidContextDefaultValue = {
-  accessTokenList: [],
-  setAccessTokenList: () => {},
-};
-
-export const PlaidContext = React.createContext<PlaidContext>(PlaidContextDefaultValue);
-
 const App = ({ Component, pageProps }: AppProps) => {
-  const [accessTokenList, setAccessTokenList] = useState<PlaidAccessToken[]>([]);
+  const [user, setUser] = useUser();
 
   return (
-    <PlaidContext.Provider value={{ accessTokenList, setAccessTokenList }}>
+    <UserContext.Provider value={{ user, setUser }}>
       <StyledEngineProvider injectFirst>
         <Component {...pageProps} />
       </StyledEngineProvider>
-    </PlaidContext.Provider>
+    </UserContext.Provider>
   );
 };
 

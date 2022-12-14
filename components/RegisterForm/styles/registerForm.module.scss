@@ -1,0 +1,249 @@
+$googleLoginButtonBackgroundColorOnHover: #2b2b2b;
+$googleLoginButtonBackgroundColorOnFocus: #3f3f3f;
+$credentialsLoginButtonBackgroundColorOnHover: #4f8cff;
+$credentialsLoginButtonBackgroundColorOnFocus: #8bb4ff;
+
+.container {
+  padding: 2rem;
+  border-radius: 8px;
+  border: 1px solid var(--clr-border-primary);
+  min-width: 34rem;
+  background-color: var(--clr-bg-black);
+}
+
+.title {
+  font-size: var(--fs-medium);
+  font-weight: var(--fw-light);
+  margin-bottom: 0.25rem;
+}
+
+.subTitle {
+  font-size: var(--fs-regular);
+  font-weight: var(--fw-regular);
+  margin-bottom: 2rem;
+  color: var(--clr-text-gray);
+}
+
+.loginWithProviderBox,
+.loginWithCredentialsBox {
+  margin-bottom: 1rem;
+
+  & .loginButton {
+    cursor: pointer;
+    width: 100%;
+    height: 3rem;
+    font-size: var(--fs-regular);
+    border: none;
+    border-radius: 4px;
+    color: var(--clr-text-white);
+    background-color: #1f1f1f;
+
+    &.withGoogle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:focus {
+        border: 1px solid $googleLoginButtonBackgroundColorOnFocus;
+      }
+
+      &:hover {
+        background-color: $googleLoginButtonBackgroundColorOnHover;
+      }
+
+      & .googleLogo {
+        width: 24px;
+        height: 24px;
+        margin-right: 0.5rem;
+      }
+    }
+
+    &.withCredentials {
+      &:hover {
+        background-color: $credentialsLoginButtonBackgroundColorOnHover;
+      }
+
+      &:focus {
+        border: 1px solid $credentialsLoginButtonBackgroundColorOnFocus;
+      }
+    }
+  }
+}
+
+.loginButtonDivider {
+  margin-bottom: 1rem;
+  color: var(--clr-text-gray);
+
+  &::before,
+  &::after {
+    border-color: var(--clr-input-border);
+  }
+}
+
+.onSubmitErrorBox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  animation: smoothEntry 0.5s;
+
+  & .errorIcon {
+    width: 20px;
+    height: 20px;
+    color: var(--clr-text-red);
+    margin-right: 0.25rem;
+  }
+
+  & .errorMessage {
+    font-size: var(--fs-small);
+    color: var(--clr-text-red);
+  }
+}
+
+.form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin-bottom: 2rem;
+
+  & .inputTextBox {
+    grid-column: span 2;
+    font-size: var(--fs-regular);
+
+    &.halfWidth {
+      grid-column: span 1;
+
+      &.roundedLeft > .inputText > input {
+        border-radius: 0 4px 4px 0;
+      }
+
+      &.roundedRight > .inputText > input {
+        border-radius: 4px 0 0 4px;
+      }
+    }
+
+    & .label {
+      cursor: pointer;
+      display: inline-block;
+      width: 100%;
+      padding-bottom: 0.25rem;
+      font-size: var(--fs-small);
+      color: var(--clr-text-white);
+    }
+
+    & .inputText {
+      margin-bottom: 1rem;
+
+      & > input {
+        width: 100%;
+        height: 3rem;
+        padding: 0 0.5rem;
+        font-size: var(--fs-regular);
+        border: 1px solid var(--clr-input-border);
+        border-radius: 4px;
+        color: var(--clr-text-white);
+        background-color: inherit;
+
+        &:focus {
+          outline: none;
+          border-color: #4f8cff;
+          transition: 0.5s;
+        }
+
+        &::placeholder {
+          color: var(--clr-text-gray);
+        }
+      }
+    }
+
+    & .inputTextErrorBox {
+      display: flex;
+      align-items: center;
+      margin-top: -0.5rem;
+      margin-bottom: 1rem;
+      animation: smoothEntry 0.5s;
+
+      & .errorIcon {
+        width: 20px;
+        height: 20px;
+        color: var(--clr-text-red);
+        margin-right: 0.25rem;
+      }
+
+      & .errorMessage {
+        font-size: var(--fs-small);
+        color: var(--clr-text-red);
+      }
+    }
+  }
+
+  & .inputCheckboxAndLinkBox {
+    grid-column: span 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    font-size: var(--fs-small);
+
+    & .inputCheckboxBox {
+      display: flex;
+      align-items: flex-start;
+
+      & .input {
+        margin-right: 0.25rem;
+
+        & > input {
+          cursor: pointer;
+          outline: none;
+
+          &:focus {
+            outline: 1px solid #4f8cff;
+          }
+        }
+      }
+
+      & .label {
+        cursor: pointer;
+        font-size: var(--fs-small);
+        color: var(--clr-text-white);
+      }
+    }
+
+    & .link {
+      &:focus {
+        outline: 1px solid #4f8cff;
+      }
+    }
+  }
+
+  & .loginWithCredentialsBox {
+    grid-column: span 2;
+    margin-bottom: 0;
+
+    & .loginButton {
+      background-color: var(--clr-button-text--positive);
+    }
+  }
+}
+
+.registerBox {
+  text-align: center;
+
+  & .registerPrompt {
+    margin-bottom: 0.5rem;
+    color: var(--clr-text-gray);
+  }
+
+  & .registerLink {
+    &:focus {
+      outline: 1px solid #4f8cff;
+    }
+  }
+}
+
+@keyframes smoothEntry {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
