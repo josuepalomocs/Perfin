@@ -275,6 +275,10 @@
   outline: 1px solid #4f8cff;
 }
 
+.circularProgress > span {
+  color: var(--clr-button-text--positive);
+}
+
 @-webkit-keyframes smoothEntry {
   from {
     opacity: 0;

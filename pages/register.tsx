@@ -1,25 +1,13 @@
 import React, { useContext } from "react";
 import Head from "next/head";
-import { Box, Dialog, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
+import { Box } from "@mui/material";
 import RegisterForm from "../components/RegisterForm/RegisterForm";
 import styles from "../styles/register/register.module.css";
 import UserContext from "../context/UserContext";
+import adminAuth from "../lib/firebase/admin-auth";
+import { GetServerSidePropsContext } from "next";
 
 const Register = () => {
-  const { user } = useContext(UserContext);
-  const redirectDialogIsOpen = Boolean(user);
-
-  if (redirectDialogIsOpen) {
-    return (
-      <Dialog className={styles.redirectDialog} open={redirectDialogIsOpen}>
-        <DialogTitle className={styles.title}>Just a moment</DialogTitle>
-        <DialogContent className={styles.content}>
-          <DialogContentText className={styles.message}>You are being redirected to the dashboard...</DialogContentText>
-        </DialogContent>
-      </Dialog>
-    );
-  }
-
   return (
     <>
       <Head>
@@ -33,6 +21,27 @@ const Register = () => {
       </Box>
     </>
   );
+};
+
+export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+  const {
+    req: {
+      cookies: { firebaseToken },
+    },
+  } = context;
+
+  if (!firebaseToken) {
+    return { props: {} };
+  }
+
+  return adminAuth
+    .verifyIdToken(firebaseToken)
+    .then(() => {
+      return { redirect: { permanent: false, destination: "/" } };
+    })
+    .catch((error) => {
+      return { props: {} };
+    });
 };
 
 export default Register;

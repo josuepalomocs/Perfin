@@ -1,9 +1,9 @@
 import { BellIcon } from "@heroicons/react/24/solid";
 import { ButtonUnstyled } from "@mui/base";
 import { Avatar, Box, Typography } from "@mui/material";
+import { GetServerSidePropsContext } from "next";
 import Head from "next/head";
 import BalanceSection from "../components/BalanceSection/BalanceSection";
-import CardSection from "../components/CardSection/CardSection";
 import useNavigation from "../components/NavigationSection/hooks/useNavigation";
 import NavigationSection from "../components/NavigationSection/navigationSection";
 import OverviewSection from "../components/OverviewSection/OverviewSection";
@@ -53,10 +53,23 @@ const Home = () => {
             )}
           </Box>
         </Box>
-        {/* <TransactionSection /> */}
       </Box>
     </div>
   );
+};
+
+export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+  const {
+    req: {
+      cookies: { firebaseToken },
+    },
+  } = context;
+
+  if (!firebaseToken) {
+    return { redirect: { permanent: false, destination: "/login" } };
+  }
+
+  return { props: {} };
 };
 
 export default Home;

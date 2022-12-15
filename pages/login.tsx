@@ -1,14 +1,11 @@
-import { useState, useContext, useEffect } from "react";
 import Head from "next/head";
-import { Box, Dialog, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
+import { Box } from "@mui/material";
 import LoginForm from "../components/LoginForm.tsx/LoginForm";
-import UserContext from "../context/UserContext";
+import { GetServerSidePropsContext } from "next";
+import adminAuth from "../lib/firebase/admin-auth";
 import styles from "../styles/login/login.module.css";
-import { NextApiRequest, NextApiResponse } from "next";
 
 const Login = () => {
-  const { user } = useContext(UserContext);
-
   return (
     <>
       <Head>
@@ -24,6 +21,25 @@ const Login = () => {
   );
 };
 
-export const getServerSideProps = async ({ req, res }: { req: NextApiRequest; res: NextApiResponse }) => {};
+// export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+//   const {
+//     req: {
+//       cookies: { firebaseToken },
+//     },
+//   } = context;
+
+//   if (!firebaseToken) {
+//     return { props: {} };
+//   }
+
+//   return adminAuth
+//     .verifyIdToken(firebaseToken)
+//     .then(() => {
+//       return { redirect: { permanent: false, destination: "/" } };
+//     })
+//     .catch((error) => {
+//       return { props: {} };
+//     });
+// };
 
 export default Login;

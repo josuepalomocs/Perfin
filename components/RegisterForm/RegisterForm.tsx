@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Divider, FormLabel, Link, Typography } from "@mui/material";
+import { Backdrop, Box, CircularProgress, Divider, FormLabel, Link, Typography } from "@mui/material";
 import { ButtonUnstyled, InputUnstyled } from "@mui/base";
 import { ExclamationCircleIcon } from "@heroicons/react/24/solid";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
@@ -22,7 +22,7 @@ const RegisterForm = () => {
     formState: { errors },
   } = useForm<RegisterData>({ defaultValues: { firstName: "", lastName: "", email: "", password: "", confirmPassword: "" } });
 
-  const { errorMessage, handleRegisterWithCredentials, handleRegisterWithGooglePopup } = useRegister();
+  const { errorMessage, isRedirecting, handleRegisterWithCredentials, handleRegisterWithGooglePopup } = useRegister();
 
   const googlePopupOnSubmit = () => {
     handleRegisterWithGooglePopup();
@@ -144,7 +144,7 @@ const RegisterForm = () => {
         <Controller
           name="password"
           control={control}
-          rules={{ required: { value: true, message: "Field is required" } }}
+          rules={{ required: { value: true, message: "Field is required" }, minLength: { value: 8, message: "Password must be at least 8 characters long" } }}
           render={({ field }) => {
             return (
               <Box className={`${styles.inputTextBox} ${styles.halfWidth} ${styles.roundedRight}`}>
@@ -199,14 +199,6 @@ const RegisterForm = () => {
             );
           }}
         />
-        <Box className={styles.inputCheckboxAndLinkBox}>
-          <Box className={styles.inputCheckboxBox}>
-            <InputUnstyled id="rememberPasswordInput" className={styles.input} type="checkbox" />
-            <FormLabel className={styles.label} htmlFor="rememberPasswordInput">
-              Remember me
-            </FormLabel>
-          </Box>
-        </Box>
         <Box className={styles.loginWithCredentialsBox}>
           <ButtonUnstyled id="loginWithCredentials" className={`${styles.loginButton} ${styles.withCredentials}`} type="submit">
             Register
@@ -219,6 +211,9 @@ const RegisterForm = () => {
           Login
         </Link>
       </Box>
+      <Backdrop className={styles.circularProgress} open={isRedirecting}>
+        <CircularProgress />
+      </Backdrop>
     </Box>
   );
 };

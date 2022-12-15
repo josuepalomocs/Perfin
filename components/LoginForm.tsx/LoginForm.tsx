@@ -1,6 +1,6 @@
 import React from "react";
 import { ExclamationCircleIcon } from "@heroicons/react/24/solid";
-import { Box, Divider, FormLabel, Link, Typography } from "@mui/material";
+import { Backdrop, Box, CircularProgress, Container, Divider, FormLabel, Link, Typography } from "@mui/material";
 import { ButtonUnstyled, InputUnstyled } from "@mui/base";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
@@ -19,7 +19,7 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm({ defaultValues: { email: "", password: "" } });
 
-  const { errorMessage, handleLoginWithEmailAndPassword, handleLoginWithGooglePopup } = useLogin();
+  const { errorMessage, isRedirecting, handleLoginWithEmailAndPassword, handleLoginWithGooglePopup } = useLogin();
 
   const emailAndPasswordOnSubmit: SubmitHandler<LoginData> = (credentials) => {
     handleLoginWithEmailAndPassword(credentials);
@@ -110,12 +110,6 @@ const LoginForm = () => {
           }}
         />
         <Box className={styles.inputCheckboxAndLinkBox}>
-          <Box className={styles.inputCheckboxBox}>
-            <InputUnstyled id="rememberPasswordInput" className={styles.input} type="checkbox" />
-            <FormLabel className={styles.label} htmlFor="rememberPasswordInput">
-              Remember me
-            </FormLabel>
-          </Box>
           <Link className={styles.link} href="/forgot-password">
             Forgot password?
           </Link>
@@ -129,9 +123,12 @@ const LoginForm = () => {
       <Box className={styles.registerBox}>
         <Typography className={styles.registerPrompt}>Don't have an account?</Typography>
         <Link className={styles.registerLink} href="/register">
-          Sign up
+          Register
         </Link>
       </Box>
+      <Backdrop className={styles.circularProgress} open={isRedirecting}>
+        <CircularProgress />
+      </Backdrop>
     </Box>
   );
 };

@@ -165,7 +165,7 @@ $credentialsLoginButtonBackgroundColorOnFocus: #8bb4ff;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 
     & .inputCheckboxBox {
       display: flex;
@@ -217,6 +217,12 @@ $credentialsLoginButtonBackgroundColorOnFocus: #8bb4ff;
     &:focus {
       outline: 1px solid #4f8cff;
     }
+  }
+}
+
+.circularProgress {
+  & > span {
+    color: var(--clr-button-text--positive);
   }
 }
 

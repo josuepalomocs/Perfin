@@ -239,6 +239,12 @@ $credentialsLoginButtonBackgroundColorOnFocus: #8bb4ff;
   }
 }
 
+.circularProgress {
+  & > span {
+    color: var(--clr-button-text--positive);
+  }
+}
+
 @keyframes smoothEntry {
   from {
     opacity: 0;

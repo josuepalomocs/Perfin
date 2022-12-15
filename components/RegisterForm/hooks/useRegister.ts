@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import auth from "../../../lib/firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile } from "firebase/auth";
+import auth from "../../../lib/firebase/client-auth";
+import { useRouter } from "next/router";
 
 interface RegisterData {
   email: string;
@@ -12,25 +13,45 @@ interface RegisterData {
 
 const useRegister = () => {
   const [errorMessage, setErrorMessage] = useState("");
+  const [isRedirecting, setIsRedirecting] = useState(false);
+  const router = useRouter();
+
+  const handleRedirect = () => {
+    setIsRedirecting(true);
+    router.push("/");
+  };
 
   const handleRegisterWithCredentials = ({ email, firstName, lastName, password, confirmPassword }: RegisterData) => {
     if (password !== confirmPassword) {
       setErrorMessage("Passwords do not match");
     } else {
-      createUserWithEmailAndPassword(auth, email, password).catch((error) => {
-        const { code } = error;
-        switch (code) {
-          case "auth/user-not-found":
-            setErrorMessage("The email/password combination provided does not match an account");
-            break;
-          case "auth/invalid-email":
-            setErrorMessage("The email provided is not valid");
-            break;
-          default:
-            setErrorMessage(`Unknown error: ${code}`);
-            break;
-        }
-      });
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(({ user }) => {
+          if (errorMessage) {
+            setErrorMessage("");
+          }
+          updateProfile(user, { displayName: `${firstName} ${lastName}` }).catch((error) => {
+            throw error;
+          });
+          handleRedirect();
+        })
+        .catch((error) => {
+          const { code } = error;
+          switch (code) {
+            case "auth/user-not-found":
+              setErrorMessage("The email/password combination provided does not match an account");
+              break;
+            case "auth/invalid-email":
+              setErrorMessage("The email provided is not valid");
+              break;
+            case "auth/email-already-in-use":
+              setErrorMessage("The email provided is associated with an existing account");
+              break;
+            default:
+              setErrorMessage(`Unknown error: ${code}`);
+              break;
+          }
+        });
     }
   };
 
@@ -49,7 +70,7 @@ const useRegister = () => {
       });
   };
 
-  return { errorMessage, handleRegisterWithCredentials, handleRegisterWithGooglePopup };
+  return { errorMessage, isRedirecting, handleRegisterWithCredentials, handleRegisterWithGooglePopup };
 };
 
 export default useRegister;

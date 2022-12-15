@@ -200,7 +200,7 @@
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .form .inputCheckboxAndLinkBox .inputCheckboxBox {
@@ -250,6 +250,10 @@
 
 .registerBox .registerLink:focus {
   outline: 1px solid #4f8cff;
+}
+
+.circularProgress > span {
+  color: var(--clr-button-text--positive);
 }
 
 @-webkit-keyframes smoothEntry {

@@ -1,4 +1,5 @@
 import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import auth from "../../../firebase";
 
@@ -9,32 +10,42 @@ interface LoginCredentials {
 
 const useLogin = () => {
   const [errorMessage, setErrorMessage] = useState("");
+  const [isRedirecting, setIsRedirecting] = useState(false);
+  const router = useRouter();
+
+  const handleRedirect = () => {
+    setIsRedirecting(true);
+    router.push("/");
+  };
 
   const handleLoginWithEmailAndPassword = ({ email, password }: LoginCredentials) => {
-    signInWithEmailAndPassword(auth, email, password).catch((error) => {
-      const { code, message } = error;
-      switch (code) {
-        case "auth/user-not-found":
-          setErrorMessage("The email/password combination provided does not match an account");
-          break;
-        case "auth/invalid-email":
-          setErrorMessage("The email provided is not valid");
-          break;
-        default:
-          setErrorMessage(`Unknown error: ${code}`);
-          break;
-      }
-    });
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        if (errorMessage) {
+          setErrorMessage("");
+        }
+        handleRedirect();
+      })
+      .catch((error) => {
+        const { code } = error;
+        switch (code) {
+          case "auth/user-not-found":
+            setErrorMessage("The email/password combination provided does not match an account");
+            break;
+          case "auth/invalid-email":
+            setErrorMessage("The email provided is not valid");
+            break;
+          default:
+            setErrorMessage(`Unknown error: ${code}`);
+            break;
+        }
+      });
   };
 
   const handleLoginWithGooglePopup = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
-      .then((result) => {
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential?.accessToken;
-        const user = result.user;
-      })
+      .then(handleRedirect)
       .catch((error) => {
         const { code, message, customData } = error;
         const { email } = customData;
@@ -42,7 +53,7 @@ const useLogin = () => {
       });
   };
 
-  return { errorMessage, handleLoginWithEmailAndPassword, handleLoginWithGooglePopup };
+  return { errorMessage, isRedirecting, handleLoginWithEmailAndPassword, handleLoginWithGooglePopup };
 };
 
 export default useLogin;
