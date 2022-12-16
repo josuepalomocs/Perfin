@@ -6,9 +6,9 @@ import styles from "./styles/balance.module.css";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-ChartJS.defaults.backgroundColor = "blue";
-ChartJS.defaults.borderColor = "#202020";
-ChartJS.defaults.color = "white";
+ChartJS.defaults.backgroundColor = "#b1b1b1";
+ChartJS.defaults.borderColor = "#b1b1b1";
+ChartJS.defaults.color = "#b1b1b1";
 
 export const options = {
   responsive: true,
@@ -29,7 +29,7 @@ export const data = {
       data: labels.map(() => {
         return faker.finance.amount(-5555, 5555);
       }),
-      borderColor: "white",
+      borderColor: "#b1b1b1",
       backgroundColor: "white",
       tension: 0.4,
     },

@@ -1,5 +1,5 @@
 .container {
-  padding: 1 0rem;
+  padding: 1rem 0rem;
 }
 
 .top {
@@ -12,17 +12,64 @@
   color: var(--clr-text-white);
 }
 
+.bottom .accountList {
+  padding: 0.25rem 0;
+}
+
 .bottom .accountList .account {
-  border-radius: 4px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 4px;
   background-color: #131313;
 }
 
-.bottom .accountList .account .accountLeftBox .accountLogo {
-  width: 8rem;
-  height: 4rem;
-  background-color: white;
+.bottom .accountList .account .accountLeftBox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.bottom .accountList .account .accountLeftBox .accountInstitutionLogo {
+  margin-right: 1rem;
+  -o-object-fit: contain;
+     object-fit: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bottom .accountList .account .accountLeftBox .accountInstitutionName {
+  margin-right: 1rem;
+  color: var(--clr-text-gray);
+}
+
+.bottom .accountList .account .accountLeftBox .accountCode {
+  color: var(--clr-text-white);
+}
+
+.bottom .accountList .account .accountRightBox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-left: auto;
+}
+
+.bottom .accountList .account .accountRightBox .chevronRightIcon {
+  margin-left: auto;
+  width: 16px;
+  height: 16px;
+  color: var(--clr-text-gray);
 }
 /*# sourceMappingURL=accounts.module.css.map */

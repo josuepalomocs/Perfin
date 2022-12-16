@@ -1,5 +1,5 @@
 .container {
-  padding: 1 0rem;
+  padding: 1rem 0rem;
 }
 
 .top {
@@ -14,16 +14,44 @@
 
 .bottom {
   & .accountList {
+    padding: 0.25rem 0;
     & .account {
-      border-radius: 4px;
       display: flex;
+      align-items: center;
+      border-radius: 4px;
       background-color: #131313;
 
       & .accountLeftBox {
-        & .accountLogo {
-          width: 8rem;
-          height: 4rem;
-          background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        & .accountInstitutionLogo {
+          margin-right: 1rem;
+          object-fit: contain;
+          width: 24px;
+          height: 24px;
+        }
+
+        & .accountInstitutionName {
+          margin-right: 1rem;
+          color: var(--clr-text-gray);
+        }
+
+        & .accountCode {
+          color: var(--clr-text-white);
+        }
+      }
+
+      & .accountRightBox {
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+        & .chevronRightIcon {
+          margin-left: auto;
+          width: 16px;
+          height: 16px;
+          color: var(--clr-text-gray);
         }
       }
 

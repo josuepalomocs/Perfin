@@ -57,6 +57,7 @@
 }
 
 .bottom .transactionList .transactionListItem .dailyTransactionList .dailyTransactionListItem .transactionBoxLeft .transactionType {
+  font-size: var(--fs-small);
   color: var(--clr-text-gray);
 }
 
