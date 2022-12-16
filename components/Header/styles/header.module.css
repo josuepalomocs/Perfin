@@ -1,0 +1,33 @@
+.container {
+  max-height: 4rem;
+}
+
+.scrollActionList {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: var(--clr-bg-dark-gray);
+}
+
+.scrollActionList .scrollActionItem {
+  padding: 0;
+}
+
+.scrollActionList .scrollActionItem .scrollActionButton {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: var(--clr-text-gray);
+}
+
+.scrollActionList .scrollActionItem .scrollActionButton .scrollActionIcon {
+  width: 20px;
+  height: 20px;
+}
+/*# sourceMappingURL=header.module.css.map */

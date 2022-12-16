@@ -1,0 +1,19 @@
+.container {
+  padding: 1rem 0;
+}
+
+.top {
+  margin-bottom: 1rem;
+
+  & .title {
+    font-weight: var(--fw-medium);
+    font-size: var(--fs-medium);
+    color: var(--clr-text-white);
+  }
+}
+
+.bottom {
+  padding: 1rem;
+  background-color: #131313;
+  border-radius: 4px;
+}

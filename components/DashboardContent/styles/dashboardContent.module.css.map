@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,UAAU,CAAC;EACT,IAAI,EAAE,CAAC;CACR",
+    "sources": [
+        "dashboardContent.module.scss"
+    ],
+    "names": [],
+    "file": "dashboardContent.module.css"
+}

@@ -61,12 +61,12 @@ body,
 #__next,
 .App {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   font-family: var(--ff-default);
   font-size: 14px;
   font-weight: var(--fw-regular);
   color: var(--clr-text-white);
-  background-color: var(--clr-bg-dark-gray);
+  background-color: var(--clr-bg-black);
 }
 
 button {
@@ -75,16 +75,16 @@ button {
 }
 
 ::-webkit-scrollbar {
-  background: #303030;
-  width: 10px;
+  background: var(--clr-bg-black);
+  width: 4px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #303030;
+  background: var(--clr-bg-black);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #555;
+  background: #3a3a3a;
 }
 
 ::-webkit-scrollbar-thumb:hover {

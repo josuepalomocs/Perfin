@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,UAAU,CAAC;EACT,OAAO,EAAE,MAAM;CAChB;;AAED,AAAA,IAAI,CAAC;EACH,aAAa,EAAE,IAAI;CAOpB;;AARD,AAGE,IAHE,CAGA,MAAM,CAAC;EACP,WAAW,EAAE,gBAAgB;EAC7B,SAAS,EAAE,gBAAgB;EAC3B,KAAK,EAAE,qBAAqB;CAC7B;;AAGH,AAAA,OAAO,CAAC;EACN,OAAO,EAAE,IAAI;EACb,gBAAgB,EAAE,OAAO;EACzB,aAAa,EAAE,GAAG;CACnB",
+    "sources": [
+        "balance.module.scss"
+    ],
+    "names": [],
+    "file": "balance.module.css"
+}

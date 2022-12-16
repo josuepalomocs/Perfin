@@ -1,0 +1,34 @@
+.container {
+  padding: 1 0rem;
+}
+
+.top {
+  margin-bottom: 1rem;
+
+  & .title {
+    font-weight: var(--fw-medium);
+    font-size: var(--fs-medium);
+    color: var(--clr-text-white);
+  }
+}
+
+.bottom {
+  & .accountList {
+    & .account {
+      border-radius: 4px;
+      display: flex;
+      background-color: #131313;
+
+      & .accountLeftBox {
+        & .accountLogo {
+          width: 8rem;
+          height: 4rem;
+          background-color: white;
+        }
+      }
+
+      & .accountRightBox {
+      }
+    }
+  }
+}
