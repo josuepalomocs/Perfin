@@ -1,38 +1,82 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
 import { ButtonUnstyled } from "@mui/base";
+import axios from "axios";
+import { collection, doc, setDoc } from "firebase/firestore";
+import { CountryCode, ItemPublicTokenExchangeRequest, ItemPublicTokenExchangeResponse, LinkTokenCreateRequest, LinkTokenCreateResponse, Products } from "plaid";
+import { useCallback, useContext, useEffect, useState } from "react";
 import {
-  usePlaidLink,
-  PlaidLinkOnSuccess,
-  PlaidLinkOnSuccessMetadata,
-  PlaidLinkOnExit,
-  PlaidLinkOnExitMetadata,
   PlaidLinkError,
   PlaidLinkOnEvent,
-  PlaidLinkStableEvent,
   PlaidLinkOnEventMetadata,
+  PlaidLinkOnExit,
+  PlaidLinkOnExitMetadata,
+  PlaidLinkOnSuccess,
+  PlaidLinkOnSuccessMetadata,
+  PlaidLinkStableEvent,
+  usePlaidLink,
 } from "react-plaid-link";
-import axios from "axios";
+import UserContext from "../../context/UserContext";
+import { firestore } from "../../lib/firebase/client";
 import styles from "./styles/plaidLink.module.css";
-import { ItemPublicTokenExchangeResponse, LinkTokenCreateResponse } from "plaid";
 
 const PlaidLink = () => {
   const [linkToken, setLinkToken] = useState("");
+  const userContext = useContext(UserContext);
 
   const createLinkToken = async () => {
-    const { data } = await axios.get<LinkTokenCreateResponse>("/api/plaid/create-link-token");
-    const { link_token } = data;
-    setLinkToken(link_token);
+    const linkTokenCreateRequest: LinkTokenCreateRequest = {
+      user: {
+        client_user_id: userContext.user!.uid,
+      },
+      client_name: "Perfin",
+      products: [Products.Transactions],
+      country_codes: [CountryCode.Us],
+      language: "en",
+    };
+    await axios
+      .post<LinkTokenCreateResponse>("/api/plaid/link-tokens", { data: linkTokenCreateRequest })
+      .then(({ data: { link_token } }) => {
+        setLinkToken(link_token);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const exchangePublicTokenForAccessToken = async (public_token: string) => {
+    const itemPublicTokenExchangeRequest: ItemPublicTokenExchangeRequest = {
+      public_token,
+    };
+    await axios
+      .post<ItemPublicTokenExchangeResponse>("/api/plaid/access-tokens", { data: itemPublicTokenExchangeRequest })
+      .then(async ({ data: { access_token, item_id } }) => {
+        await persistAccessToken(access_token, item_id);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const persistAccessToken = async (access_token: string, item_id: string) => {
+    const accessTokenRef = doc(collection(firestore, "access_tokens"));
+    await setDoc(accessTokenRef, {
+      access_token,
+      item_id,
+    }).catch((error) => {
+      console.log(error);
+    });
   };
 
   const onSuccess = useCallback<PlaidLinkOnSuccess>(async (public_token: string, metadata: PlaidLinkOnSuccessMetadata) => {
-    const { data } = await axios.post<ItemPublicTokenExchangeResponse>("/api/plaid/exchange-public-token", { public_token });
-    const { access_token } = data;
+    await exchangePublicTokenForAccessToken(public_token);
   }, []);
 
-  const onExit = useCallback<PlaidLinkOnExit>((error: PlaidLinkError | null, metadata: PlaidLinkOnExitMetadata) => {
-    console.log("Exited");
-    if (error != null && error.error_code === "INVALID_LINK_TOKEN") {
-      createLinkToken();
+  const onExit = useCallback<PlaidLinkOnExit>(async (error: PlaidLinkError | null, metadata: PlaidLinkOnExitMetadata) => {
+    if (error) {
+      switch (error.error_code) {
+        case "INVALID_LINK_TOKEN":
+          setLinkToken("");
+          await createLinkToken();
+      }
     }
   }, []);
 
@@ -41,7 +85,7 @@ const PlaidLink = () => {
         Metadata: ${metadata}`);
   }, []);
 
-  const { ready, open, error } = usePlaidLink({
+  const { ready, open } = usePlaidLink({
     onSuccess,
     onExit,
     onEvent,

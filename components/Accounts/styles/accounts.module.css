@@ -3,6 +3,12 @@
 }
 
 .top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   margin-bottom: 1rem;
 }
 
@@ -10,6 +16,10 @@
   font-weight: var(--fw-medium);
   font-size: var(--fs-medium);
   color: var(--clr-text-white);
+}
+
+.top .button {
+  width: 4rem;
 }
 
 .bottom .accountList {
@@ -25,6 +35,7 @@
           align-items: center;
   border-radius: 4px;
   background-color: #131313;
+  margin-bottom: 0.5rem;
 }
 
 .bottom .accountList .account .accountLeftBox {

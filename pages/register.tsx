@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 import RegisterForm from "../components/RegisterForm/RegisterForm";
 import styles from "../styles/register/register.module.css";
 import UserContext from "../context/UserContext";
-import adminAuth from "../lib/firebase/admin-auth";
+import adminAuth from "../lib/firebase/admin";
 import { GetServerSidePropsContext } from "next";
 
 const Register = () => {

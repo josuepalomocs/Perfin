@@ -15,7 +15,7 @@ if (admin.apps.length === 0) {
   admin.initializeApp(firebaseConfig, appName);
 }
 
-const adminApp = getApp("perfin");
-const adminAuth = auth(adminApp);
+const app = getApp("perfin");
+const adminAuth = auth(app);
 
 export default adminAuth;

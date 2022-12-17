@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile } from "firebase/auth";
-import auth from "../../../lib/firebase/client-auth";
+import auth from "../../../lib/firebase/client";
 import { useRouter } from "next/router";
 
 interface RegisterData {

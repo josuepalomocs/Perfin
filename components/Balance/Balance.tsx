@@ -30,7 +30,7 @@ export const data = {
         return faker.finance.amount(-5555, 5555);
       }),
       borderColor: "#b1b1b1",
-      backgroundColor: "white",
+      backgroundColor: "#b1b1b1",
       tension: 0.4,
     },
   ],
