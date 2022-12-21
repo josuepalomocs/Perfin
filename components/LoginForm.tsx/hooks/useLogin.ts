@@ -1,7 +1,7 @@
 import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import auth from "../../../firebase";
+import { auth } from "../../../lib/firebase/client";
 
 interface LoginCredentials {
   email: string;

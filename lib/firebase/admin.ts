@@ -1,21 +1,18 @@
-import admin from "firebase-admin";
-import { auth } from "firebase-admin";
-import { getApp } from "firebase-admin/app";
+import { apps, auth, credential } from "firebase-admin";
+import { getApp, initializeApp } from "firebase-admin/app";
 
 const serviceAccount = require("./serviceAccountKey.json");
 
 const firebaseConfig = {
-  credential: admin.credential.cert(serviceAccount),
+  credential: credential.cert(serviceAccount),
   databaseURL: "https://perfin-b4307-default-rtdb.firebaseio.com",
 };
 
 const appName = "perfin";
 
-if (admin.apps.length === 0) {
-  admin.initializeApp(firebaseConfig, appName);
+if (apps.length === 0) {
+  initializeApp(firebaseConfig, appName);
 }
 
 const app = getApp("perfin");
-const adminAuth = auth(app);
-
-export default adminAuth;
+export const adminAuth = auth(app);

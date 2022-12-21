@@ -1,18 +1,18 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { User } from "firebase/auth";
 import { auth } from "../lib/firebase/client";
-import Cookies from "js-cookie";
+import { setCookie, deleteCookie } from "cookies-next";
 
 const useUser = (): [User | null, Dispatch<SetStateAction<User | null>>] => {
   const [user, setUser] = useState<User | null>(null);
 
   const setAuthCookie = async (user: User) => {
     const token = await user.getIdToken();
-    Cookies.set("firebaseToken", token);
+    setCookie("authToken", token);
   };
 
   const deleteAuthCookie = async () => {
-    Cookies.remove("firebaseToken");
+    deleteCookie("firebaseToken");
   };
 
   useEffect(() => {

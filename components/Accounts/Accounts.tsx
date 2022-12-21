@@ -10,10 +10,7 @@ const Accounts = () => {
   const [accountList, setAccountList] = useState<AccountBase[] | null>(null);
   useEffect(() => {
     const getAccountList = async () => {
-      const accountGetRequestList: AccountsGetRequest[] = [
-        { access_token: "access-sandbox-8fee4368-8e8e-4095-8ad3-ff41e1a41eef" },
-        { access_token: "access-sandbox-7b76ce37-a938-45b1-9402-9555915a91fe" },
-      ];
+      const accountGetRequestList: AccountsGetRequest[] = [];
       const { data: accountList } = await axios.post<AccountBase[]>("/api/plaid/accounts", { data: accountGetRequestList });
       setAccountList(accountList);
     };
