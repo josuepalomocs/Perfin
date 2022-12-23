@@ -1,11 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { ItemPublicTokenExchangeRequest } from "plaid";
-import { isAuthorizedRequest } from "../../../server/auth";
-import plaidClient from "../../../plaid/config";
+import { isAuthorizedRequest } from "../../server/auth";
+import plaidClient from "../../plaid/config";
 import { addDoc, collection } from "firebase/firestore";
-import { firestore } from "../../../lib/firebase/client";
-import { firebaseAuthManager } from "../../../auth";
-import { adminAuth as auth } from "../../../lib/firebase/admin";
+import { firestore } from "../../lib/firebase/client";
+import { firebaseAuthManager } from "../../auth";
+import { adminAuth as auth } from "../../lib/firebase/admin";
 import { getCookie } from "cookies-next";
 import { idID } from "@mui/material/locale";
 import { access } from "fs";

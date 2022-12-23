@@ -1,6 +1,7 @@
-import db from "./db/config";
+import { QueryResult } from "pg";
+import db from "./config";
 
-export interface postItemParameters {
+export interface Item {
   itemId: string;
   accessToken: string;
   uid: string;
@@ -23,13 +24,13 @@ export const getItemListByUid = async (uid: string) => {
     });
 };
 
-export const postItem = async ({ itemId, accessToken, uid }: postItemParameters) => {
-  const queryText = `INSERT INTO item(plaid_item_id, plaid_access_token, firebase_uid) VALUES ($1, $2, $3) RETURNING (plaid_item_id, plaid_access_token, firebase_uid) `;
+export const createItem = async ({ itemId, accessToken, uid }: Item) => {
+  const queryText = `INSERT INTO item(plaid_item_id, plaid_access_token, firebase_uid) VALUES ($1, $2, $3) RETURNING plaid_item_id AS itemId, plaid_access_token AS accessToken, firebase_uid AS uid`;
 
   return db
     .query(queryText, [itemId, accessToken, uid])
-    .then((item) => {
-      return item;
+    .then((item: QueryResult<Item>) => {
+      return item.rows[0];
     })
     .catch((error) => {
       return null;

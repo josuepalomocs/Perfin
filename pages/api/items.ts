@@ -1,7 +1,10 @@
 import { getCookie } from "cookies-next";
 import { NextApiRequest, NextApiResponse } from "next";
+import { ItemPublicTokenExchangeRequest } from "plaid";
 import { adminAuth as auth } from "../../lib/firebase/admin";
-import { getItemListByUid, postItem, postItemParameters } from "../../server/api";
+import plaidClient from "../../plaid/config";
+import { getItemListByUid } from "../../server/api";
+import { createItem } from "../../server/db/services";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const authToken = getCookie("authToken", { req });
@@ -15,9 +18,17 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         }
 
         if (req.method === "POST") {
-          const { data }: { data: postItemParameters } = req.body;
-          const item = await postItem(data);
-          return res.status(200).json(item);
+          const { data: request }: { data: ItemPublicTokenExchangeRequest } = req.body;
+          return await plaidClient
+            .itemPublicTokenExchange(request)
+            .then(async ({ data }) => {
+              const item = await createItem({ itemId: data.item_id, accessToken: data.access_token, uid });
+              return res.status(200).json(item);
+            })
+            .catch((error) => {
+              console.log(error);
+              return res.status(500).json({ error: { code: 500, name: "Internal server error", message: "Failed to create Plaid item" } });
+            });
         }
 
         return res.status(501).json({ error: { code: 501, name: "Not implemented", message: "Request method not implemented" } });

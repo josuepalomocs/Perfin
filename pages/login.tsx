@@ -1,8 +1,6 @@
-import Head from "next/head";
 import { Box } from "@mui/material";
+import Head from "next/head";
 import LoginForm from "../components/LoginForm.tsx/LoginForm";
-import { GetServerSidePropsContext } from "next";
-import adminAuth from "../lib/firebase/admin";
 import styles from "../styles/login/login.module.css";
 
 const Login = () => {

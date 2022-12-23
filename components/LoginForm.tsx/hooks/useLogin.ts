@@ -20,7 +20,7 @@ const useLogin = () => {
 
   const handleLoginWithEmailAndPassword = ({ email, password }: LoginCredentials) => {
     signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
+      .then((user) => {
         if (errorMessage) {
           setErrorMessage("");
         }

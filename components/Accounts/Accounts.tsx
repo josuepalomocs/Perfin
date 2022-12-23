@@ -8,15 +8,15 @@ import styles from "./styles/accounts.module.css";
 
 const Accounts = () => {
   const [accountList, setAccountList] = useState<AccountBase[] | null>(null);
-  useEffect(() => {
-    const getAccountList = async () => {
-      const accountGetRequestList: AccountsGetRequest[] = [];
-      const { data: accountList } = await axios.post<AccountBase[]>("/api/plaid/accounts", { data: accountGetRequestList });
-      setAccountList(accountList);
-    };
+  // useEffect(() => {
+  //   const getAccountList = async () => {
+  //     const accountGetRequestList: AccountsGetRequest[] = [];
+  //     const { data: accountList } = await axios.post<AccountBase[]>("/api/plaid/accounts", { data: accountGetRequestList });
+  //     setAccountList(accountList);
+  //   };
 
-    getAccountList();
-  }, []);
+  //   getAccountList();
+  // }, []);
 
   const renderAccountList = () => {
     if (accountList) {
@@ -41,8 +41,6 @@ const Accounts = () => {
       );
     }
   };
-
-  console.log(accountList);
 
   return (
     <Box className={styles.container}>

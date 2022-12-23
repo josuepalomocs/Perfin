@@ -1,6 +1,4 @@
 import { ButtonUnstyled } from "@mui/base";
-import axios from "axios";
-import { CountryCode, ItemPublicTokenExchangeRequest, ItemPublicTokenExchangeResponse, LinkTokenCreateRequest, LinkTokenCreateResponse, Products } from "plaid";
 import { useCallback, useContext, useEffect, useState } from "react";
 import {
   PlaidLinkError,
@@ -13,58 +11,42 @@ import {
   PlaidLinkStableEvent,
   usePlaidLink,
 } from "react-plaid-link";
+import apiClient from "../../client/api/index";
+import { createLinkToken, exchangePublicTokenForItem } from "../../client/plaid/services";
 import UserContext from "../../context/UserContext";
 import styles from "./styles/plaidLink.module.css";
 
+export type LinkToken = string | null;
+
 const PlaidLink = () => {
-  const [linkToken, setLinkToken] = useState("");
+  const [linkToken, setLinkToken] = useState<LinkToken>(null);
   const { user } = useContext(UserContext);
 
-  const createLinkToken = async () => {
-    const linkTokenCreateRequest: LinkTokenCreateRequest = {
-      user: {
-        client_user_id: user!.uid,
-      },
-      client_name: "Perfin",
-      products: [Products.Transactions],
-      country_codes: [CountryCode.Us],
-      language: "en",
-    };
-    await axios
-      .post<LinkTokenCreateResponse>("/api/plaid/link-tokens", { data: linkTokenCreateRequest })
-      .then(({ data: { link_token } }) => {
-        setLinkToken(link_token);
-      })
-      .catch((error) => {
+  const handleLaunchPlaidLink = async () => {
+    if (user) {
+      const idToken = await user.getIdToken();
+      const uid = user.uid;
+      const perfinApiUser = {
+        idToken,
+        uid,
+      };
+      try {
+        const linkToken = await apiClient.createLinkToken(perfinApiUser);
+        console.log(linkToken);
+      } catch (error) {
         console.log(error);
-      });
-  };
-
-  const exchangePublicTokenForAccessToken = async (public_token: string) => {
-    const itemPublicTokenExchangeRequest: ItemPublicTokenExchangeRequest = {
-      public_token,
-    };
-    await axios
-      .post<ItemPublicTokenExchangeResponse>("/api/plaid/access-tokens", { data: itemPublicTokenExchangeRequest })
-      .then(async ({ data: { access_token, item_id } }) => {
-        console.log(`Generated access token: ${access_token} , with item id: ${item_id}`);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      }
+    }
   };
 
   const onSuccess = useCallback<PlaidLinkOnSuccess>(async (public_token: string, metadata: PlaidLinkOnSuccessMetadata) => {
-    await exchangePublicTokenForAccessToken(public_token);
+    const item = await exchangePublicTokenForItem(public_token);
+    console.log(item);
   }, []);
 
   const onExit = useCallback<PlaidLinkOnExit>(async (error: PlaidLinkError | null, metadata: PlaidLinkOnExitMetadata) => {
     if (error) {
-      switch (error.error_code) {
-        case "INVALID_LINK_TOKEN":
-          setLinkToken("");
-          await createLinkToken();
-      }
+      console.log(error);
     }
   }, []);
 
@@ -87,7 +69,7 @@ const PlaidLink = () => {
   }, [linkToken, ready]);
 
   return (
-    <ButtonUnstyled id="initPlaidLink" className={styles.button} onClick={createLinkToken}>
+    <ButtonUnstyled id="initPlaidLink" className={styles.button} onClick={handleLaunchPlaidLink}>
       Link Account
     </ButtonUnstyled>
   );
