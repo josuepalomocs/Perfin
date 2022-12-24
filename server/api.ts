@@ -1,4 +1,4 @@
-import db from "./db/config";
+import db from "./database/config";
 
 export interface postItemParameters {
   itemId: string;

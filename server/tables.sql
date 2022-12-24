@@ -9,5 +9,5 @@ CREATE TABLE link_token(
   id SERIAL PRIMARY KEY NOT NULL,
   value VARCHAR(100) NOT NULL,
   expiration_date TIMESTAMP NOT NULL,
-  bearer_id VARCHAR(100)
+  uid VARCHAR(100)
 );

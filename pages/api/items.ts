@@ -4,7 +4,7 @@ import { ItemPublicTokenExchangeRequest } from "plaid";
 import { adminAuth as auth } from "../../lib/firebase/admin";
 import plaidClient from "../../plaid/config";
 import { getItemListByUid } from "../../server/api";
-import { createItem } from "../../server/db/services";
+import { createItem } from "../../server/database/services";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const authToken = getCookie("authToken", { req });

@@ -11,8 +11,9 @@ import {
   PlaidLinkStableEvent,
   usePlaidLink,
 } from "react-plaid-link";
-import apiClient from "../../client/api/index";
-import { createLinkToken, exchangePublicTokenForItem } from "../../client/plaid/services";
+// import apiClient from "../../client/api/index";
+import getPerfinRequestCredential from "../../client/helpers/getPerfinRequestCredential";
+import { exchangePublicTokenForItem } from "../../client/plaid/services";
 import UserContext from "../../context/UserContext";
 import styles from "./styles/plaidLink.module.css";
 
@@ -24,17 +25,14 @@ const PlaidLink = () => {
 
   const handleLaunchPlaidLink = async () => {
     if (user) {
-      const idToken = await user.getIdToken();
-      const uid = user.uid;
-      const perfinApiUser = {
-        idToken,
-        uid,
-      };
-      try {
-        const linkToken = await apiClient.createLinkToken(perfinApiUser);
-        console.log(linkToken);
-      } catch (error) {
-        console.log(error);
+      const perfinRequestCredential = await getPerfinRequestCredential(user);
+      if (perfinRequestCredential) {
+        try {
+          // const linkToken = await apiClient.createLinkToken(perfinRequestCredential);
+          console.log(linkToken);
+        } catch (error) {
+          console.log(error);
+        }
       }
     }
   };

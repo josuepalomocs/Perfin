@@ -1,5 +1,6 @@
-import PerfinClient from "./PerfinClient";
+// import CreatePerfinClient from "./PerfinClient";
 
-const apiClient = new PerfinClient();
+// const apiClient = CreatePerfinClient();
 
-export default apiClient;
+// export default apiClient;
+export {};

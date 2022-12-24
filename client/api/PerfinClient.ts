@@ -1,3 +1,4 @@
+import { User } from "firebase/auth";
 import { CountryCode, LinkTokenCreateRequest, LinkTokenCreateResponse, Products } from "plaid";
 import HttpClient from "./HttpClient";
 
@@ -8,21 +9,26 @@ interface LinkToken {
   bearerUid: string;
 }
 
-interface PerfinApiUser {
-  idToken: string;
-  uid: string;
-}
-
 class PerfinClient extends HttpClient {
-  public constructor() {
+  private readonly _uid: string;
+  private _idToken: string;
+
+  private constructor(uid: string, idToken: string) {
     super("http://localhost:3000");
+    this._uid = uid;
+    this._idToken = idToken;
   }
 
-  public async createLinkToken(user: PerfinApiUser) {
+  public static async CreatePerfinClient(user: User) {
+    const idToken = await user.getIdToken();
+    return new PerfinClient(user.uid, idToken);
+  }
+
+  public async createLinkToken() {
     const apiEndpoint = "/api/link-tokens";
     const data: LinkTokenCreateRequest = {
       user: {
-        client_user_id: user.uid,
+        client_user_id: this._uid,
       },
       client_name: "Perfin",
       products: [Products.Transactions],
@@ -31,7 +37,7 @@ class PerfinClient extends HttpClient {
     };
     const config = {
       headers: {
-        Authorization: `Bearer ${user.idToken}`,
+        Authorization: `Bearer ${this._idToken}`,
       },
     };
 
@@ -39,11 +45,11 @@ class PerfinClient extends HttpClient {
     return linkToken;
   }
 
-  public async getLinkToken(user: { uid: string; idToken: string }) {
+  public async getLinkToken() {
     const apiEndpoint = "/api/link-tokens";
     const config = {
       headers: {
-        Authorization: `Bearer ${user.idToken}`,
+        Authorization: `Bearer ${this._idToken}`,
       },
     };
 
@@ -51,11 +57,11 @@ class PerfinClient extends HttpClient {
     return linkToken;
   }
 
-  public async deleteLinkToken(user: { uid: string; idToken: string }) {
+  public async deleteLinkToken() {
     const apiEndpoint = "/api/link-tokens";
     const config = {
       headers: {
-        Authorization: `Bearer ${user.idToken}`,
+        Authorization: `Bearer ${this._idToken}`,
       },
     };
 
